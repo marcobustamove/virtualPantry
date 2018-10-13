@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">virtualPantry</string>
+    <string name="UserName">UserName</string>
+    <string name="Password">Password</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="Create_Account">Create Account</string>
+    <color name="lightblue">#3399ff</color>
 </resources>
