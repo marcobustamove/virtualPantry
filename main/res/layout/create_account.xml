@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/pantryBackground"
+    android:background="@drawable/pantrybackground"
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
@@ -98,9 +98,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="76dp"
         android:layout_marginBottom="160dp"
+        android:backgroundTint="#2cbf837f"
+        android:backgroundTintMode="multiply"
         android:text="@string/Submit"
         android:textColorHint="@color/Yellow"
         android:textSize="35sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
