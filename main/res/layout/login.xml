@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/baby_blue"
+    android:background="@drawable/pantryBackground"
     tools:context=".Home">
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginBottom="9dp"
         android:background="@drawable/roundedbutton"
         android:text="@string/UserName"
-        android:textColor="#ffffff"
+        android:textColor="#040b87"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:layout_marginBottom="14dp"
         android:background="@drawable/roundedbutton"
         android:text="@string/Password"
-        android:textColor="#ffffff"
+        android:textColor="#1d1dd1"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/Create_Account"
         app:layout_constraintEnd_toEndOf="@+id/UserName"

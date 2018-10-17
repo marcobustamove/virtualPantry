@@ -2,7 +2,10 @@
     <string name="app_name">virtualPantry</string>
     <string name="UserName">UserName</string>
     <string name="Password">Password</string>
-    <string name="Enter_Password">Enter_Password</string>
+    <string name="Submit">Submit</string>
+    <string name="forgot_password_text">Enter email to reset password.</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Enter_Password">Enter Password</string>
     <string name="Email">Email</string>
     <string name="Forgot_Password">Forgot Password</string>
     <string name="Create_Account">Create Account</string>
