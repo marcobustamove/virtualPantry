@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">virtualPantry</string>
+    <string name="app_name">Virtual Pantry</string>
+    <string name="closebutton">Close Pantry</string>
+    <string name="dairycategory">Dairy</string>
+    <string name="grainscategory">Grains</string>
+    <string name="meatcategory">Meat</string>
+    <string name="fruitscategory">Fruits</string>
+    <string name="vegiescategory">Vegies</string>
+    <string name="drinkscategory">Drinks</string>
+    <string name="spicescategory">Spices</string>
+    <string name="oilscategory">Oils</string>
+    <string name="nonfoodscategory">Non-Foods</string>
+    <string name="bg_pantryscreen">Pantry Screen</string>
+    <string name="notifications">Notifications</string>
 </resources>
