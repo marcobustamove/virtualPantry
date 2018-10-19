@@ -9,7 +9,7 @@
     <string name="drinkscategory">Drinks</string>
     <string name="spicescategory">Spices</string>
     <string name="oilscategory">Oils</string>
-    <string name="nonfoodscategory">Non-Foods</string>
+    <string name="allitems">All\nItems</string>
     <string name="bg_pantryscreen">Pantry Screen</string>
     <string name="notifications">Notifications</string>
 </resources>
