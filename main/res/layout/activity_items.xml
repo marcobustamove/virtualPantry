@@ -18,36 +18,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <Button style="?android:buttonStyleInset"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bar_button"
             android:fontFamily="@font/futura"
             android:gravity="center"
             android:text="@string/select_button"
             android:textColor="@color/colorAccent"
             android:textSize="25sp" />
 
-        <TextView
+        <Button style="?android:buttonStyleInset"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1.5"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bar_button"
             android:fontFamily="@font/futura"
             android:gravity="center"
             android:text="@string/category_name_test"
             android:textColor="@color/colorAccent"
             android:textSize="25sp" />
 
-        <TextView
+        <Button style="?android:buttonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bar_button"
             android:fontFamily="@font/futura"
             android:gravity="center"
             android:text="@string/sorting_button_test"
@@ -66,12 +66,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
+    <Button style="?android:buttonStyle"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bar_button"
         android:fontFamily="@font/futura"
         android:gravity="center"
         android:text="@string/plus_button_test"
