@@ -2,6 +2,7 @@ package edu.csuci.compsci.virtualpantry;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,3 +40,16 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
     }
 }
+=======
+
+public class Home extends AppCompatActivity
+{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pantry_screen);
+    }
+}
+>>>>>>> pantryScreen
