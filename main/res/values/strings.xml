@@ -1,11 +1,8 @@
 <resources>
-<<<<<<< HEAD
-    <string name="app_name">virtualPantry</string>
     <string name="plus_button_test">+</string>
     <string name="select_button">Select</string>
     <string name="category_name_test">Fruits</string>
     <string name="sorting_button_test">A-Z</string>
-=======
     <string name="app_name">Virtual Pantry</string>
     <string name="closebutton">Close Pantry</string>
     <string name="dairycategory">Dairy</string>
@@ -19,5 +16,4 @@
     <string name="allitems">All\nItems</string>
     <string name="bg_pantryscreen">Pantry Screen</string>
     <string name="notifications">Notifications</string>
->>>>>>> pantryScreen
 </resources>

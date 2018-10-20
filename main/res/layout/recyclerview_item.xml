@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorAccent"/>
+        android:background="@layout/categorybutton"/>
 
 </LinearLayout>
