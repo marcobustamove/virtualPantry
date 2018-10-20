@@ -10,8 +10,9 @@
         android:id="@+id/info_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:background="@layout/categorybutton"/>
+        android:background="@layout/categorybutton"
+        android:fontFamily="@font/futura"
+        android:gravity="center" />
 
 </LinearLayout>
