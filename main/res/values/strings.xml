@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">virtualPantry</string>
+    <string name="app_name">Virtual Pantry</string>
+    <string name="plus_button_test">+</string>
+    <string name="select_button">Select</string>
+    <string name="category_name_test">Fruits</string>
+    <string name="sorting_button_test">A-Z</string>
+    <string name="closebutton">Close Pantry</string>
+    <string name="dairycategory">Dairy</string>
+    <string name="grainscategory">Grains</string>
+    <string name="meatcategory">Meat</string>
+    <string name="fruitscategory">Fruits</string>
+    <string name="vegiescategory">Vegies</string>
+    <string name="drinkscategory">Drinks</string>
+    <string name="spicescategory">Spices</string>
+    <string name="oilscategory">Oils</string>
+    <string name="allitems">All\nItems</string>
+    <string name="bg_pantryscreen">Pantry Screen</string>
+    <string name="notifications">Notifications</string>
+    <string name="UserName">UserName</string>
+    <string name="Password">Password</string>
+    <string name="Submit">Submit</string>
+    <string name="forgot_password_text">Enter email to reset password.</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Enter_Password">Enter Password</string>
+    <string name="Email">Email</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="Create_Account">Create Account</string>
+    <color name="buttonBackground">#1c2f59</color>
+    <color name="baby_blue">#effbfb</color>
 </resources>
