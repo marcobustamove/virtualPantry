@@ -11,7 +11,6 @@ import android.widget.Button;
 
 public class Home extends AppCompatActivity  {
 
-    MyRecyclerViewAdapter adapter;
     private Button createAccountButton;
     private Button ForgotPasswordButton;
     private Button loginSubmitButton;
