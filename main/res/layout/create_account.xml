@@ -121,7 +121,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/create_account_submit_button"
         style="@style/Widget.MaterialComponents.Chip.Choice"
         android:layout_width="386dp"
         android:layout_height="58dp"

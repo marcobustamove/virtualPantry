@@ -23,7 +23,9 @@
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".pantryScreenActivity"></activity>
+        <activity android:name=".pantryScreenActivity" />
+        <activity android:name=".loginScreenActivity" />
+        <activity android:name=".fruitScreenActivity"></activity>
     </application>
 
 </manifest>
