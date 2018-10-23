@@ -54,6 +54,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorText"
         android:textSize="15sp"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/Create_Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -110,6 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
+
 
 
 </android.support.constraint.ConstraintLayout>
