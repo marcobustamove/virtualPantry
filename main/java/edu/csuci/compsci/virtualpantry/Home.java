@@ -3,9 +3,6 @@ package edu.csuci.compsci.virtualpantry;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,6 +32,7 @@ public class Home extends AppCompatActivity  {
                 openForgotPasswordActivity();
             }
         });
+
         loginSubmitButton = (Button) findViewById(R.id.login_submit);
         loginSubmitButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -43,6 +41,7 @@ public class Home extends AppCompatActivity  {
 
             }
         });
+
     }
     public void openLoginActivity()
     {
