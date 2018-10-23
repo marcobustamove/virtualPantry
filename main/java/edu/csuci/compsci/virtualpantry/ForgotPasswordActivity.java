@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ForgotPasswordActivity extends AppCompatActivity  {
 
@@ -21,6 +22,7 @@ public class ForgotPasswordActivity extends AppCompatActivity  {
         forgotPasswordSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Email Sent", Toast.LENGTH_SHORT).show();
                 openLoginScreenActivity();
 
             }
