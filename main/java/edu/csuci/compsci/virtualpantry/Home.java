@@ -43,32 +43,6 @@ public class Home extends AppCompatActivity  {
 
             }
         });
-
-
-        /**
-        // data to populate the RecyclerView with
-        String[] data = {"Apples", "Bananas", "Oranges", "Watermelon", "Peaches", "Kiwi", "Strawberries", "Grapes", "Avocado", "Pineapple", "Kiwano Melon", "Dragonfruit", "Tomato"};
-        /* test array for displaying 150 grid items
-        String data[] = new String[150];
-        for(int i = 0; i < data.length; i++)
-        {
-            data[i] = Integer.toString(i+1);
-        }
-        //put back slash astrix
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        int numberOfColumns = 3;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new MyRecyclerViewAdapter(this, data);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
-    }
-    */
     }
     public void openLoginActivity()
     {

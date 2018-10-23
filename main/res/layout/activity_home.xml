@@ -41,12 +41,14 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="306dp" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/favicon"
         android:layout_width="25dp"
         android:layout_height="21dp"
         android:layout_marginStart="28dp"
-        android:background="@layout/favselect"
+        android:background="@drawable/favoriteicon"
+        android:textOn=""
+        android:textOff=""
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="116dp" />
 
