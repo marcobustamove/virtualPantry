@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity  {
         loginSubmitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openPantryScreen();
+                openHomeScreen();
 
             }
         });
@@ -80,9 +80,9 @@ public class Home extends AppCompatActivity  {
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
-    public void openPantryScreen()
+    public void openHomeScreen()
     {
-        Intent intent = new Intent(this, pantryScreenActivity.class);
+        Intent intent = new Intent(this, homeactivity.class);
         startActivity(intent);
     }
 

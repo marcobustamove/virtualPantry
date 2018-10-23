@@ -25,7 +25,8 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".pantryScreenActivity" />
         <activity android:name=".loginScreenActivity" />
-        <activity android:name=".fruitScreenActivity"></activity>
+        <activity android:name=".fruitScreenActivity" />
+        <activity android:name=".homeactivity"></activity>
     </application>
 
 </manifest>
