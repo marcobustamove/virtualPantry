@@ -29,7 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/roundedbutton"
-        android:fontFamily="@font/futur"
+        android:fontFamily="@font/futura"
         android:text="@string/UserName"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Display1"
@@ -37,7 +37,8 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:fontFamily="@font/futur" />
 
     <EditText
         android:id="@+id/Password"
