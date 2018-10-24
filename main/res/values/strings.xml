@@ -23,8 +23,9 @@
     <string name="Confirm_Password">Confirm Password</string>
     <string name="Enter_Password">Enter Password</string>
     <string name="Email">Email</string>
-    <string name="Forgot_Password">Forgot Password</string>
-    <string name="Create_Account">Create Account</string>
+    <string name="Forgot_Password">Forgot your password?</string>
+    <string name="Create_Account">Create One</string>
+    <string name="accountCreateQuery">Don\'t have an account?</string>
     <color name="buttonBackground">#1c2f59</color>
     <color name="baby_blue">#effbfb</color>
 </resources>

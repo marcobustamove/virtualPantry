@@ -4,94 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/loginscreenbg"
     tools:context=".Home"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
         android:layout_width="wrap_content"
-        android:layout_height="295dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:src="@drawable/vplogo"
-        app:layout_constraintBottom_toTopOf="@+id/UserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/UserName"
-        android:layout_width="379dp"
-        android:layout_height="36dp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/baby_blue"
         android:fontFamily="@font/futura"
-        android:text="@string/UserName"
+        android:hint="@string/UserName"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Display1"
-        android:textColor="@color/colorText"
+        android:textColor="@color/baby_blue"
+        android:textColorHint="@color/colorText"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/Password"
+        android:drawableStart="@drawable/loginscreenidicon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
         tools:fontFamily="@font/futur" />
 
     <EditText
         android:id="@+id/Password"
-        android:layout_width="379dp"
-        android:layout_height="36dp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="76dp"
-        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/baby_blue"
         android:fontFamily="@font/futur"
-        android:text="@string/Password"
+        android:inputType="textPassword"
+        android:hint="@string/Password"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
         android:textSize="15sp"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/Create_Account"
+        android:drawableStart="@drawable/loginscreenpasswordlockicon"
+        android:textColor="@color/baby_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserName" />
 
     <Button
         android:id="@+id/ForgotPassword"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="371dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/futur"
         android:text="@string/Forgot_Password"
         android:textAppearance="@android:style/TextAppearance.Material.Display1"
         android:textColor="@color/colorText"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/Create_Account"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="363dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/futur"
-        android:text="@string/Create_Account"
-        android:textAppearance="@android:style/TextAppearance.Material.Display1"
-        android:textColor="@color/colorText"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/ForgotPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_submit" />
 
     <Button
         android:id="@+id/login_submit"
@@ -100,18 +86,51 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:backgroundTint="@color/buttonBackground"
+        android:background="@drawable/loginbutton"
         android:fontFamily="@font/futur"
-        android:text="Submit"
         android:textAllCaps="false"
         android:textColor="@color/colorText"
-        app:layout_constraintBottom_toTopOf="@+id/Create_Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ForgotPassword"
+        app:layout_constraintVertical_bias="0.931">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futur"
+            android:text="@string/accountCreateQuery"
+            android:textColor="@color/baby_blue" />
+
+        <Button
+            android:id="@+id/Create_Account"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futur"
+            android:text="@string/Create_Account"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:textColor="@color/colorText"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ForgotPassword" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
 
 
 </android.support.constraint.ConstraintLayout>
