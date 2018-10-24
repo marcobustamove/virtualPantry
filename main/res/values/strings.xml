@@ -27,6 +27,4 @@
     <string name="Create_Account">Create Account</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="accountCreateQuery">Don\'t have an account?</string>
-    <color name="buttonBackground">#1c2f59</color>
-    <color name="baby_blue">#effbfb</color>
 </resources>
