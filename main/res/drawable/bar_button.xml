@@ -6,8 +6,7 @@
             <solid android:color="#5A82E3" />
             <solid android:color="@color/secondary_blue" />
             <stroke
-                android:width="3dip"
-                android:color="#5A82E3" />
+                android:width="1dip"
                 android:color="@color/colorBackground" />
             <padding
                 android:bottom="4dp"
@@ -21,7 +20,7 @@
             <corners android:radius="0dp" />
             <solid android:color="@color/colorPrimary" />
             <stroke
-                android:width="2dip"
+                android:width="1dip"
                 android:color="@color/colorBackground" />
             <padding
                 android:bottom="4dp"
