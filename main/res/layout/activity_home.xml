@@ -94,27 +94,31 @@
 
     <Button
         android:id="@+id/create_pantry_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="9dp"
         android:background="@drawable/create_pantry_button" />
 
     <Button
         android:id="@+id/pantry_settings"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignEnd="@+id/bellicon"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-3dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantry_settings_icon" />
 
     <Button
         android:id="@+id/profile_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="12dp"
+        android:layout_marginBottom="9dp"
         android:background="@drawable/profile_icon" />
 
 

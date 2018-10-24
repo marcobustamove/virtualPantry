@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/clickedprofilebtn"
-        android:state_checked="true"/>
+        android:state_pressed="true"/>
     <item android:drawable="@drawable/profilebtn"/>
 
 </selector>
