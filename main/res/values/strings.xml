@@ -23,7 +23,7 @@
     <string name="Confirm_Password">Confirm Password</string>
     <string name="Enter_Password">Enter Password</string>
     <string name="Email">Email</string>
-    <string name="Forgot_Password">Forgot Password</string>
+    <string name="Forgot_Password">Forgot Password?</string>
     <string name="Create_Account">Create Account</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="accountCreateQuery">Don\'t have an account?</string>
