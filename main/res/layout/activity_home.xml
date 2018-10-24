@@ -5,7 +5,8 @@
     android:id="@+id/homescreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homebg">
+    android:background="@drawable/homebg"
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/pantryshelf"
