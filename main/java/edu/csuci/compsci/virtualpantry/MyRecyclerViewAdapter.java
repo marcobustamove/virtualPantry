@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import java.util.Random;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private String[] mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private Random random = new Random();
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, String[] data) {
@@ -25,7 +27,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+
+        TextView innertext = view.findViewById(R.id.info_text);
+        innertext.setBackgroundResource(0);
+        innertext.setBackgroundResource(R.drawable.categorybutton);
+
+
         return new ViewHolder(view);
+
     }
 
     // binds the data to the TextView in each cell
@@ -54,6 +63,30 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+
+            TextView innertext = view.findViewById(R.id.info_text);
+
+            int select = random.nextInt(4);
+            switch(select)
+            {
+                case 0:
+                    innertext.setBackgroundResource(0);
+                    innertext.setBackgroundResource(R.drawable.mockitemfull);
+                    break;
+                case 1:
+                    innertext.setBackgroundResource(0);
+                    innertext.setBackgroundResource(R.drawable.mockitemlow);
+                    break;
+                case 2:
+                    innertext.setBackgroundResource(0);
+                    innertext.setBackgroundResource(R.drawable.mockitemempty);
+                    break;
+                case 3:
+                    innertext.setBackgroundResource(0);
+                    innertext.setBackgroundResource(R.drawable.mockitemexpired);
+                    break;
+            }
+
         }
     }
 

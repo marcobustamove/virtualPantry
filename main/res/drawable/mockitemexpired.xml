@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="5dp"
+    android:layout_width="110dp"
+    android:layout_height="110dp">
+
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <corners android:radius="0dp" />
-            <solid android:color="#5A82E3" />
-            <solid android:color="@color/secondary_blue" />
+            <corners android:radius="5dp" />
+            <solid android:color="@color/item_expired" />
             <stroke
                 android:width="3dip"
-                android:color="#5A82E3" />
-                android:color="@color/colorBackground" />
+                android:color="@color/secondary_blue" />
             <padding
                 android:bottom="4dp"
                 android:left="4dp"
@@ -18,11 +20,11 @@
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="0dp" />
-            <solid android:color="@color/colorPrimary" />
+            <corners android:radius="5dp" />
+            <solid android:color="@color/item_expired_pressed" />
             <stroke
                 android:width="2dip"
-                android:color="@color/colorBackground" />
+                android:color="@color/secondary_blue" />
             <padding
                 android:bottom="4dp"
                 android:left="4dp"

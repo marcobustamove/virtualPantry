@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/pantryscreenbg"
     android:fitsSystemWindows="true">
 
 
@@ -12,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/pantryscreenbg" />
+        android:layout_alignParentTop="true" />
+        <!--android:background="@drawable/pantryscreenbg"-->
 
     <Button
         android:id="@+id/closepantry"
