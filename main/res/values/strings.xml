@@ -16,7 +16,7 @@
     <string name="allitems">All\nItems</string>
     <string name="bg_pantryscreen">Pantry Screen</string>
     <string name="notifications">Notifications</string>
-    <string name="UserName">UserName</string>
+    <string name="UserName">Username</string>
     <string name="Password">Password</string>
     <string name="Submit">Submit</string>
     <string name="forgot_password_text">Enter email to reset password.</string>
@@ -25,6 +25,6 @@
     <string name="Email">Email</string>
     <string name="Forgot_Password">Forgot Password</string>
     <string name="Create_Account">Create Account</string>
-    <color name="buttonBackground">#1c2f59</color>
-    <color name="baby_blue">#effbfb</color>
+    <string name="pantry_title">Family Kitchen</string>
+    <string name="accountCreateQuery">Don\'t have an account?</string>
 </resources>

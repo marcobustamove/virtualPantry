@@ -8,28 +8,29 @@
     android:background="@drawable/homebg">
 
     <ImageView
-            android:id="@+id/pantryshelf"
-            android:layout_width="291dp"
-            android:layout_height="303dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/pantryicon"
-            tools:layout_editor_absoluteY="69dp" />
+        android:id="@+id/pantryshelf"
+        android:layout_width="291dp"
+        android:layout_height="303dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/pantryicon"
+        tools:layout_editor_absoluteY="69dp" />
 
-        <ImageView
-            android:id="@+id/vptext"
-            android:layout_width="291dp"
-            android:layout_height="24dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/vptext"
-            tools:layout_editor_absoluteY="16dp" />
+    <ImageView
+        android:id="@+id/vptext"
+        android:layout_width="291dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/vptext"
+        tools:layout_editor_absoluteY="16dp" />
 
         <ToggleButton
             android:id="@+id/favicon"
@@ -67,16 +68,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="111dp" />
 
-        <ImageView
-            android:id="@+id/pantrytitle"
-            android:layout_width="157dp"
-            android:layout_height="19dp"
-            android:layout_alignBottom="@+id/deletebtn"
-            android:layout_centerHorizontal="true"
-            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
-            app:layout_constraintStart_toEndOf="@+id/favicon"
-            app:srcCompat="@drawable/pantrytitletxt"
-            tools:layout_editor_absoluteY="116dp" />
+    <ImageView
+        android:id="@+id/pantrytitle"
+        android:layout_width="157dp"
+        android:layout_height="19dp"
+        android:layout_alignBottom="@+id/deletebtn"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/pantry_title"
+        app:layout_constraintEnd_toStartOf="@+id/deletebtn"
+        app:layout_constraintStart_toEndOf="@+id/favicon"
+        app:srcCompat="@drawable/pantrytitletxt"
+        tools:layout_editor_absoluteY="116dp" />
 
     <ToggleButton
         android:id="@+id/bellicon"
@@ -88,6 +90,31 @@
         android:background="@drawable/bellicon"
         android:textOff=""
         android:textOn="" />
+
+    <Button
+        android:id="@+id/create_pantry_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/create_pantry_button" />
+
+    <Button
+        android:id="@+id/pantry_settings"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/bellicon"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/pantry_settings_icon" />
+
+    <Button
+        android:id="@+id/profile_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/profile_icon" />
 
 
 </RelativeLayout>
