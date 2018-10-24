@@ -19,15 +19,15 @@ public class LoginActivity extends AppCompatActivity {
         createAccountSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLoginScreenActivity();
+                openHomeScreen();
             }
 
         });
     }
 
-    public void openLoginScreenActivity()
+    public void openHomeScreen()
     {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, homeactivity.class);
         startActivity(intent);
     }
 
