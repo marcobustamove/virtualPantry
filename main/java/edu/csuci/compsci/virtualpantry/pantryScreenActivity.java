@@ -34,7 +34,7 @@ public class pantryScreenActivity extends AppCompatActivity {
     }
     public void goHomeScreen()
     {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, homeactivity.class);
         startActivity(intent);
     }
     public void enterFruitItemScreen()
