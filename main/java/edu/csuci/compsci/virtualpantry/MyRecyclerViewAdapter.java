@@ -1,6 +1,7 @@
 package edu.csuci.compsci.virtualpantry;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.Random;
 
+import database.ItemBaseHelper;
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private String[] mData;
@@ -16,8 +19,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ItemClickListener mClickListener;
     private Random random = new Random();
 
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
+
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, String[] data) {
+
+        mContext = context.getApplicationContext();
+        mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
+
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
