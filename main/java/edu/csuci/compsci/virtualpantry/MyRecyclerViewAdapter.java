@@ -19,8 +19,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ItemClickListener mClickListener;
     private Random random = new Random();
 
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, String[] data){

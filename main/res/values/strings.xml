@@ -9,7 +9,7 @@
     <string name="grainscategory">Grains</string>
     <string name="meatcategory">Meat</string>
     <string name="fruitscategory">Fruits</string>
-    <string name="vegiescategory">Vegies</string>
+    <string name="vegiescategory">Veggies</string>
     <string name="drinkscategory">Drinks</string>
     <string name="spicescategory">Spices</string>
     <string name="oilscategory">Oils</string>
@@ -27,4 +27,7 @@
     <string name="Create_Account">Create Account</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="accountCreateQuery">Don\'t have an account?</string>
+    <string name="addItemTitle">Add Item</string>
+    <string name="addItemNameInput">Item Name:</string>
+    <string name="addItemDone">Done</string>
 </resources>
