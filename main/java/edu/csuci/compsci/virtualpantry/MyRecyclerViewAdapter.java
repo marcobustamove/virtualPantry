@@ -23,11 +23,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private SQLiteDatabase mDatabase;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, String[] data) {
-
-        mContext = context.getApplicationContext();
-        mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
-
+    MyRecyclerViewAdapter(Context context, String[] data){
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -39,7 +35,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
 
         TextView innertext = view.findViewById(R.id.info_text);
-        innertext.setBackgroundResource(0);
+        innertext.setBackgroundResource(0); //This line is possibly not necessary, experiment later
         innertext.setBackgroundResource(R.drawable.categorybutton);
 
 
