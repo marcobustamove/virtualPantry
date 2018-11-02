@@ -27,6 +27,7 @@
 
         <ImageView
             android:id="@+id/username_icon"
+            android:contentDescription="@string/app_name"
             android:layout_width="13dp"
             android:layout_height="14dp"
             android:layout_marginStart="90dp"
@@ -36,12 +37,13 @@
 
         <EditText
             android:id="@+id/Username"
+            android:inputType="text"
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:backgroundTint="@color/baby_blue"
             android:fontFamily="@font/futura"
-            android:hint="@string/UserName"
+            android:hint="@string/Username"
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/baby_blue"
@@ -59,6 +61,7 @@
 
         <ImageView
             android:id="@+id/password_icon"
+            android:contentDescription="@string/Password"
             android:layout_width="13dp"
             android:layout_height="16dp"
             android:layout_marginStart="90dp"
@@ -95,7 +98,7 @@
         android:text="@string/Forgot_Password"
         android:textAppearance="@android:style/TextAppearance.Material.Display1"
         android:textColor="@color/colorText"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/login_submit"
@@ -121,7 +124,7 @@
             android:fontFamily="@font/futur"
             android:text="@string/accountCreateQuery"
             android:textColor="@color/baby_blue"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/Create_Account"

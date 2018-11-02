@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">Virtual Pantry</string>
-    <string name="plus_button">+</string>
-    <string name="select_button">Select</string>
-    <string name="category_name_test">Fruits</string>
-    <string name="sorting_button_test">A-Z</string>
+
+    <!--Login screen strings-->
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="accountCreateQuery">Don\'t have an account?</string>
+    <string name="Create_Account">Create Account</string>
+
+    <!--Home screen strings-->
+    <string name="notifications">Notifications</string>
+    <string name="pantry_title">Family Kitchen</string>
+    <string name="open_pantry">Open Pantry</string>
+
+    <!--Pantry screen strings-->
     <string name="closebutton">Close Pantry</string>
     <string name="dairycategory">Dairy</string>
     <string name="grainscategory">Grains</string>
@@ -15,15 +24,29 @@
     <string name="oilscategory">Oils</string>
     <string name="allitems">All\nItems</string>
     <string name="bg_pantryscreen">Pantry Screen</string>
-    <string name="notifications">Notifications</string>
-    <string name="UserName">Username</string>
-    <string name="Password">Password</string>
-    <string name="Submit">Submit</string>
-    <string name="forgot_password_text">Enter email to reset password.</string>
-    <string name="Confirm_Password">Confirm Password</string>
-    <string name="Enter_Password">Enter Password</string>
+
+    <!--Item screen strings-->
+    <string name="select_button">Select</string>
+    <string name="category_name_test">Fruits</string>
+    <string name="sorting_button_test">A-Z</string>
+    <string name="plus_button">+</string>
+
+    <!--Create Account screen strings-->
     <string name="Email">Email</string>
+    <string name="Enter_Password">Enter Password</string>
+    <string name="Confirm_Password">Confirm Password</string>
+
+    <!--Forgot Password screen strings-->
     <string name="Forgot_Password">Forgot Password?</string>
+    <string name="forgot_password_text">Enter email to reset password.</string>
+    <string name="Submit">Submit</string>
+
+    <!--Multiple use strings-->
+
+
+
+
+
     <string name="Create_Account">Create Account</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="accountCreateQuery">Don\'t have an account?</string>

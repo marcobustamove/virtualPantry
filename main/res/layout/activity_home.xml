@@ -47,6 +47,7 @@
 
         <Button
             android:id="@+id/openpantry"
+            android:contentDescription="@string/open_pantry"
             android:layout_width="299dp"
             android:layout_height="44dp"
             android:layout_alignParentBottom="true"
