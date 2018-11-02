@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity {
+public class CreateAccountActivity extends AppCompatActivity {
 
     private Button createAccountSubmitButton;
 
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openHomeScreen()
     {
-        Intent intent = new Intent(this, homeactivity.class);
+        Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
     }
 

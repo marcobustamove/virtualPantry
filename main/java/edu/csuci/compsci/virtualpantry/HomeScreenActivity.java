@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class homeactivity extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity {
 
     private Button open_pantry;
     @Override
@@ -14,7 +14,7 @@ public class homeactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        open_pantry = findViewById(R.id.openpantry);
+        open_pantry = (Button) findViewById(R.id.openpantry);
         open_pantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,7 +27,7 @@ public class homeactivity extends AppCompatActivity {
 
     public void openPantry()
     {
-        Intent intent = new Intent(this, pantryScreenActivity.class);
+        Intent intent = new Intent(this, PantryScreenActivity.class);
         startActivity(intent);
     }
 }

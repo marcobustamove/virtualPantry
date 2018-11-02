@@ -22,6 +22,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/selectbutton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -34,6 +35,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -46,6 +48,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/sort"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -76,7 +79,7 @@
         android:background="@drawable/bar_button"
         android:fontFamily="@font/futura"
         android:gravity="center"
-        android:text="@string/plus_button_test"
+        android:text="@string/plus_button"
         android:textColor="@color/baby_blue"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"

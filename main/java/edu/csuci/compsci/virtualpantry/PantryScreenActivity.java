@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class pantryScreenActivity extends AppCompatActivity {
+public class PantryScreenActivity extends AppCompatActivity {
 
     private Button closePantryButton;
     private Button fruitsButton;
@@ -34,12 +34,12 @@ public class pantryScreenActivity extends AppCompatActivity {
     }
     public void goHomeScreen()
     {
-        Intent intent = new Intent(this, homeactivity.class);
+        Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
     }
     public void enterFruitItemScreen()
     {
-        Intent intent = new Intent(this, fruitScreenActivity.class);
+        Intent intent = new Intent(this, ItemScreenActivity.class);
         startActivity(intent);
     }
 }
