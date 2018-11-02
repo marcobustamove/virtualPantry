@@ -24,7 +24,8 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                 ItemTable.Cols.DATE + ", " +
                 ItemTable.Cols.STATUS + ", " +
                 ItemTable.Cols.PANTRY_ID + ", " +
-                ItemTable.Cols.CATEGORY + ")");
+                ItemTable.Cols.CATEGORY + ", " +
+                ItemTable.Cols.IMG_REF + ")");
     }
 
     @Override

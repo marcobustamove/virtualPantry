@@ -11,6 +11,7 @@ public class ItemDBSchema {
             public static final String STATUS = "status";
             public static final String PANTRY_ID = "pantry_id";
             public static final String CATEGORY = "category";
+            public static final String IMG_REF = "img_ref";
         }
     }
 }
