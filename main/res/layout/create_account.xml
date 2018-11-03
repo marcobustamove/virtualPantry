@@ -24,7 +24,7 @@
             android:layout_width="407dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/futur"
-            android:hint="@string/UserName"
+            android:hint="@string/Username"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorPrimaryDark"

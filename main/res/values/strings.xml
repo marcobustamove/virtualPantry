@@ -31,6 +31,11 @@
     <string name="sorting_button_test">A-Z</string>
     <string name="plus_button">+</string>
 
+    <!--Add Item Dialog Strings-->
+    <string name="addItemTitle">Add Item</string>
+    <string name="addItemNameInput">Item Name:</string>
+    <string name="addItemDone">Done</string>
+
     <!--Create Account screen strings-->
     <string name="Email">Email</string>
     <string name="Enter_Password">Enter Password</string>
@@ -44,13 +49,4 @@
     <!--Multiple use strings-->
 
 
-
-
-
-    <string name="Create_Account">Create Account</string>
-    <string name="pantry_title">Family Kitchen</string>
-    <string name="accountCreateQuery">Don\'t have an account?</string>
-    <string name="addItemTitle">Add Item</string>
-    <string name="addItemNameInput">Item Name:</string>
-    <string name="addItemDone">Done</string>
 </resources>
