@@ -36,7 +36,10 @@
     <!--Add Item Dialog Strings-->
     <string name="addItemTitle">Add Item</string>
     <string name="addItemNameInput">Item Name:</string>
-    <string name="additemNameHint">Apple</string>
+    <string name="addItemNameHint">Apple</string>
+    <string name="addItemExpirationQuery">Expirable?</string>
+    <string name="addItemExpirationDate">Expiration Date:</string>
+    <string name="addItemExpirationHint">mm/dd/yyyy</string>
     <string name="addItemDone">Done</string>
 
     <!--Create Account screen strings-->

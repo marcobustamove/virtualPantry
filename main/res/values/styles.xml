@@ -14,6 +14,7 @@
     <style name="AddItemDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/secondary_blue</item>
         <item name="android:textColor">@color/baby_blue</item>
+        <item name="android:fontFamily">@font/futura</item>
     </style>
 
 </resources>
