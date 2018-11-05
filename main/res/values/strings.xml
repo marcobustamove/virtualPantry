@@ -11,6 +11,8 @@
     <string name="notifications">Notifications</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="open_pantry">Open Pantry</string>
+    <string name="create_pantry">Create Pantry</string>
+    <string name="pantry_name">Pantry name:</string>
 
     <!--Pantry screen strings-->
     <string name="closebutton">Close Pantry</string>
