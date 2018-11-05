@@ -54,6 +54,9 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                 FragmentManager manager = getSupportFragmentManager();
                 AddItemFragment dialog = new AddItemFragment();
                 dialog.show(manager,DIALOG_ADD_ITEM);
+
+                
+
             }
         });
     }
