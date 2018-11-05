@@ -4,51 +4,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorText">
-
+    android:background="@color/secondary_blue">
 
     <LinearLayout
-        android:id="@+id/ItemName_Layout"
+        android:id="@+id/AddItemDialog_ParentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ItemName_Layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/futura"
-            android:text="@string/addItemNameInput"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/ItemName"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/baby_blue"
-            android:fontFamily="@font/futura"
-            android:hint="@string/addItemNameInput"
-            android:inputType="text"
-            android:textAlignment="center"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="15sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/futura"
+                android:text="@string/addItemNameInput"
+                android:textColor="@color/baby_blue"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/ItemName"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/baby_blue"
+                android:fontFamily="@font/futura"
+                android:hint="@string/additemNameHint"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Display1"
+                android:textColor="@color/baby_blue"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="15sp" />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

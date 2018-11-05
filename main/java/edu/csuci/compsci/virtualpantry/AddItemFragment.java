@@ -16,7 +16,7 @@ public class AddItemFragment extends DialogFragment
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_additem, null);
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity(), R.style.AddItemDialogTheme)
                 .setView(v)
                 .setTitle(R.string.addItemTitle)
                 .setPositiveButton(android.R.string.ok, null)
