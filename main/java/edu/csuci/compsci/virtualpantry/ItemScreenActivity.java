@@ -3,7 +3,6 @@ package edu.csuci.compsci.virtualpantry;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-import database.ItemBaseHelper;
+import database.PantryBaseHelper;
 
 public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener {
 
@@ -29,7 +28,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         setContentView(R.layout.activity_items);
 
         mContext = this.getApplicationContext();
-        mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
 
         String[] data = {"Apples", "Bananas", "Oranges", "Watermelon", "Peaches", "Kiwi", "Strawberries", "Grapes", "Avocado", "Pineapple", "Kiwano Melon", "Dragonfruit", "Tomato"};
         /* test array for displaying 150 grid items

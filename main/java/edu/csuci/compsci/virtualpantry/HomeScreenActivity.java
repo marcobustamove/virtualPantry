@@ -1,5 +1,6 @@
 package edu.csuci.compsci.virtualpantry;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import database.PantryBaseHelper;
+import database.PantryDBSchema.PantryTable;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -56,6 +58,20 @@ public class HomeScreenActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, PantryScreenActivity.class);
         startActivity(intent);
+    }
+
+    private static ContentValues getContentValues(String pantryName) {
+        ContentValues values = new ContentValues();
+
+        values.put(PantryTable.TITLE, pantryName);
+
+        return values;
+    }
+
+    public void createPantry(String pantryName)
+    {
+        ContentValues values = getContentValues(pantryName);
+        mDatabase.insert(PantryTable.TITLE, null, values);
     }
 
 }

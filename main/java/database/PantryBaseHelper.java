@@ -26,6 +26,16 @@ public class PantryBaseHelper extends SQLiteOpenHelper
                 PantryTable.Cols.UUID + ", " +
                 PantryTable.Cols.TITLE + ")");
 
+        db.execSQL("create table " +
+                PantryDBSchema.ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
+                PantryDBSchema.ItemTable.Cols.UUID + ", " +
+                PantryDBSchema.ItemTable.Cols.NAME + ", " +
+                PantryDBSchema.ItemTable.Cols.DATE + ", " +
+                PantryDBSchema.ItemTable.Cols.STATUS + ", " +
+                PantryDBSchema.ItemTable.Cols.PANTRY_ID + ", " +
+                PantryDBSchema.ItemTable.Cols.CATEGORY + ", " +
+                PantryDBSchema.ItemTable.Cols.IMG_REF + ")");
+
     }
 
     @Override
