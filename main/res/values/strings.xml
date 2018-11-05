@@ -27,4 +27,7 @@
     <string name="Create_Account">Create Account</string>
     <string name="pantry_title">Family Kitchen</string>
     <string name="accountCreateQuery">Don\'t have an account?</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
