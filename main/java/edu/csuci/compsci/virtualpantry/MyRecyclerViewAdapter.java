@@ -106,6 +106,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
             System.out.println("OnClick received");
 
+
+
             //functionality will be added here to change item status, or select multiple items
 
         }
