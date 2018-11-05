@@ -3,11 +3,9 @@ package database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.TextInputEditText;
-
-import java.util.UUID;
 
 import database.PantryDBSchema.PantryTable;
+import database.PantryDBSchema.ItemTable;
 
 public class PantryBaseHelper extends SQLiteOpenHelper
 {
@@ -27,14 +25,14 @@ public class PantryBaseHelper extends SQLiteOpenHelper
                 PantryTable.Cols.TITLE + ")");
 
         db.execSQL("create table " +
-                PantryDBSchema.ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
-                PantryDBSchema.ItemTable.Cols.UUID + ", " +
-                PantryDBSchema.ItemTable.Cols.NAME + ", " +
-                PantryDBSchema.ItemTable.Cols.DATE + ", " +
-                PantryDBSchema.ItemTable.Cols.STATUS + ", " +
-                PantryDBSchema.ItemTable.Cols.PANTRY_ID + ", " +
-                PantryDBSchema.ItemTable.Cols.CATEGORY + ", " +
-                PantryDBSchema.ItemTable.Cols.IMG_REF + ")");
+                ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
+                ItemTable.Cols.UUID + ", " +
+                ItemTable.Cols.NAME + ", " +
+                ItemTable.Cols.DATE + ", " +
+                ItemTable.Cols.STATUS + ", " +
+                ItemTable.Cols.PANTRY_ID + ", " +
+                ItemTable.Cols.CATEGORY + ", " +
+                ItemTable.Cols.IMG_REF + ")");
 
     }
 

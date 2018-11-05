@@ -63,7 +63,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private static ContentValues getContentValues(String pantryName) {
         ContentValues values = new ContentValues();
 
-        values.put(PantryTable.TITLE, pantryName);
+        values.put(PantryTable.Cols.TITLE, pantryName);
 
         return values;
     }
@@ -71,7 +71,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     public void createPantry(String pantryName)
     {
         ContentValues values = getContentValues(pantryName);
-        mDatabase.insert(PantryTable.TITLE, null, values);
+        mDatabase.insert(PantryTable.Cols.TITLE, null, values);
     }
 
 }
