@@ -2,6 +2,7 @@
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,41 +34,17 @@
         android:id="@+id/homescreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/homebg"
+        android:background="@drawable/homescreenbg"
         android:fitsSystemWindows="true">
 
-
-        <ImageView
-            android:id="@+id/pantryshelf"
-            android:layout_width="291dp"
-            android:layout_height="303dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/pantryicon"
-            tools:layout_editor_absoluteY="69dp" />
-
-
-        <ImageView
-            android:id="@+id/vptext"
-            android:layout_width="291dp"
-            android:layout_height="24dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/vptext"
-            tools:layout_editor_absoluteY="16dp" />
 
         <ToggleButton
             android:id="@+id/favicon"
             android:layout_width="25dp"
             android:layout_height="21dp"
             android:layout_alignTop="@+id/deletebutton"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/openpantry"
             android:background="@drawable/favoriteicon"
             android:textOff=""
@@ -93,9 +70,10 @@
             android:id="@+id/deletebutton"
             android:layout_width="26dp"
             android:layout_height="24dp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="122dp"
-            android:layout_toEndOf="@+id/pantryshelf"
+            android:layout_marginStart="353dp"
+            android:layout_marginTop="96dp"
             android:background="@layout/delselect"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="111dp" />
@@ -106,6 +84,7 @@
             android:layout_height="19dp"
             android:layout_alignBottom="@+id/deletebutton"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-2dp"
             android:contentDescription="@string/pantry_title"
             app:layout_constraintEnd_toStartOf="@+id/deletebutton"
             app:layout_constraintStart_toEndOf="@+id/favicon"
@@ -116,7 +95,6 @@
             android:id="@+id/bellicon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_alignTop="@+id/vptext"
             android:layout_marginStart="3dp"
             android:layout_toEndOf="@+id/deletebutton"
             android:background="@drawable/bellicon"
@@ -129,7 +107,7 @@
             android:layout_height="25dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="9dp"
+            android:layout_marginBottom="116dp"
             android:background="@drawable/create_pantry_button" />
 
         <Button
@@ -138,8 +116,8 @@
             android:layout_height="25dp"
             android:layout_alignEnd="@+id/bellicon"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-3dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="78dp"
             android:background="@drawable/pantry_settings_icon" />
 
         <Button
@@ -148,8 +126,8 @@
             android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="9dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginBottom="77dp"
             android:background="@drawable/profile_icon" />
 
 
@@ -163,7 +141,7 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/pantry_list"
         app:headerLayout="@layout/nav_header"/>
-</android.support.v4.widget.DrawerLayout>
+    </android.support.v4.widget.DrawerLayout>
 
 
 
