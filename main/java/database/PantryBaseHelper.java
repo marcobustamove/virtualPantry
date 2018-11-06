@@ -18,12 +18,15 @@ public class PantryBaseHelper extends SQLiteOpenHelper
 
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
+        //For Pantries
         db.execSQL("create table " + PantryTable.NAME + "(" +
         " _id integer primary key autoincrement, " +
                 PantryTable.Cols.UUID + ", " +
                 PantryTable.Cols.TITLE + ")");
 
+        //For Items
         db.execSQL("create table " +
                 ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
                 ItemTable.Cols.UUID + ", " +

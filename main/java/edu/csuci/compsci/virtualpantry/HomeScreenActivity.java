@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.UUID;
+
 import database.PantryBaseHelper;
 import database.PantryDBSchema.PantryTable;
 
@@ -19,8 +21,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
-    private Button mOpenPantry;
-    private Button mCreatePantry;
+    private Button openPantry;
+    private Button createPantry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         mContext = this.getApplicationContext();
         mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
 
-        mOpenPantry = (Button) findViewById(R.id.openpantry);
-        mOpenPantry.setOnClickListener(new View.OnClickListener() {
+        openPantry = (Button) findViewById(R.id.openpantry);
+        openPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openPantryScreen();
@@ -39,13 +41,13 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
 
-        mCreatePantry = (Button) findViewById(R.id.create_pantry_button);
-        mCreatePantry.setOnClickListener(new View.OnClickListener() {
+        createPantry = (Button) findViewById(R.id.create_pantry_button);
+        createPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                CreatePantryFragment dialog = new CreatePantryFragment();
-                dialog.show(manager, DIALOG_CREATE_PANTRY);
+                CreatePantryFragment createNewPantryDialog = new CreatePantryFragment();
+                createNewPantryDialog.show(manager, DIALOG_CREATE_PANTRY);
 
             }
         });
@@ -60,9 +62,10 @@ public class HomeScreenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private static ContentValues getContentValues(String pantryName) {
+    private static ContentValues getContentValues(String pantryName)
+    {
         ContentValues values = new ContentValues();
-
+        values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
         values.put(PantryTable.Cols.TITLE, pantryName);
 
         return values;
@@ -71,7 +74,18 @@ public class HomeScreenActivity extends AppCompatActivity {
     public void createPantry(String pantryName)
     {
         ContentValues values = getContentValues(pantryName);
-        mDatabase.insert(PantryTable.Cols.TITLE, null, values);
+        mDatabase.insert(PantryTable.NAME, null, values);
+    }
+
+    public void updatePantry(String newPantryName, UUID pantryID)
+    {
+        ContentValues values = new ContentValues();
+
+        values.put(PantryTable.Cols.TITLE, newPantryName);
+
+        mDatabase.update(PantryTable.NAME, values,
+                PantryTable.Cols.UUID + " = ?",
+                new String[] { pantryID.toString() });
     }
 
 }

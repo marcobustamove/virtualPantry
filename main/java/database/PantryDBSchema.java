@@ -1,6 +1,7 @@
 package database;
 
-public class PantryDBSchema {
+public class PantryDBSchema
+{
     public static final class PantryTable
     {
         public static final String NAME = "Pantries";
