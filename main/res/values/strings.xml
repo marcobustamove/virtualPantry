@@ -40,7 +40,7 @@
     <string name="addItemExpirationQuery">Expirable?</string>
     <string name="addItemExpirationDate">Expiration Date:</string>
     <string name="addItemExpirationHint">mm/dd/yyyy</string>
-    <string name="addItemDone">Done</string>
+    <string name="addItemDone">Create</string>
 
     <!--Create Account screen strings-->
     <string name="Email">Email</string>
