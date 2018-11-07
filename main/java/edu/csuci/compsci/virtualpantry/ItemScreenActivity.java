@@ -1,5 +1,6 @@
 package edu.csuci.compsci.virtualpantry;
 
+import android.content.ContentValues;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,9 +13,12 @@ import android.view.View;
 import android.widget.Button;
 
 
-import database.PantryBaseHelper;
+import java.util.UUID;
 
-public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener {
+import database.PantryBaseHelper;
+import database.PantryDBSchema.ItemTable;
+
+public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
 
     MyRecyclerViewAdapter adapter;
 
@@ -38,15 +42,17 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
             data[i] = Integer.toString(i+1);
         }
         */
+
         // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
+        RecyclerView ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         int numberOfColumns = 3;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        ItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         adapter = new MyRecyclerViewAdapter(this, data);
         adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+        ItemsRecyclerView.setAdapter(adapter);
 
 
+        //Add item button
         Button mAddItemButton = (Button) findViewById(R.id.addItemButton);
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +60,20 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                 FragmentManager manager = getSupportFragmentManager();
                 AddItemFragment dialog = new AddItemFragment();
                 dialog.show(manager,DIALOG_ADD_ITEM);
-
-                
-
             }
         });
+
+    }
+
+    @Override
+    public void AddItem(String newItemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear)
+    {
+        ContentValues values = new ContentValues();
+        values.put(ItemTable.Cols.UUID, UUID.randomUUID().toString());
+        values.put(ItemTable.Cols.NAME, newItemName);
+        values.put(ItemTable.Cols.DATE, expirationMonth + "/" + expirationDay + "/" + expirationYear);
+
+        mDatabase.insert(ItemTable.NAME, null, values);
     }
 
     @Override

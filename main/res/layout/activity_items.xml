@@ -5,7 +5,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
     android:fitsSystemWindows="true"
     android:background="@mipmap/itemlistscreenbg">
 
@@ -62,10 +61,9 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvNumbers"
+        android:id="@+id/itemsRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/addItemButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -20,6 +20,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, String[] data){
         this.mInflater = LayoutInflater.from(context);
+
+        //pull item names from pertinent category in db into data
         this.mData = data;
     }
 
@@ -66,6 +68,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
 
             TextView innertext = view.findViewById(R.id.info_text);
+
+            //functionality will be added here to change item status, or select multiple items
 
             int select = random.nextInt(4);
             switch(select)

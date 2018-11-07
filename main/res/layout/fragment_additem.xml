@@ -14,7 +14,7 @@
         android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ItemName_Layout"
+            android:id="@+id/AddItemName_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/ItemName"
+                android:id="@+id/AddItemName"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/baby_blue"
@@ -118,6 +118,7 @@
                 android:textSize="15sp" />
 
             <DatePicker
+                android:id="@+id/AddItemExpirationPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:calendarTextColor="@color/baby_blue"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
+import database.PantryDBSchema;
 import database.PantryDBSchema.PantryTable;
 
 public class HomeScreenActivity extends AppCompatActivity implements CreatePantryFragment.CreatePantryListener
