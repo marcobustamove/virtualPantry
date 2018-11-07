@@ -12,7 +12,6 @@ import android.widget.Button;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
-import database.PantryDBSchema;
 import database.PantryDBSchema.PantryTable;
 
 public class HomeScreenActivity extends AppCompatActivity implements CreatePantryFragment.CreatePantryListener
@@ -27,7 +26,8 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
     private String userInputPantryName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -53,6 +53,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
                 createPantry(userInputPantryName);
             }
         });
+
 
 
 

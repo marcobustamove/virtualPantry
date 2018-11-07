@@ -23,6 +23,8 @@ public class CreatePantryFragment extends AppCompatDialogFragment
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_createpantry, null);
 
+        editTextPantryName = view.findViewById(R.id.userpantryname);
+
         builder.setView(view)
                 .setTitle(R.string.create_pantry)
                 .setNegativeButton(android.R.string.cancel, null)
@@ -35,8 +37,6 @@ public class CreatePantryFragment extends AppCompatDialogFragment
                         listener.applyTexts(pantryName);
                     }
                 });
-
-        editTextPantryName = view.findViewById(R.id.userpantryname);
 
         return builder.create();
     }

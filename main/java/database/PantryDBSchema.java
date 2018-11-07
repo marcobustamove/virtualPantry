@@ -12,7 +12,8 @@ public class PantryDBSchema
         }
     }
 
-    public static final class ItemTable {
+    public static final class ItemTable
+    {
         public static final String NAME = "Items";
 
         public static final class Cols {

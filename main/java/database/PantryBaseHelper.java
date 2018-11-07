@@ -12,7 +12,8 @@ public class PantryBaseHelper extends SQLiteOpenHelper
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "PantryDatabase.db";
 
-    public PantryBaseHelper(Context context) {
+    public PantryBaseHelper(Context context)
+    {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -20,13 +21,11 @@ public class PantryBaseHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        //For Pantries
         db.execSQL("create table " + PantryTable.NAME + "(" +
         " _id integer primary key autoincrement, " +
                 PantryTable.Cols.UUID + ", " +
                 PantryTable.Cols.TITLE + ")");
 
-        //For Items
         db.execSQL("create table " +
                 ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
                 ItemTable.Cols.UUID + ", " +
@@ -40,8 +39,6 @@ public class PantryBaseHelper extends SQLiteOpenHelper
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
 }
