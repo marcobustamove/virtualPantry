@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +14,16 @@ import java.util.UUID;
 import database.PantryBaseHelper;
 import database.PantryDBSchema.PantryTable;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity implements CreatePantryFragment.CreatePantryListener
+{
 
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
-    private Button openPantry;
-    private Button createPantry;
+    private Button mOpenPantry;
+    private Button mCreatePantry;
+    private String userInputPantryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         mContext = this.getApplicationContext();
         mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
 
-        openPantry = (Button) findViewById(R.id.openpantry);
-        openPantry.setOnClickListener(new View.OnClickListener() {
+        mOpenPantry = (Button) findViewById(R.id.openpantry);
+        mOpenPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openPantryScreen();
@@ -41,14 +42,14 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
 
-        createPantry = (Button) findViewById(R.id.create_pantry_button);
-        createPantry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getSupportFragmentManager();
-                CreatePantryFragment createNewPantryDialog = new CreatePantryFragment();
-                createNewPantryDialog.show(manager, DIALOG_CREATE_PANTRY);
 
+        mCreatePantry = (Button) findViewById(R.id.create_pantry_button);
+        mCreatePantry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                openCreatePantryDialog();
+                createPantry(userInputPantryName);
             }
         });
 
@@ -62,18 +63,25 @@ public class HomeScreenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private static ContentValues getContentValues(String pantryName)
+    public void openCreatePantryDialog()
+    {
+        CreatePantryFragment fragment = new CreatePantryFragment();
+        fragment.show(getSupportFragmentManager(), DIALOG_CREATE_PANTRY);
+    }
+
+    @Override
+    public void applyTexts(String inputPantryName)
+    {
+        userInputPantryName = inputPantryName;
+    }
+
+
+    public void createPantry(String pantryName)
     {
         ContentValues values = new ContentValues();
         values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
         values.put(PantryTable.Cols.TITLE, pantryName);
 
-        return values;
-    }
-
-    public void createPantry(String pantryName)
-    {
-        ContentValues values = getContentValues(pantryName);
         mDatabase.insert(PantryTable.NAME, null, values);
     }
 
