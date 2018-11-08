@@ -144,13 +144,4 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         return super.onOptionsItemSelected(item);
     }
 
-    public Cursor getPantryNames(SQLiteDatabase db)
-    {
-        Cursor cursor = null;
-        String[] projector = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE};
-
-        return cursor;
-    }
-
-
 }
