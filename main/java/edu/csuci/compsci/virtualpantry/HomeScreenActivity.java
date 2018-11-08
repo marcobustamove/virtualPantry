@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.UUID;
 
@@ -40,6 +42,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
     private ListView mDrawerList;
     //CursorAdapter for binding to a sql
     ListView listView;
+    private SQLiteDatabase mReadableDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,12 +73,29 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         });
 
 
+
+
+
+
         mDrawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
+        String[]position = {"TITLE"};
+
+        Cursor cursor = mReadableDatabase.query("PantryTable",position,null,null,null,null,null);
+
+        List itemIds = new ArrayList<>();
+        while(cursor.isFirst()) {
+            String itemId = cursor.getString(1);
+            itemIds.add(itemId);
+            menu.add(itemId);
+        }
+        cursor.close();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
