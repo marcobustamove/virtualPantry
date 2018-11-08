@@ -113,10 +113,10 @@
             android:id="@+id/pantrytitle"
             android:layout_width="157dp"
             android:layout_height="19dp"
-            android:layout_alignBottom="@+id/deletebtn"
+            android:layout_alignBottom="@+id/deletebutton"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/pantry_title"
-            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
+            app:layout_constraintEnd_toStartOf="@+id/deletebutton"
             app:layout_constraintStart_toEndOf="@+id/favicon"
             app:srcCompat="@drawable/pantrytitletxt"
             tools:layout_editor_absoluteY="116dp" />
@@ -127,7 +127,7 @@
             android:layout_height="20dp"
             android:layout_alignTop="@+id/vptext"
             android:layout_marginStart="3dp"
-            android:layout_toEndOf="@+id/deletebtn"
+            android:layout_toEndOf="@+id/deletebutton"
             android:background="@drawable/bellicon"
             android:textOff=""
             android:textOn="" />
