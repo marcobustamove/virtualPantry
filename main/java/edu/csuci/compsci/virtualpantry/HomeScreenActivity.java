@@ -3,6 +3,7 @@ package edu.csuci.compsci.virtualpantry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -122,7 +123,8 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
                 new String[] { pantryID.toString() });
     }
 
-    private void addMenuItemInNavMenuDrawer() {
+    private void addMenuItemInNavMenuDrawer()
+    {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
         //Menu submenu = menu.addSubMenu("New Super SubMenu");
@@ -132,7 +134,8 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         navView.invalidate();
     }
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         switch (item.getItemId()){
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -140,5 +143,14 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public Cursor getPantryNames(SQLiteDatabase db)
+    {
+        Cursor cursor = null;
+        String[] projector = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE};
+
+        return cursor;
+    }
+
 
 }
