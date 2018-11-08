@@ -19,7 +19,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
 
 
     private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private SQLiteDatabase mWritableDatabase;
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private Button mOpenPantry;
     private Button mCreatePantry;
@@ -32,7 +32,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         setContentView(R.layout.activity_home);
 
         mContext = this.getApplicationContext();
-        mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
+        mWritableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
 
         mOpenPantry = (Button) findViewById(R.id.openpantry);
         mOpenPantry.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,6 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
             public void onClick(View v)
             {
                 openCreatePantryDialog();
-                createPantry(userInputPantryName);
             }
         });
 
@@ -72,19 +71,14 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
     }
 
     @Override
-    public void applyTexts(String inputPantryName)
+    public void createPantry(String inputPantryName)
     {
         userInputPantryName = inputPantryName;
-    }
-
-
-    public void createPantry(String pantryName)
-    {
         ContentValues values = new ContentValues();
         values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
-        values.put(PantryTable.Cols.TITLE, pantryName);
+        values.put(PantryTable.Cols.TITLE, userInputPantryName);
 
-        mDatabase.insert(PantryTable.NAME, null, values);
+        mWritableDatabase.insert(PantryTable.NAME, null, values);
     }
 
     public void updatePantry(String newPantryName, UUID pantryID)
@@ -93,7 +87,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
 
         values.put(PantryTable.Cols.TITLE, newPantryName);
 
-        mDatabase.update(PantryTable.NAME, values,
+        mWritableDatabase.update(PantryTable.NAME, values,
                 PantryTable.Cols.UUID + " = ?",
                 new String[] { pantryID.toString() });
     }

@@ -34,7 +34,7 @@ public class AddItemFragment extends DialogFragment
                         Switch expirationSwitch = v.findViewById(R.id.itemExpirationQuerySwitch);
                         DatePicker expirationDate = v.findViewById(R.id.AddItemExpirationPicker);
 
-                        listener.AddItem(newItemName.toString(), expirationSwitch.isChecked(), expirationDate.getMonth(), expirationDate.getDayOfMonth(), expirationDate.getYear());
+                        listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), expirationDate.getMonth(), expirationDate.getDayOfMonth(), expirationDate.getYear());
 
                         //System.out.println("Item name: " + newItemName.getText().toString()); //Test print functions
                         //System.out.println("Value of expiration switch: " + expirationSwitch.isChecked());

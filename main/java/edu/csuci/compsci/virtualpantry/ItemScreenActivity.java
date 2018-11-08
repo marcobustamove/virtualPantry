@@ -71,7 +71,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         ContentValues values = new ContentValues();
         values.put(ItemTable.Cols.UUID, UUID.randomUUID().toString());
         values.put(ItemTable.Cols.NAME, newItemName);
-        values.put(ItemTable.Cols.DATE, expirationMonth + "/" + expirationDay + "/" + expirationYear);
+        values.put(ItemTable.Cols.DATE, (expirationMonth+1) + "/" + expirationDay + "/" + expirationYear);
 
         mDatabase.insert(ItemTable.NAME, null, values);
     }

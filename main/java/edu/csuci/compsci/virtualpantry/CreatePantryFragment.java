@@ -12,7 +12,6 @@ import android.widget.EditText;
 
 public class CreatePantryFragment extends AppCompatDialogFragment
 {
-    private EditText editTextPantryName;
     private CreatePantryListener listener;
 
     @Override
@@ -21,20 +20,28 @@ public class CreatePantryFragment extends AppCompatDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_createpantry, null);
+        final View view = inflater.inflate(R.layout.fragment_createpantry, null);
 
-        editTextPantryName = view.findViewById(R.id.userpantryname);
+
 
         builder.setView(view)
                 .setTitle(R.string.create_pantry)
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        CreatePantryFragment.this.getDialog().cancel();
+                    }
+                })
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
+                        EditText editTextPantryName = view.findViewById(R.id.userpantryname);
                         String pantryName = editTextPantryName.getText().toString();
-                        listener.applyTexts(pantryName);
+                        listener.createPantry(pantryName);
                     }
                 });
 
@@ -51,7 +58,7 @@ public class CreatePantryFragment extends AppCompatDialogFragment
 
     public interface CreatePantryListener
     {
-        void applyTexts(String inputPantryName);
+        void createPantry(String inputPantryName);
     }
 
 }
