@@ -84,18 +84,22 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         listView = (ListView) findViewById(R.id.simpleListView);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
+
         mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
-        String[]position = {"TITLE"};
 
-        Cursor cursor = mReadableDatabase.query("PantryTable",position,null,null,null,null,null);
+        String[] position = {"TITLE"};
 
-        List itemIds = new ArrayList<>();
-        while(cursor.isFirst()) {
-            String itemId = cursor.getString(1);
+        Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
+
+        ArrayList itemIds = new ArrayList();
+        while(cursor.moveToNext()) {
+            String itemId = cursor.getString(0);
             itemIds.add(itemId);
             menu.add(itemId);
         }
         cursor.close();
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
