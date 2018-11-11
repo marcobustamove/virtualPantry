@@ -82,7 +82,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
 
         mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
@@ -95,11 +95,12 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         while(cursor.moveToNext()) {
             String itemId = cursor.getString(0);
             itemIds.add(itemId);
+            System.out.println(itemId);
             menu.add(itemId);
         }
-        cursor.close();
+        cursor.close();*/
 
-
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -134,6 +135,7 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         values.put(PantryTable.Cols.TITLE, userInputPantryName);
 
         mWritableDatabase.insert(PantryTable.NAME, null, values);
+        addMenuItemInNavMenuDrawer();
     }
 
     public void updatePantry(String newPantryName, UUID pantryID)
@@ -151,11 +153,30 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
     {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
+        mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
+        String[]position = {PantryTable.Cols.TITLE};
+
+        Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
+
+
+        List<String> itemIds = new ArrayList<>();
+        menu.clear();
+        while(cursor.moveToNext()) {
+            String itemId = cursor.getString(0);
+            //itemIds.add(itemId);
+            //System.out.println(itemId);
+            menu.add(itemId);
+
+        }
+        cursor.close();
+
+        /*
+        Menu menu = navView.getMenu();
         //Menu submenu = menu.addSubMenu("New Super SubMenu");
         menu.add("Super Item1");
         menu.add("Super Item2");
         menu.add("Super Item3");
-        navView.invalidate();
+        navView.invalidate();*/
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

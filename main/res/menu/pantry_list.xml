@@ -4,13 +4,13 @@
 
 
     <group android:checkableBehavior="none">
-        <item
-            android:id="@+id/new_pantry"
-            android:title="pantry 1" />
+        <!--<item-->
+            <!--android:id="@+id/new_pantry"-->
+            <!--android:title="pantry 1" />-->
 
-        <item
-            android:id="@+id/new_pantry2"
-            android:title="pantry 2" />
+        <!--<item-->
+            <!--android:id="@+id/new_pantry2"-->
+            <!--android:title="pantry 2" />-->
     </group>
 
 
