@@ -12,7 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,7 +28,7 @@ import java.util.UUID;
 import database.PantryBaseHelper;
 import database.PantryDBSchema.PantryTable;
 
-public class HomeScreenActivity extends AppCompatActivity implements CreatePantryFragment.CreatePantryListener
+public class HomeScreenActivity extends AppCompatActivity  implements CreatePantryFragment.CreatePantryListener
 {
 
 
@@ -74,43 +76,26 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
 
 
 
-
-
-
         mDrawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menu = navigationView.getMenu();
 
-        mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
-        String[] position = {"TITLE"};
-
-        Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
-
-        ArrayList itemIds = new ArrayList();
-        while(cursor.moveToNext()) {
-            String itemId = cursor.getString(0);
-            itemIds.add(itemId);
-            System.out.println(itemId);
-            menu.add(itemId);
-        }
-        cursor.close();*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case 0:
+                        openPantryScreen();
+                }
                 return false;
             }
         });
         addMenuItemInNavMenuDrawer();
-
-
-
 
     }
 
@@ -163,20 +148,14 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
         menu.clear();
         while(cursor.moveToNext()) {
             String itemId = cursor.getString(0);
-            //itemIds.add(itemId);
-            //System.out.println(itemId);
-            menu.add(itemId);
 
+            //itemIds.add(itemId)
+            // System.out.println(itemId);
+            menu.add(itemId);
         }
         cursor.close();
+        //navView.invalidate();
 
-        /*
-        Menu menu = navView.getMenu();
-        //Menu submenu = menu.addSubMenu("New Super SubMenu");
-        menu.add("Super Item1");
-        menu.add("Super Item2");
-        menu.add("Super Item3");
-        navView.invalidate();*/
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -185,8 +164,15 @@ public class HomeScreenActivity extends AppCompatActivity implements CreatePantr
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
 
 }
