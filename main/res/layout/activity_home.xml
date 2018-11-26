@@ -162,7 +162,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/pantry_list"
-        app:headerLayout="@layout/nav_header"/>
+        app:headerLayout="@layout/nav_header"
+        app:itemTextColor="@color/colorPrimaryDark"/>
 </android.support.v4.widget.DrawerLayout>
 
 
