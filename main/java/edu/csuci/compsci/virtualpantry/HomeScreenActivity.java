@@ -139,7 +139,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
         mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
-        String[]position = {PantryTable.Cols.TITLE};
+        String[]position = {PantryTable.Cols.TITLE, PantryTable.Cols.UUID};
 
         Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
 
@@ -147,11 +147,11 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         List<String> itemIds = new ArrayList<>();
         menu.clear();
         while(cursor.moveToNext()) {
-            String itemId = cursor.getString(0);
-
+            String pantryName = cursor.getString(0);
+            String pantryUUID = cursor.getString(1);
             //itemIds.add(itemId)
             // System.out.println(itemId);
-            menu.add(itemId);
+            menu.add(pantryName);
         }
         cursor.close();
         //navView.invalidate();
