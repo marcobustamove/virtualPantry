@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -34,41 +35,19 @@
         android:id="@+id/homescreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/homebg"
+        android:background="@drawable/homescreenbg"
         android:fitsSystemWindows="true">
 
-
-        <ImageView
-            android:id="@+id/pantryshelf"
-            android:layout_width="291dp"
-            android:layout_height="303dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/pantryicon"
-            tools:layout_editor_absoluteY="69dp" />
-
-
-        <ImageView
-            android:id="@+id/vptext"
-            android:layout_width="291dp"
-            android:layout_height="24dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/vptext"
-            tools:layout_editor_absoluteY="16dp" />
 
         <ToggleButton
             android:id="@+id/favicon"
             android:layout_width="25dp"
             android:layout_height="21dp"
             android:layout_alignTop="@+id/deletebutton"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="-32dp"
             android:layout_toStartOf="@+id/openpantry"
             android:background="@drawable/favoriteicon"
             android:textOff=""
@@ -94,10 +73,11 @@
             android:id="@+id/deletebutton"
             android:layout_width="26dp"
             android:layout_height="24dp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="122dp"
-            android:layout_toEndOf="@+id/pantryshelf"
-            android:background="@layout/delselect"
+            android:layout_marginStart="321dp"
+            android:layout_marginTop="176dp"
+            android:background="@drawable/deletebtn"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="111dp" />
 
@@ -110,46 +90,122 @@
             android:contentDescription="@string/pantry_title"
             android:textColor="@color/item_expired"/>
 
-        <ToggleButton
-            android:id="@+id/bellicon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignTop="@+id/vptext"
-            android:layout_marginStart="3dp"
-            android:layout_toEndOf="@+id/deletebutton"
-            android:background="@drawable/bellicon"
-            android:textOff=""
-            android:textOn="" />
-
         <Button
             android:id="@+id/create_pantry_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="9dp"
-            android:background="@drawable/create_pantry_button" />
+            android:layout_marginEnd="-226dp"
+            android:layout_marginBottom="118dp"
+            android:layout_toStartOf="@+id/imageView5"
+            android:background="@drawable/createbtn" />
 
-        <Button
-            android:id="@+id/pantry_settings"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignEnd="@+id/bellicon"
+        <ImageView
+            android:id="@+id/categorylist"
+            android:layout_width="26dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-3dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/pantry_settings_icon" />
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="361dp"
+            android:layout_marginBottom="637dp"
+            android:contentDescription="@string/pantrycategorylist"
+            app:srcCompat="@drawable/categorydropdown" />
 
-        <Button
-            android:id="@+id/profile_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+        <ImageView
+            android:id="@+id/pantrybox"
+            android:layout_width="331dp"
+            android:layout_height="331dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="163dp"
+            android:contentDescription="pantrybox"
+            app:srcCompat="@drawable/pantryboxhomeview" />
+
+        <TextView
+            android:id="@+id/createpantrytext"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="102dp"
+            android:layout_marginEnd="98dp"
+            android:layout_marginBottom="100dp"
+            android:fontFamily="@font/futura"
+            android:text="Create Pantry"
+            android:textAlignment="center"
+            android:textColor="@color/text_brown_accent"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="123dp"
+            android:layout_height="123dp"
+            android:layout_above="@+id/openpantry"
+            android:layout_alignStart="@+id/pantrybox"
+            android:layout_alignTop="@+id/pantrybox"
+            android:layout_alignEnd="@+id/pantrybox"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="61dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="25dp"
+            app:srcCompat="@drawable/pantryavatardefault" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="9dp"
-            android:background="@drawable/profile_icon" />
+            android:layout_marginStart="226dp"
+            android:layout_marginBottom="232dp"
+            app:srcCompat="@drawable/inactivepantryicon" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="213dp"
+            android:layout_marginBottom="232dp"
+            app:srcCompat="@drawable/inactivepantryicon" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="200dp"
+            android:layout_marginBottom="232dp"
+            app:srcCompat="@drawable/inactivepantryicon" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="186dp"
+            android:layout_marginBottom="232dp"
+            app:srcCompat="@drawable/activepantryicon" />
+
+        <TextView
+            android:id="@+id/pantryname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/favicon"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/futura"
+            android:text="Pantry Name"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
 
     </RelativeLayout>
@@ -163,7 +219,4 @@
         app:headerLayout="@layout/nav_header"
         app:itemTextColor="@color/colorPrimaryDark"/>
 </android.support.v4.widget.DrawerLayout>
-
-
-
 

@@ -20,4 +20,6 @@
     <color name="item_empty_pressed">#CC4444</color>
     <color name="item_expired">#333355</color>
     <color name="item_expired_pressed">#222233</color>
+    <color name="accent_brown">#f9d6ab</color>
+    <color name="text_brown_accent">#cda26c</color>
 </resources>
