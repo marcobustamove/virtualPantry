@@ -6,9 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/baby_blue</item>
+        <item name="android:colorForeground">@color/baby_blue</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="AddItemDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/secondary_blue</item>
+        <item name="android:textColor">@color/baby_blue</item>
+        <item name="android:fontFamily">@font/futura</item>
+        <item name="android:textColorPrimaryInverse">?attr/colorPrimary</item>
     </style>
 
 </resources>

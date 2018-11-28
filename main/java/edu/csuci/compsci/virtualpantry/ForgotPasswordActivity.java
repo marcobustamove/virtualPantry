@@ -18,7 +18,7 @@ public class ForgotPasswordActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_password_screen);
 
-        forgotPasswordSubmitButton = (Button) findViewById(R.id.forgot_Password_submit);
+        forgotPasswordSubmitButton = (Button) findViewById(R.id.forgot_password_submit);
         forgotPasswordSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +31,7 @@ public class ForgotPasswordActivity extends AppCompatActivity  {
     }
     public void openLoginScreenActivity()
     {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, LoginScreenActivity.class);
         startActivity(intent);
     }
 

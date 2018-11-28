@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home">
+        <activity android:name=".LoginScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,12 +21,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".pantryScreenActivity" />
-        <activity android:name=".loginScreenActivity" />
-        <activity android:name=".fruitScreenActivity" />
-        <activity android:name=".homeactivity"></activity>
+        <activity android:name=".PantryScreenActivity" />
+        <activity android:name=".ItemScreenActivity" />
+        <activity android:name=".HomeScreenActivity"/>
     </application>
 
 </manifest>

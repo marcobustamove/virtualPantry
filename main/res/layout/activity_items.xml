@@ -5,7 +5,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
     android:fitsSystemWindows="true"
     android:background="@mipmap/itemlistscreenbg">
 
@@ -22,6 +21,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/selectbutton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -34,6 +34,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -46,6 +47,7 @@
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/sort"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -59,24 +61,23 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvNumbers"
+        android:id="@+id/itemsRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/addItemButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button style="?android:buttonStyle"
-        android:id="@+id/textView"
+        android:id="@+id/addItemButton"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bar_button"
         android:fontFamily="@font/futura"
         android:gravity="center"
-        android:text="@string/plus_button_test"
+        android:text="@string/plus_button"
         android:textColor="@color/baby_blue"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,20 +85,3 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
-
-
-<!--
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvNumbers"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
--->
