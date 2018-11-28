@@ -24,7 +24,8 @@ public class PantryBaseHelper extends SQLiteOpenHelper
         db.execSQL("create table " + PantryTable.NAME + "(" +
         " _id integer primary key autoincrement, " +
                 PantryTable.Cols.UUID + ", " +
-                PantryTable.Cols.TITLE + ")");
+                PantryTable.Cols.TITLE + ", " +
+                PantryTable.Cols.FAVORITE + ")");
 
         db.execSQL("create table " +
                 ItemTable.NAME + "(" + " _id integer primary key autoincrement, " +
