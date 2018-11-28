@@ -30,6 +30,9 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
+        String catagory = this.getIntent().getStringExtra("EXTRA_PANTRY_CATEGORY");
+        String uuid = this.getIntent().getStringExtra("EXTRA_PANTRY_UUID");
+        System.out.println(catagory + " " + uuid);
 
         mContext = this.getApplicationContext();
         mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();

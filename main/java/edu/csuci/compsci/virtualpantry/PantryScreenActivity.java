@@ -12,6 +12,15 @@ public class PantryScreenActivity extends AppCompatActivity {
     private Button fruitsButton;
     private Button dairyButton;
     private Button grainsButton;
+    private Button meatsButton;
+    private Button vegetablesButton;
+    private Button condimentsButton;
+    private Button oilsButton;
+    private Button snacksButton;
+    private Button fishButton;
+    private Button frozenButton;
+    private Button hygieneButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,78 @@ public class PantryScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 enterItemScreen(pantryUUID, "DAIRY");
+            }
+        });
+
+        grainsButton = (Button) findViewById(R.id.grains);
+        grainsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "GRAINS");
+            }
+        });
+
+        meatsButton = (Button) findViewById(R.id.meat);
+        meatsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "MEATS");
+            }
+        });
+
+        vegetablesButton = (Button) findViewById(R.id.vegies);
+        vegetablesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "VEGETABLES");
+            }
+        });
+
+        condimentsButton = (Button) findViewById(R.id.condiments);
+        condimentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "CONDIMENTS");
+            }
+        });
+
+        oilsButton = (Button) findViewById(R.id.oils);
+        oilsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "OILS");
+            }
+        });
+
+        snacksButton = (Button) findViewById(R.id.snacks);
+        snacksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "SNACKS");
+            }
+        });
+
+        fishButton = (Button) findViewById(R.id.fish);
+        fishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "FISH");
+            }
+        });
+
+        frozenButton = (Button) findViewById(R.id.frozen);
+        frozenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "FROZEN");
+            }
+        });
+
+        hygieneButton = (Button) findViewById(R.id.grains);
+        hygieneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterItemScreen(pantryUUID, "HYGIENE");
             }
         });
 
