@@ -59,6 +59,7 @@
     <string name="enter_e_mail_address">Enter E-mail Address</string>
     <string name="trouble_logging_in">Trouble logging in?</string>
     <string name="enter_your_e_mail_and_we_ll_send_you_a_link_nto_get_back_into_your_account">Enter your e-mail and we’ll send you a link to get back into your account.</string>
+    <string name="pantrycategorylist">pantrycategorylist</string>
 
 
 </resources>
