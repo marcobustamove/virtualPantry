@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="275dp"
+    android:layout_height="100dp"
+    android:background="@drawable/status_selector_bg">
+
+    <LinearLayout
+        android:id="@+id/AddItemDialog_ParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/set_empty_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/item_empty"
+            android:text="@string/setItemEmptyHint"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/futura"
+            android:textSize="30sp"/>
+        <Button
+            android:id="@+id/set_low_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/item_low"
+            android:text="@string/setItemLowHint"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/futura"
+            android:textSize="30sp"/>
+        <Button
+            android:id="@+id/set_full_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/item_full"
+            android:text="@string/setItemFullHint"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/futura"
+            android:textSize="30sp"/>
+
+
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

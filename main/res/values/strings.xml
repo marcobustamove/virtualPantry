@@ -42,6 +42,11 @@
     <string name="addItemExpirationHint">mm/dd/yyyy</string>
     <string name="addItemDone">Create</string>
 
+    <!--Edit Item Status Dialog Strings-->
+    <string name="setItemEmptyHint">E</string>
+    <string name="setItemLowHint">L</string>
+    <string name="setItemFullHint">F</string>
+
     <!--Create Account screen strings-->
     <string name="Email">Email</string>
     <string name="Enter_Password">Enter Password</string>

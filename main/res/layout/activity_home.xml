@@ -81,6 +81,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="111dp" />
 
+        <TextView
+            android:id="@+id/pantrytitle"
+            android:layout_width="157dp"
+            android:layout_height="19dp"
+            android:layout_alignBottom="@+id/deletebutton"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/pantry_title"
+            android:textColor="@color/item_expired"/>
 
         <Button
             android:id="@+id/create_pantry_button"
@@ -208,6 +216,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/pantry_list"
-        app:headerLayout="@layout/nav_header"/>
-    </android.support.v4.widget.DrawerLayout>
+        app:headerLayout="@layout/nav_header"
+        app:itemTextColor="@color/colorPrimaryDark"/>
+</android.support.v4.widget.DrawerLayout>
 
