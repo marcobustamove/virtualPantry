@@ -47,6 +47,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     private ListView mDrawerList;
     private String favoriteValue;
     private int indexOfFavoriteColumn;
+    private List<String> pantryUUIDS;
     //CursorAdapter for binding to a sql
     ListView listView;
     private SQLiteDatabase mReadableDatabase;
@@ -96,7 +97,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         mOpenPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPantryScreen();
+                //openPantryScreen();
 
             }
         });
@@ -125,10 +126,10 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case 0:
-                        openPantryScreen();
-                }
+
+                String pantryUUID = pantryUUIDS.get(menuItem.getItemId());
+                openPantryScreen(pantryUUID);
+
                 return false;
             }
         });
@@ -136,9 +137,12 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
 
     }
 
-    public void openPantryScreen()
+    public void openPantryScreen(String pantryUUID)
     {
         Intent intent = new Intent(this, PantryScreenActivity.class);
+
+        intent.putExtra("EXTRA_PANTRY_UUID", pantryUUID);
+
         startActivity(intent);
     }
 
@@ -233,17 +237,15 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
 
 
-        List<String> itemIds = new ArrayList<>();
+        pantryUUIDS = new ArrayList<>();
         menu.clear();
         while(cursor.moveToNext()) {
             String pantryName = cursor.getString(0);
             String pantryUUID = cursor.getString(1);
-            //itemIds.add(itemId)
-            // System.out.println(itemId);
+            pantryUUIDS.add(pantryUUID);
             menu.add(pantryName);
         }
         cursor.close();
-        //navView.invalidate();
 
     }
     @Override
