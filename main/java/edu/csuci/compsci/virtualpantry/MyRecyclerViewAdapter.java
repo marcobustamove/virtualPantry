@@ -43,6 +43,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView innertext = view.findViewById(R.id.info_text);
         innertext.setBackgroundResource(0); //This line is possibly not necessary, experiment later
         innertext.setBackgroundResource(R.drawable.categorybutton);
+        view.setLongClickable(true);
 
 
 
@@ -72,6 +73,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             super(itemView);
             myTextView = itemView.findViewById(R.id.info_text);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -79,6 +81,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
 
             TextView innertext = view.findViewById(R.id.info_text);
+            System.out.println("OnClick received");
 
             //functionality will be added here to change item status, or select multiple items
 
@@ -111,6 +114,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             Button btnSetEmpty;
             Button btnSetLow;
             Button btnSetFull;
+            System.out.println("OnLongClick received");
 
             myDialog.setContentView(R.layout.fragment_change_item_status);
             btnSetEmpty = (Button) myDialog.findViewById(R.id.set_empty_button);
