@@ -25,7 +25,6 @@ public class PantryScreenActivity extends AppCompatActivity {
         closePantryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //goHomeScreen();
                 finish();
 
             }
@@ -48,11 +47,6 @@ public class PantryScreenActivity extends AppCompatActivity {
         });
 
 
-    }
-    public void goHomeScreen()
-    {
-        Intent intent = new Intent(this, HomeScreenActivity.class);
-        startActivity(intent);
     }
     public void enterItemScreen(String pantryUUID, String category)
     {
