@@ -8,10 +8,9 @@
     <Button
         android:id="@+id/closepantry"
         android:layout_width="157dp"
-        android:layout_height="32dp"
+        android:layout_height="26dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
         android:background="#5A82E3"
         android:fontFamily="@font/futura"
         android:text="@string/closebutton"

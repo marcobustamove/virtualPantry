@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,11 +13,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -29,25 +32,34 @@ import java.util.UUID;
 import database.PantryBaseHelper;
 import database.PantryDBSchema.PantryTable;
 
-public class HomeScreenActivity extends AppCompatActivity  implements CreatePantryFragment.CreatePantryListener
+public class HomeScreenActivity extends AppCompatActivity  implements CreatePantryFragment.CreatePantryListener, DeletePantryFragment.DeletePantryListener
 {
 
 
+    private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
+    private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
     private Context mContext;
     private SQLiteDatabase mWritableDatabase;
-    private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
+
     private Button mOpenPantry;
-    private Button mCreatePantry;
-    private Button mHeartButton;
+    private Button mHeartIcon;
+    private Button mDeletePantry;
     private TextView pantryTitle;
+    private TextView noPantryPrompt;
+    private Button mCreatePantry;
+    private ImageView pantryImage;
+    private ImageView listViewBars;
+
     private String userInputPantryName;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private ArrayAdapter<String> mAdapter;
-    private ListView mDrawerList;
+
     private String favoriteValue;
     private int indexOfFavoriteColumn;
+    private String currentPantryUUIDOnDisplay;
+
     private List<String> pantryUUIDS;
+
     //CursorAdapter for binding to a sql
     ListView listView;
     private SQLiteDatabase mReadableDatabase;
@@ -62,46 +74,56 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         mWritableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
         mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
-        //TODO - Marco's In Progress Work
-        //This section will be for the filling of the first pantry to show to the user
-        //In other words, if there is a favorite pantry, then grab the entry from the database
-        //and use the info to fill in the red heart and the title
-        //Otherwise if there is no favorite, grab the first pantry in database and fill in info
-        //This will ultimately be where the scroll view where go
+        pantryTitle = (TextView) findViewById(R.id.pantrytitle);
+        noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
+        pantryImage = (ImageView) findViewById(R.id.pantryImage);
 
-        mHeartButton = (ToggleButton) findViewById(R.id.favicon);
-        mHeartButton.setOnClickListener(new View.OnClickListener() {
+
+        mHeartIcon = (ToggleButton) findViewById(R.id.favicon);
+        mHeartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 if(favoriteValue.equals("YES"))
                 {
                     removeCurrentFavorite();
-                    mHeartButton.setBackgroundResource(R.drawable.defaultfavicon);
+                    mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
                 }
                 else
                 {
                     setFavorite(pantryTitle.getText().toString());
-                    mHeartButton.setBackgroundResource(R.drawable.favicon);
+                    mHeartIcon.setBackgroundResource(R.drawable.favicon);
                 }
             }
         });
 
-        pantryTitle = (TextView) findViewById(R.id.pantrytitle);
-
-
-        setPantryView();
+        mDeletePantry = (Button) findViewById(R.id.deletebutton);
+        mDeletePantry.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                openDeletePantryDialog();
+            }
+        });
 
 
         mOpenPantry = (Button) findViewById(R.id.openpantry);
         mOpenPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //openPantryScreen();
+                openPantryScreen(currentPantryUUIDOnDisplay);
 
             }
         });
 
+        listViewBars = (ImageView) findViewById(R.id.categorylist);
+        listViewBars.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+
+        });
 
         mCreatePantry = (Button) findViewById(R.id.create_pantry_button);
         mCreatePantry.setOnClickListener(new View.OnClickListener() {
@@ -112,15 +134,16 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
             }
         });
 
+        setPantryView();
 
         //This is for the drawer
         mDrawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
-
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -140,9 +163,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     public void openPantryScreen(String pantryUUID)
     {
         Intent intent = new Intent(this, PantryScreenActivity.class);
-
         intent.putExtra("EXTRA_PANTRY_UUID", pantryUUID);
-
         startActivity(intent);
     }
 
@@ -150,6 +171,12 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     {
         CreatePantryFragment fragment = new CreatePantryFragment();
         fragment.show(getSupportFragmentManager(), DIALOG_CREATE_PANTRY);
+    }
+
+    public void openDeletePantryDialog()
+    {
+        DeletePantryFragment fragment = new DeletePantryFragment();
+        fragment.show(getSupportFragmentManager(), DIALOG_DELETE_PANTRY);
     }
 
     @Override
@@ -163,17 +190,46 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
 
         mWritableDatabase.insert(PantryTable.NAME, null, values);
         addMenuItemInNavMenuDrawer();
+        setPantryView();
+        makeIconsVisible();
     }
 
-    public void setPantryView()
+    @Override
+    public void deletePantry()
     {
-        int indexOfTitleColumn;
+        String selection = PantryTable.Cols.UUID + " LIKE ?";
+        String[] whereValue = { currentPantryUUIDOnDisplay };
 
+        mWritableDatabase.delete(PantryTable.NAME, selection, whereValue);
+        addMenuItemInNavMenuDrawer();
+        setPantryView();
+
+        //TODO - Delete all Items containing the UUID
+    }
+
+    public Cursor getFavoritePantry()
+    {
         String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
         String selection = PantryTable.Cols.FAVORITE + " = ?";
         String[] whereValue = {"YES"};
 
         Cursor cursor = mReadableDatabase.query(PantryTable.NAME, projection, selection, whereValue,null,null,null);
+        return cursor;
+    }
+
+    public Cursor getEntirePantryDatabase()
+    {
+        String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
+        Cursor cursor = mReadableDatabase.query(PantryTable.NAME, projection, null, null,null,null,null);
+        return cursor;
+    }
+
+    public void setPantryView()
+    {
+        int indexOfTitleColumn;
+        int indexOfUUIDColumn;
+
+        Cursor cursor = getFavoritePantry();
 
         if(cursor != null && cursor.getCount() > 0 && cursor.moveToNext())
         {
@@ -183,13 +239,17 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
             indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
             favoriteValue = cursor.getString(indexOfFavoriteColumn);
 
-            mHeartButton.setBackgroundResource(R.drawable.favicon);
+            indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
+            currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
 
+            noPantryPrompt.setText("");
 
+            makeIconsVisible();
+            mHeartIcon.setBackgroundResource(R.drawable.favicon);
         }
         else
         {
-            cursor = mReadableDatabase.query(PantryTable.NAME, projection, null, null,null,null,null);
+            cursor = getEntirePantryDatabase();
 
             if(cursor != null && cursor.getCount() > 0 && cursor.moveToNext())
             {
@@ -198,11 +258,40 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
 
                 indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
                 favoriteValue = cursor.getString(indexOfFavoriteColumn);
-                mHeartButton.setBackgroundResource(R.drawable.defaultfavicon);
+
+                indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
+                currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
+
+                noPantryPrompt.setText("");
+
+                makeIconsVisible();
+                mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+            }
+            else
+            {
+                hidePantryIcons();
             }
         }
 
         cursor.close();
+    }
+
+    public void makeIconsVisible()
+    {
+        mHeartIcon.setVisibility(View.VISIBLE);
+        mDeletePantry.setVisibility(View.VISIBLE);
+        mOpenPantry.setVisibility(View.VISIBLE);
+        pantryImage.setVisibility(View.VISIBLE);
+    }
+
+    public void hidePantryIcons()
+    {
+        mHeartIcon.setVisibility(View.INVISIBLE);
+        mDeletePantry.setVisibility(View.INVISIBLE);
+        mOpenPantry.setVisibility(View.INVISIBLE);
+        pantryImage.setVisibility(View.INVISIBLE);
+        pantryTitle.setText("");
+        noPantryPrompt.setText("You have no Pantries!\nStart by creating one!");
     }
 
     public void removeCurrentFavorite()
@@ -214,6 +303,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         mWritableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "NO";
     }
+
     public void setFavorite(String pantryName)
     {
         removeCurrentFavorite();
@@ -227,27 +317,6 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
 
     }
 
-    private void addMenuItemInNavMenuDrawer()
-    {
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menu = navView.getMenu();
-        mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
-        String[]position = {PantryTable.Cols.TITLE, PantryTable.Cols.UUID};
-
-        Cursor cursor = mReadableDatabase.query(PantryTable.NAME,position,null,null,null,null,null);
-
-
-        pantryUUIDS = new ArrayList<>();
-        menu.clear();
-        while(cursor.moveToNext()) {
-            String pantryName = cursor.getString(0);
-            String pantryUUID = cursor.getString(1);
-            pantryUUIDS.add(pantryUUID);
-            menu.add(pantryName);
-        }
-        cursor.close();
-
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -260,4 +329,22 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         return super.onOptionsItemSelected(item);
     }
 
+    private void addMenuItemInNavMenuDrawer()
+    {
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navView.getMenu();
+
+        Cursor cursor = getEntirePantryDatabase();
+
+        pantryUUIDS = new ArrayList<>();
+        menu.clear();
+        while(cursor.moveToNext())
+        {
+            String pantryName = cursor.getString(0);
+            String pantryUUID = cursor.getString(1);
+            pantryUUIDS.add(pantryUUID);
+            menu.add(pantryName);
+        }
+        cursor.close();
+    }
 }

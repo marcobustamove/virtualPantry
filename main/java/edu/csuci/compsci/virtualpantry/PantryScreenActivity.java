@@ -46,7 +46,7 @@ public class PantryScreenActivity extends AppCompatActivity {
             }
         });
 
-        
+
     }
     public void goHomeScreen()
     {
