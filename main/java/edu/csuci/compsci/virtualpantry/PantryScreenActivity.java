@@ -25,7 +25,8 @@ public class PantryScreenActivity extends AppCompatActivity {
         closePantryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goHomeScreen();
+                //goHomeScreen();
+                finish();
 
             }
         });

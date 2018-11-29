@@ -331,17 +331,21 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
 
     private void addMenuItemInNavMenuDrawer()
     {
+        int indexOfTitleColumn;
+        int indexOfUUIDColumn;
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
 
         Cursor cursor = getEntirePantryDatabase();
+        indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
+        indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
 
         pantryUUIDS = new ArrayList<>();
         menu.clear();
         while(cursor.moveToNext())
         {
-            String pantryName = cursor.getString(0);
-            String pantryUUID = cursor.getString(1);
+            String pantryName = cursor.getString(indexOfTitleColumn);
+            String pantryUUID = cursor.getString(indexOfUUIDColumn);
             pantryUUIDS.add(pantryUUID);
             menu.add(pantryName);
         }
