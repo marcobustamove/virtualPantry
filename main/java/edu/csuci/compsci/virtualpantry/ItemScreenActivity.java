@@ -1,6 +1,7 @@
 package edu.csuci.compsci.virtualpantry;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
@@ -23,31 +25,41 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     MyRecyclerViewAdapter adapter;
 
     private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
+    private String pantryUUID;
+    private String pantryCategory;
+    private ArrayList<String> itemList;
+
+    private String currentSortingOrder;
+    private Button sortingMethod;
+
+    private static final int FULL = 1;
+    private static final int LOW = 2;
+    private static final int EMPTY = 3;
+    private static final int EXPIRED = 4;
+
     private static final String DIALOG_ADD_ITEM = "DialogAddItem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
+        this.pantryUUID = this.getIntent().getStringExtra("EXTRA_PANTRY_UUID");
+        this.pantryCategory = this.getIntent().getStringExtra("EXTRA_PANTRY_CATEGORY");
 
         mContext = this.getApplicationContext();
-        mDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
+        writableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
+        readableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
-        String[] data = {"Apples", "Bananas", "Oranges", "Watermelon", "Peaches", "Kiwi", "Strawberries", "Grapes", "Avocado", "Pineapple", "Kiwano Melon", "Dragonfruit", "Tomato"};
-        /* test array for displaying 150 grid items
-        String data[] = new String[150];
-        for(int i = 0; i < data.length; i++)
-        {
-            data[i] = Integer.toString(i+1);
-        }
-        */
+
+        initializeArrayList();
 
         // set up the RecyclerView
         RecyclerView ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         int numberOfColumns = 3;
         ItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new MyRecyclerViewAdapter(this, data);
+        adapter = new MyRecyclerViewAdapter(this, itemList);
         adapter.setClickListener(this);
         ItemsRecyclerView.setAdapter(adapter);
 
@@ -63,6 +75,56 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
             }
         });
 
+        sortingMethod = (Button) findViewById(R.id.sort);
+        currentSortingOrder = "A-Z";
+        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+        sortingMethod.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                switch(currentSortingOrder)
+                {
+                    case "A-Z":
+                        currentSortingOrder = "STATUS";
+                        sortingMethod.setText(getResources().getString(R.string.status));
+                        //sort method
+                        break;
+                    case "STATUS":
+                        currentSortingOrder = "EXP";
+                        sortingMethod.setText(getResources().getString(R.string.expiration));
+                        //sort method
+                        break;
+                    case "EXP":
+                        currentSortingOrder = "A-Z";
+                        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+                        //sort method
+                        break;
+                }
+            }
+        });
+
+    }
+
+    public Cursor getEntireItemDatabase()
+    {
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS, ItemTable.Cols.PANTRY_ID, ItemTable.Cols.DATE};
+        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
+        String[] selectVals = {pantryUUID, pantryCategory};
+
+        return readableDatabase.query(ItemTable.NAME, projection, selection, selectVals, null, null, null);
+    }
+
+    public void initializeArrayList()
+    {
+        itemList = new ArrayList<>();
+        Cursor cursor = getEntireItemDatabase();
+
+        while(cursor.moveToNext())
+        {
+            itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+        }
+
+        cursor.close();
     }
 
     @Override
@@ -72,8 +134,13 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         values.put(ItemTable.Cols.UUID, UUID.randomUUID().toString());
         values.put(ItemTable.Cols.NAME, newItemName);
         values.put(ItemTable.Cols.DATE, (expirationMonth+1) + "/" + expirationDay + "/" + expirationYear);
+        values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
+        values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
+        values.put(ItemTable.Cols.STATUS, FULL);
 
-        mDatabase.insert(ItemTable.NAME, null, values);
+        writableDatabase.insert(ItemTable.NAME, null, values);
+        itemList.add(newItemName);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

@@ -8,18 +8,28 @@ import android.widget.Button;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private Button createAccountSubmitButton;
+    private Button createAccountSubmit;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
 
-        createAccountSubmitButton = (Button) findViewById(R.id.create_account_submit_button);
-        createAccountSubmitButton.setOnClickListener(new View.OnClickListener() {
+        createAccountSubmit = (Button) findViewById(R.id.create_account_submit_button);
+        createAccountSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHomeScreen();
+            }
+
+        });
+
+        login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
 
         });

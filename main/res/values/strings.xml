@@ -13,6 +13,8 @@
     <string name="open_pantry">Open Pantry</string>
     <string name="create_pantry">Create Pantry</string>
     <string name="pantry_name">Pantry name:</string>
+    <string name="delete_pantry">Delete Pantry</string>
+    <string name="delete_pantry_prompt">Are you sure you want to delete this pantry?</string>
 
     <!--Pantry screen strings-->
     <string name="closebutton">Close Pantry</string>
@@ -30,7 +32,9 @@
     <!--Item screen strings-->
     <string name="select_button">Select</string>
     <string name="category_name_test">Fruits</string>
-    <string name="sorting_button_test">A-Z</string>
+    <string name="alphabetically">A-Z</string>
+    <string name="status">STATUS</string>
+    <string name="expiration">EXP</string>
     <string name="plus_button">Add Item</string>
 
     <!--Add Item Dialog Strings-->

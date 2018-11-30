@@ -81,23 +81,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="111dp" />
 
-        <TextView
-            android:id="@+id/pantrytitle"
-            android:layout_width="157dp"
-            android:layout_height="19dp"
-            android:layout_alignBottom="@+id/deletebutton"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/pantry_title"
-            android:textColor="@color/item_expired"/>
-
         <Button
             android:id="@+id/create_pantry_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-226dp"
-            android:layout_marginBottom="118dp"
-            android:layout_toStartOf="@+id/imageView5"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="65dp"
             android:background="@drawable/createbtn" />
 
         <ImageView
@@ -113,6 +103,7 @@
             android:layout_marginEnd="361dp"
             android:layout_marginBottom="637dp"
             android:contentDescription="@string/pantrycategorylist"
+            android:clickable="true"
             app:srcCompat="@drawable/categorydropdown" />
 
         <ImageView
@@ -130,20 +121,26 @@
             android:id="@+id/createpantrytext"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="102dp"
-            android:layout_marginEnd="98dp"
-            android:layout_marginBottom="100dp"
+            android:layout_below="@+id/create_pantry_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-65dp"
             android:fontFamily="@font/futura"
             android:text="Create Pantry"
             android:textAlignment="center"
             android:textColor="@color/text_brown_accent"
             android:textSize="12sp" />
 
+        <TextView
+            android:id="@+id/noPantryPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="256dp"
+            android:text="" />
+
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/pantryImage"
             android:layout_width="123dp"
             android:layout_height="123dp"
             android:layout_above="@+id/openpantry"
@@ -155,6 +152,8 @@
             android:layout_marginEnd="101dp"
             android:layout_marginBottom="25dp"
             app:srcCompat="@drawable/pantryavatardefault" />
+
+
 
         <ImageView
             android:id="@+id/imageView5"
@@ -197,7 +196,7 @@
             app:srcCompat="@drawable/activepantryicon" />
 
         <TextView
-            android:id="@+id/pantryname"
+            android:id="@+id/pantrytitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/favicon"
