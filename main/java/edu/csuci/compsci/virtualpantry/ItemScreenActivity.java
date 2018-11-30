@@ -31,6 +31,9 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private String pantryCategory;
     private ArrayList<String> itemList;
 
+    private String currentSortingOrder;
+    private Button sortingMethod;
+
     private static final int FULL = 1;
     private static final int LOW = 2;
     private static final int EMPTY = 3;
@@ -69,6 +72,34 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                 FragmentManager manager = getSupportFragmentManager();
                 AddItemFragment dialog = new AddItemFragment();
                 dialog.show(manager,DIALOG_ADD_ITEM);
+            }
+        });
+
+        sortingMethod = (Button) findViewById(R.id.sort);
+        currentSortingOrder = "A-Z";
+        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+        sortingMethod.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                switch(currentSortingOrder)
+                {
+                    case "A-Z":
+                        currentSortingOrder = "STATUS";
+                        sortingMethod.setText(getResources().getString(R.string.status));
+                        //sort method
+                        break;
+                    case "STATUS":
+                        currentSortingOrder = "EXP";
+                        sortingMethod.setText(getResources().getString(R.string.expiration));
+                        //sort method
+                        break;
+                    case "EXP":
+                        currentSortingOrder = "A-Z";
+                        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+                        //sort method
+                        break;
+                }
             }
         });
 
