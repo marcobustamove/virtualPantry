@@ -340,6 +340,7 @@ public class HomeScreenActivity extends AppCompatActivity
         }
 
         makeIconsVisible();
+        addMenuItemInNavMenuDrawer();
     }
 
     public void makeIconsVisible()
@@ -380,6 +381,7 @@ public class HomeScreenActivity extends AppCompatActivity
         cv.put(PantryTable.Cols.FAVORITE, "YES");
         mWritableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "YES";
+        addMenuItemInNavMenuDrawer();
     }
 
     @Override
