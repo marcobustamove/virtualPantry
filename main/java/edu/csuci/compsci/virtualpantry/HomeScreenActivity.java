@@ -8,14 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,22 +35,25 @@ import java.util.UUID;
 import database.PantryBaseHelper;
 import database.PantryDBSchema.PantryTable;
 
-public class HomeScreenActivity extends AppCompatActivity  implements CreatePantryFragment.CreatePantryListener, DeletePantryFragment.DeletePantryListener
+public class HomeScreenActivity extends AppCompatActivity
+        implements CreatePantryFragment.CreatePantryListener, DeletePantryFragment.DeletePantryListener
 {
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
+
     private Context mContext;
     private SQLiteDatabase mWritableDatabase;
     private SQLiteDatabase mReadableDatabase;
 
-    private Button mOpenPantry;
+    private ImageView listViewBars;
+    private TextView pantryTitle;
     private Button mHeartIcon;
     private Button mDeletePantry;
-    private TextView pantryTitle;
     private TextView noPantryPrompt;
-    private Button mCreatePantry;
     private ImageView pantryImage;
-    private ImageView listViewBars;
+    private Button mOpenPantry;
+    private ImageView pantryBox;
+    private Button mCreatePantry;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -73,6 +79,69 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
+
+
+        pantryBox = (ImageView) findViewById(R.id.pantrybox);
+        pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
+        {
+            @Override
+            public void onSwipeLeft()
+            {
+                Cursor cursor = getPantryDBWithFavoriteAsFirst();
+
+                if(cursor.getCount() > 0)
+                {
+                    cursor.moveToNext();
+
+                    while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
+                    {
+                        cursor.moveToNext();
+                    }
+
+                    if(cursor.moveToNext())
+                    {
+
+                        updatePantryBox(cursor);
+                    }
+                    else
+                    {
+                        cursor.moveToPosition(0);
+
+                        updatePantryBox(cursor);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onSwipeRight()
+            {
+                Cursor cursor = getPantryDBWithFavoriteAsFirst();
+
+                if(cursor.getCount() > 0)
+                {
+                    cursor.moveToNext();
+
+                    while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
+                    {
+                        cursor.moveToNext();
+                    }
+
+                    if(cursor.moveToPrevious())
+                    {
+                        updatePantryBox(cursor);
+                    }
+                    else
+                    {
+                        cursor.moveToLast();
+                        updatePantryBox(cursor);
+                    }
+
+
+                }
+            }
+
+        });
 
         mHeartIcon = (ToggleButton) findViewById(R.id.favicon);
         mHeartIcon.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +169,6 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
                 openDeletePantryDialog();
             }
         });
-
 
         mOpenPantry = (Button) findViewById(R.id.openpantry);
         mOpenPantry.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +294,6 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
             pantryTitle.setText(cursor.getString(indexOfTitleColumn));
             currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
             noPantryPrompt.setText("");
-            makeIconsVisible();
 
             if(favoriteValue.equals("YES"))
             {
@@ -237,6 +304,8 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
                 mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
             }
 
+            makeIconsVisible();
+
         }
         else
         {
@@ -244,6 +313,33 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         }
 
         cursor.close();
+    }
+
+    public void updatePantryBox(Cursor cursor)
+    {
+        int indexOfTitleColumn;
+        int indexOfUUIDColumn;
+        int indexOfFavoriteColumn;
+
+        indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
+        indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
+        indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
+
+        pantryTitle.setText(cursor.getString(indexOfTitleColumn));
+        currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
+        favoriteValue = cursor.getString(indexOfFavoriteColumn);
+
+        noPantryPrompt.setText("");
+
+        if (favoriteValue.equals("YES"))
+        {
+            mHeartIcon.setBackgroundResource(R.drawable.favicon);
+        } else
+        {
+            mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+        }
+
+        makeIconsVisible();
     }
 
     public void makeIconsVisible()
@@ -284,17 +380,16 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         cv.put(PantryTable.Cols.FAVORITE, "YES");
         mWritableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "YES";
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch (item.getItemId()){
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
