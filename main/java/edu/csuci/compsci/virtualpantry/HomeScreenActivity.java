@@ -34,12 +34,11 @@ import database.PantryDBSchema.PantryTable;
 
 public class HomeScreenActivity extends AppCompatActivity  implements CreatePantryFragment.CreatePantryListener, DeletePantryFragment.DeletePantryListener
 {
-
-
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
     private Context mContext;
     private SQLiteDatabase mWritableDatabase;
+    private SQLiteDatabase mReadableDatabase;
 
     private Button mOpenPantry;
     private Button mHeartIcon;
@@ -50,19 +49,16 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     private ImageView pantryImage;
     private ImageView listViewBars;
 
-    private String userInputPantryName;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
     private String favoriteValue;
-    private int indexOfFavoriteColumn;
     private String currentPantryUUIDOnDisplay;
 
     private List<String> pantryUUIDS;
 
     //CursorAdapter for binding to a sql
     ListView listView;
-    private SQLiteDatabase mReadableDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,7 +73,6 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
-
 
         mHeartIcon = (ToggleButton) findViewById(R.id.favicon);
         mHeartIcon.setOnClickListener(new View.OnClickListener() {
@@ -182,16 +177,14 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     @Override
     public void createPantry(String inputPantryName)
     {
-        userInputPantryName = inputPantryName;
         ContentValues values = new ContentValues();
         values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
-        values.put(PantryTable.Cols.TITLE, userInputPantryName);
+        values.put(PantryTable.Cols.TITLE, inputPantryName);
         values.put(PantryTable.Cols.FAVORITE, "NO");
 
         mWritableDatabase.insert(PantryTable.NAME, null, values);
         addMenuItemInNavMenuDrawer();
         setPantryView();
-        makeIconsVisible();
     }
 
     @Override
@@ -207,70 +200,47 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         //TODO - Delete all Items containing the UUID
     }
 
-    public Cursor getFavoritePantry()
+    public Cursor getPantryDBWithFavoriteAsFirst()
     {
         String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
-        String selection = PantryTable.Cols.FAVORITE + " = ?";
-        String[] whereValue = {"YES"};
+        String sortOrder = PantryTable.Cols.FAVORITE + " DESC";
 
-        Cursor cursor = mReadableDatabase.query(PantryTable.NAME, projection, selection, whereValue,null,null,null);
-        return cursor;
-    }
-
-    public Cursor getEntirePantryDatabase()
-    {
-        String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
-        Cursor cursor = mReadableDatabase.query(PantryTable.NAME, projection, null, null,null,null,null);
-        return cursor;
+        return mReadableDatabase.query(PantryTable.NAME, projection, null, null, null, null, sortOrder);
     }
 
     public void setPantryView()
     {
         int indexOfTitleColumn;
         int indexOfUUIDColumn;
+        int indexOfFavoriteColumn;
 
-        Cursor cursor = getFavoritePantry();
+        Cursor cursor = getPantryDBWithFavoriteAsFirst();
 
         if(cursor != null && cursor.getCount() > 0 && cursor.moveToNext())
         {
             indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
-            pantryTitle.setText(cursor.getString(indexOfTitleColumn));
-
-            indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
-            favoriteValue = cursor.getString(indexOfFavoriteColumn);
-
             indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
+            indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
+
+            favoriteValue = cursor.getString(indexOfFavoriteColumn);
+            pantryTitle.setText(cursor.getString(indexOfTitleColumn));
             currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
-
             noPantryPrompt.setText("");
-
             makeIconsVisible();
-            mHeartIcon.setBackgroundResource(R.drawable.favicon);
-        }
-        else
-        {
-            cursor = getEntirePantryDatabase();
 
-            if(cursor != null && cursor.getCount() > 0 && cursor.moveToNext())
+            if(favoriteValue.equals("YES"))
             {
-                indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
-                pantryTitle.setText(cursor.getString(indexOfTitleColumn));
-
-                indexOfFavoriteColumn = cursor.getColumnIndex(PantryTable.Cols.FAVORITE);
-                favoriteValue = cursor.getString(indexOfFavoriteColumn);
-
-                indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
-                currentPantryUUIDOnDisplay = cursor.getString(indexOfUUIDColumn);
-
-                noPantryPrompt.setText("");
-
-                makeIconsVisible();
-                mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+                mHeartIcon.setBackgroundResource(R.drawable.favicon);
             }
             else
             {
-                hidePantryIcons();
+                mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
             }
+
+        }
+        else
+        {
+            hidePantryIcons();
         }
 
         cursor.close();
@@ -333,10 +303,11 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
     {
         int indexOfTitleColumn;
         int indexOfUUIDColumn;
+
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
 
-        Cursor cursor = getEntirePantryDatabase();
+        Cursor cursor = getPantryDBWithFavoriteAsFirst();
         indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
         indexOfUUIDColumn = cursor.getColumnIndex(PantryTable.Cols.UUID);
 
@@ -346,6 +317,7 @@ public class HomeScreenActivity extends AppCompatActivity  implements CreatePant
         {
             String pantryName = cursor.getString(indexOfTitleColumn);
             String pantryUUID = cursor.getString(indexOfUUIDColumn);
+
             pantryUUIDS.add(pantryUUID);
             menu.add(pantryName);
         }
