@@ -1,5 +1,6 @@
 package edu.csuci.compsci.virtualpantry;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -66,6 +67,7 @@ public class HomeScreenActivity extends AppCompatActivity
     //CursorAdapter for binding to a sql
     ListView listView;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
