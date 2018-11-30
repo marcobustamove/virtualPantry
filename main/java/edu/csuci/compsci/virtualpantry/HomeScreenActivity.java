@@ -6,22 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,7 +28,9 @@ import java.util.List;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
+import database.PantryDBSchema;
 import database.PantryDBSchema.PantryTable;
+import database.PantryDBSchema.ItemTable;
 
 public class HomeScreenActivity extends AppCompatActivity
         implements CreatePantryFragment.CreatePantryListener, DeletePantryFragment.DeletePantryListener
@@ -43,8 +39,8 @@ public class HomeScreenActivity extends AppCompatActivity
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
 
     private Context mContext;
-    private SQLiteDatabase mWritableDatabase;
-    private SQLiteDatabase mReadableDatabase;
+    private SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
 
     private ImageView listViewBars;
     private TextView pantryTitle;
@@ -75,8 +71,9 @@ public class HomeScreenActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         mContext = this.getApplicationContext();
-        mWritableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
-        mReadableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
+        writableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
+        readableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
+
 
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
@@ -252,7 +249,7 @@ public class HomeScreenActivity extends AppCompatActivity
         values.put(PantryTable.Cols.TITLE, inputPantryName);
         values.put(PantryTable.Cols.FAVORITE, "NO");
 
-        mWritableDatabase.insert(PantryTable.NAME, null, values);
+        writableDatabase.insert(PantryTable.NAME, null, values);
         addMenuItemInNavMenuDrawer();
         setPantryView();
     }
@@ -260,14 +257,14 @@ public class HomeScreenActivity extends AppCompatActivity
     @Override
     public void deletePantry()
     {
-        String selection = PantryTable.Cols.UUID + " LIKE ?";
+        String selectionForPantryTable = PantryTable.Cols.UUID + " LIKE ?";
+        String selectionForItemTable = ItemTable.Cols.PANTRY_ID + " LIKE ?";
         String[] whereValue = { currentPantryUUIDOnDisplay };
 
-        mWritableDatabase.delete(PantryTable.NAME, selection, whereValue);
+        writableDatabase.delete(ItemTable.NAME, selectionForItemTable, whereValue);
+        writableDatabase.delete(PantryTable.NAME, selectionForPantryTable, whereValue);
         addMenuItemInNavMenuDrawer();
         setPantryView();
-
-        //TODO - Delete all Items containing the UUID
     }
 
     public Cursor getPantryDBWithFavoriteAsFirst()
@@ -275,7 +272,7 @@ public class HomeScreenActivity extends AppCompatActivity
         String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
         String sortOrder = PantryTable.Cols.FAVORITE + " DESC";
 
-        return mReadableDatabase.query(PantryTable.NAME, projection, null, null, null, null, sortOrder);
+        return readableDatabase.query(PantryTable.NAME, projection, null, null, null, null, sortOrder);
     }
 
     public void setPantryView()
@@ -369,7 +366,7 @@ public class HomeScreenActivity extends AppCompatActivity
         String[] whereValue = { "YES" };
         ContentValues cv = new ContentValues();
         cv.put(PantryTable.Cols.FAVORITE, "NO");
-        mWritableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
+        writableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "NO";
     }
 
@@ -381,7 +378,7 @@ public class HomeScreenActivity extends AppCompatActivity
         String[] whereValue = { pantryName };
         ContentValues cv = new ContentValues();
         cv.put(PantryTable.Cols.FAVORITE, "YES");
-        mWritableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
+        writableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "YES";
         addMenuItemInNavMenuDrawer();
     }
