@@ -3,14 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:background="@color/secondary_blue"
+    android:background="@color/colorPrimary"
     android:padding="1dp"
     android:orientation="vertical"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    >
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/vptext" />
+        android:id="@+id/vplogonav"
+        android:layout_width="32dp"
+        android:layout_height="29dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="4dp"
+        app:srcCompat="@drawable/vplogo" />
+
+    <ImageView
+        android:id="@+id/navtext"
+        android:layout_width="190dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:srcCompat="@drawable/pantrynavtext" />
 
 </RelativeLayout>

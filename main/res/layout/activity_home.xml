@@ -217,6 +217,8 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/pantry_list"
         app:headerLayout="@layout/nav_header"
-        app:itemTextColor="@color/colorPrimaryDark"/>
+        android:background="@drawable/categorydrawerbg"
+        app:itemTextColor="@color/white"
+        app:itemBackground="@color/colorPrimary"/>
 </android.support.v4.widget.DrawerLayout>
 
