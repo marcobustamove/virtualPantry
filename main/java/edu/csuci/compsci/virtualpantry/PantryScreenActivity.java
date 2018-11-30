@@ -119,7 +119,7 @@ public class PantryScreenActivity extends AppCompatActivity {
             }
         });
 
-        hygieneButton = (Button) findViewById(R.id.grains);
+        hygieneButton = (Button) findViewById(R.id.hygiene);
         hygieneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

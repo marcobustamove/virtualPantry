@@ -29,7 +29,12 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private SQLiteDatabase readableDatabase;
     private String pantryUUID;
     private String pantryCategory;
-    private ArrayList<String> data;
+    private ArrayList<String> itemList;
+
+    private static final int FULL = 1;
+    private static final int LOW = 2;
+    private static final int EMPTY = 3;
+    private static final int EXPIRED = 4;
 
     private static final String DIALOG_ADD_ITEM = "DialogAddItem";
 
@@ -44,26 +49,14 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         writableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
         readableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
-        data = new ArrayList<>();
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
-        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
-        String[] selectVals = {pantryUUID, pantryCategory};
 
-        Cursor cursor = readableDatabase.query(ItemTable.NAME, projection, selection, selectVals, null, null, null);
-
-
-        while(cursor.moveToNext())
-        {
-            data.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
-        }
-
-        cursor.close();
+        initializeArrayList();
 
         // set up the RecyclerView
         RecyclerView ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         int numberOfColumns = 3;
         ItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new MyRecyclerViewAdapter(this, data);
+        adapter = new MyRecyclerViewAdapter(this, itemList);
         adapter.setClickListener(this);
         ItemsRecyclerView.setAdapter(adapter);
 
@@ -81,6 +74,28 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     }
 
+    public Cursor getEntireItemDatabase()
+    {
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS, ItemTable.Cols.PANTRY_ID, ItemTable.Cols.DATE};
+        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
+        String[] selectVals = {pantryUUID, pantryCategory};
+
+        return readableDatabase.query(ItemTable.NAME, projection, selection, selectVals, null, null, null);
+    }
+
+    public void initializeArrayList()
+    {
+        itemList = new ArrayList<>();
+        Cursor cursor = getEntireItemDatabase();
+
+        while(cursor.moveToNext())
+        {
+            itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+        }
+
+        cursor.close();
+    }
+
     @Override
     public void AddItem(String newItemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear)
     {
@@ -90,9 +105,10 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         values.put(ItemTable.Cols.DATE, (expirationMonth+1) + "/" + expirationDay + "/" + expirationYear);
         values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
         values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
+        values.put(ItemTable.Cols.STATUS, FULL);
 
         writableDatabase.insert(ItemTable.NAME, null, values);
-        data.add(newItemName);
+        itemList.add(newItemName);
         adapter.notifyDataSetChanged();
     }
 
