@@ -25,7 +25,8 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".PantryScreenActivity" />
         <activity android:name=".ItemScreenActivity" />
-        <activity android:name=".HomeScreenActivity"/>
+        <activity android:name=".HomeScreenActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
     </application>
 
 </manifest>

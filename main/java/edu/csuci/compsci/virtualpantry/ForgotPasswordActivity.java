@@ -23,17 +23,13 @@ public class ForgotPasswordActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Email Sent", Toast.LENGTH_SHORT).show();
-                openLoginScreenActivity();
+                finish();
 
             }
         });
 
     }
-    public void openLoginScreenActivity()
-    {
-        Intent intent = new Intent(this, LoginScreenActivity.class);
-        startActivity(intent);
-    }
+
 
 
 }

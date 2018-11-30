@@ -13,6 +13,8 @@
     <string name="open_pantry">Open Pantry</string>
     <string name="create_pantry">Create Pantry</string>
     <string name="pantry_name">Pantry name:</string>
+    <string name="delete_pantry">Delete Pantry</string>
+    <string name="delete_pantry_prompt">Are you sure you want to delete this pantry?</string>
 
     <!--Pantry screen strings-->
     <string name="closebutton">Close Pantry</string>

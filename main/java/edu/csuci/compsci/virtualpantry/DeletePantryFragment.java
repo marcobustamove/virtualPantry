@@ -8,11 +8,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
-public class CreatePantryFragment extends AppCompatDialogFragment
+public class DeletePantryFragment extends AppCompatDialogFragment
 {
-    private CreatePantryListener listener;
+    private DeletePantryListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -20,26 +19,24 @@ public class CreatePantryFragment extends AppCompatDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View view = inflater.inflate(R.layout.fragment_createpantry, null);
+        final View view = inflater.inflate(R.layout.fragment_deletepantry, null);
 
         builder.setView(view)
-                .setTitle(R.string.create_pantry)
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+                .setTitle(R.string.delete_pantry)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        CreatePantryFragment.this.getDialog().cancel();
+                        listener.deletePantry();
                     }
                 })
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()
+                .setNegativeButton("NO", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        EditText editTextPantryName = view.findViewById(R.id.userpantryname);
-                        String pantryName = editTextPantryName.getText().toString();
-                        listener.createPantry(pantryName);
+                        DeletePantryFragment.this.getDialog().cancel();
                     }
                 });
 
@@ -50,13 +47,12 @@ public class CreatePantryFragment extends AppCompatDialogFragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        listener = (CreatePantryListener) context;
+        listener = (DeletePantryListener) context;
     }
 
-
-    public interface CreatePantryListener
+    public interface DeletePantryListener
     {
-        void createPantry(String inputPantryName);
+        void deletePantry();
     }
 
 }
