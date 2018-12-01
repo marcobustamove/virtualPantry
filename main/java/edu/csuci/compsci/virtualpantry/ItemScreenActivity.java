@@ -231,4 +231,15 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
     }
+    @Override
+    public void itemDeleteInfo(View view, int position)
+    {
+        String selectionForItemTable = ItemTable.Cols.PANTRY_ID + " LIKE ?" + " AND " + ItemTable.Cols.CATEGORY + " LIKE ?" + " AND " + ItemTable.Cols.NAME + " LIKE ?";
+        String[] whereValue = { this.pantryUUID, this.pantryCategory, itemList.get(position)};
+
+        writableDatabase.delete(ItemTable.NAME, selectionForItemTable, whereValue);
+        initializeArrayList();
+        setUpRecyclerView();
+
+    }
 }
