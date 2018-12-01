@@ -1,175 +1,359 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/pantryscreenbg"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/beverages"
+        android:layout_width="31dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantrybeverageicon"
+        android:fontFamily="@font/futura"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toEndOf="@+id/frozen"
+        app:layout_constraintTop_toBottomOf="@+id/meat"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <Button
+        android:id="@+id/oils"
+        android:layout_width="34dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantryoilicon"
+        android:fontFamily="@font/futura"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vegies"
+        app:layout_constraintVertical_bias="0.156" />
+
+    <Button
+        android:id="@+id/fruits"
+        android:layout_width="41dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantryfruiticon"
+        android:fontFamily="@font/futura"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toEndOf="@+id/vegies"
+        app:layout_constraintTop_toBottomOf="@+id/frozen"
+        app:layout_constraintVertical_bias="0.144" />
+
+    <Button
+        android:id="@+id/snacks"
+        android:layout_width="49dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantrysnackicon"
+        android:fontFamily="@font/futura"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintStart_toEndOf="@+id/fruits"
+        app:layout_constraintTop_toBottomOf="@+id/beverages"
+        app:layout_constraintVertical_bias="0.136" />
+
 
     <Button
         android:id="@+id/closepantry"
-        android:layout_width="157dp"
-        android:layout_height="26dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="95dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#5A82E3"
         android:fontFamily="@font/futura"
         android:text="@string/closebutton"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allitems"
+        app:layout_constraintVertical_bias="0.218" />
 
-    <Button
-        android:id="@+id/oils"
-        android:layout_width="26dp"
-        android:layout_height="43dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/beverages"
-        android:layout_marginStart="176dp"
-        android:background="@drawable/pantryoilicon"
-        android:fontFamily="@font/futura"
-        android:textColor="#000000"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/beverages"
-        android:layout_width="23dp"
-        android:layout_height="38dp"
-        android:layout_alignEnd="@+id/vegies"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="297dp"
-        android:background="@drawable/pantrybeverageicon"
-        android:fontFamily="@font/futura"
-        android:textColor="#000000"
-        android:textSize="17sp" />
-
-
-    <Button
-        android:id="@+id/snacks"
-        android:layout_width="44dp"
-        android:layout_height="43dp"
-        android:layout_alignStart="@+id/condiments"
-        android:layout_alignTop="@+id/oils"
-        android:background="@drawable/pantrysnackicon"
-        android:fontFamily="@font/futura"
-        android:textColor="#000000"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/fruits"
-        android:layout_width="39dp"
-        android:layout_height="41dp"
-        android:layout_alignBottom="@+id/vegies"
-        android:layout_alignStart="@+id/oils"
-        android:background="@drawable/pantryfruiticon"
-        android:fontFamily="@font/futura"
-        android:textColor="#000000"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/vegies"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
-        android:layout_alignEnd="@+id/dairy"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="212dp"
-        android:background="@drawable/pantryvegetableicon"
-        android:fontFamily="@font/futura"
-        android:textColor="#000000"
-        android:textSize="17sp" />
 
     <Button
         android:id="@+id/condiments"
-        android:layout_width="42dp"
-        android:layout_height="43dp"
-        android:layout_alignStart="@+id/meat"
-        android:layout_alignTop="@+id/fruits"
+        android:layout_width="44dp"
+        android:layout_height="42dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantrycondimenticon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/dairy"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="35dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="92dp"
-        android:background="@drawable/pantrydairyicon"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fruits"
+        app:layout_constraintVertical_bias="0.167" />
 
     <Button
         android:id="@+id/grains"
-        android:layout_width="44dp"
-        android:layout_height="41dp"
-        android:layout_alignBottom="@+id/dairy"
-        android:layout_alignStart="@+id/oils"
+        android:layout_width="51dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantrywheaticon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
+        app:layout_constraintStart_toEndOf="@+id/dairy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <Button
+        android:id="@+id/dairy"
+        android:layout_width="34dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantrydairyicon"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.164" />
 
     <Button
         android:id="@+id/meat"
-        android:layout_width="42dp"
-        android:layout_height="36dp"
-        android:layout_alignBottom="@+id/dairy"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="75dp"
+        android:layout_width="53dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantrysteakicon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintStart_toEndOf="@+id/grains"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
         android:id="@+id/fish"
-        android:layout_width="54dp"
-        android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/vegies"
-        android:layout_marginBottom="196dp"
+        android:layout_width="55dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantryfishicon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dairy"
+        app:layout_constraintVertical_bias="0.113" />
 
     <Button
         android:id="@+id/frozen"
         android:layout_width="43dp"
         android:layout_height="43dp"
-        android:layout_alignStart="@+id/oils"
-        android:layout_alignTop="@+id/fish"
-        android:layout_marginTop="-7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantryfrozenicon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toEndOf="@+id/fish"
+        app:layout_constraintTop_toBottomOf="@+id/grains"
+        app:layout_constraintVertical_bias="0.116" />
 
     <Button
         android:id="@+id/hygiene"
-        android:layout_width="46dp"
-        android:layout_height="41dp"
-        android:layout_alignStart="@+id/snacks"
-        android:layout_alignTop="@+id/fish"
-        android:layout_marginTop="-4dp"
+        android:layout_width="47dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantryhygieneicon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toEndOf="@+id/condiments"
+        app:layout_constraintTop_toBottomOf="@+id/snacks"
+        app:layout_constraintVertical_bias="0.171" />
 
     <Button
         android:id="@+id/allitems"
-        android:layout_width="61dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_width="45dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/pantryallitemicon"
         android:fontFamily="@font/futura"
         android:textColor="#000000"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/condiments"
+        app:layout_constraintVertical_bias="0.204" />
 
+    <Button
+        android:id="@+id/vegies"
+        android:layout_width="49dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/pantryvegetableicon"
+        android:fontFamily="@font/futura"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fish"
+        app:layout_constraintVertical_bias="0.148" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pantryshelfcontainer" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316"
+        app:srcCompat="@drawable/pantryshelfcontainer" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125"
+        app:srcCompat="@drawable/pantryshelfcontainer" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678"
+        app:srcCompat="@drawable/pantryshelfcontainer" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="286dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/vptext" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="129dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.110000014"
+        app:srcCompat="@drawable/categories" />
+
+</android.support.constraint.ConstraintLayout>
