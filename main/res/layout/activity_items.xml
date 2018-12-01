@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@mipmap/itemlistscreenbg">
+    android:background="@drawable/itemviewbg">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout"
@@ -68,17 +68,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <Button style="?android:buttonStyle"
+    <Button
         android:id="@+id/addItemButton"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        style="?android:buttonStyle"
+        android:layout_width="215dp"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/bar_button"
+        android:layout_marginBottom="76dp"
+        android:background="@drawable/additemoffclickbtn"
         android:fontFamily="@font/futura"
         android:gravity="center"
-        android:text="@string/plus_button"
-        android:textColor="@color/baby_blue"
-        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
