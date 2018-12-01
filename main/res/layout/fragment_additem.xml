@@ -46,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/baby_blue"
                 android:fontFamily="@font/futura"
-                android:hint="@string/addItemNameHint"
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Display1"
