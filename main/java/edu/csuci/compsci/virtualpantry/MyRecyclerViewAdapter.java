@@ -111,13 +111,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
 
         @SuppressLint("ClickableViewAccessibility")
-        @Override
         public boolean onLongClick(final View view){
             Button btnSetEmpty;
             Button btnSetLow;
             Button btnSetFull;
             Button btnDeleteItem;
-            System.out.println("OnLongClick received");
+
 
             myDialog.setContentView(R.layout.fragment_change_item_status);
             btnSetEmpty = (Button) myDialog.findViewById(R.id.set_empty_button);
@@ -131,6 +130,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     if(event.getAction() == MotionEvent.ACTION_DOWN) {
                         return true;
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        mClickListener.itemModifyStatus(view, getAdapterPosition(), ItemScreenActivity.EMPTY );
                         myDialog.cancel();
                         return true;
                     }
@@ -144,6 +144,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     if(event.getAction() == MotionEvent.ACTION_DOWN) {
                         return true;
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        mClickListener.itemModifyStatus(view, getAdapterPosition(), ItemScreenActivity.LOW);
                         myDialog.cancel();
                         return true;
                     }
@@ -157,6 +158,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     if(event.getAction() == MotionEvent.ACTION_DOWN) {
                         return true;
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        mClickListener.itemModifyStatus(view, getAdapterPosition(), ItemScreenActivity.FULL);
                         myDialog.cancel();
                         return true;
                     }
@@ -200,5 +202,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public interface ItemClickListener {
         void onItemClick(View view, int position);
         void itemDeleteInfo(View view, int position);
+        void itemModifyStatus(View view, int position, int newStatus);
     }
 }
