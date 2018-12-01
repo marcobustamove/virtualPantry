@@ -112,16 +112,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         @SuppressLint("ClickableViewAccessibility")
         @Override
-        public boolean onLongClick(View view){
+        public boolean onLongClick(final View view){
             Button btnSetEmpty;
             Button btnSetLow;
             Button btnSetFull;
+            Button btnDeleteItem;
             System.out.println("OnLongClick received");
 
             myDialog.setContentView(R.layout.fragment_change_item_status);
             btnSetEmpty = (Button) myDialog.findViewById(R.id.set_empty_button);
             btnSetLow = (Button) myDialog.findViewById(R.id.set_low_button);
             btnSetFull = (Button) myDialog.findViewById(R.id.set_full_button);
+            btnDeleteItem = (Button) myDialog.findViewById(R.id.item_delete_button);
 
             btnSetEmpty.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -162,6 +164,23 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 }
             });
 
+            btnDeleteItem.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                        
+                        mClickListener.itemDeleteInfo(view, getAdapterPosition());
+
+
+                        return true;
+                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        myDialog.cancel();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+
             myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             myDialog.show();
 
@@ -183,5 +202,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+        void itemDeleteInfo(View view, int position);
     }
 }
