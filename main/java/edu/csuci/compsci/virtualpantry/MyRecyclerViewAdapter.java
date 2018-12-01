@@ -168,12 +168,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                        
-                        mClickListener.itemDeleteInfo(view, getAdapterPosition());
-
-
                         return true;
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                        mClickListener.itemDeleteInfo(view, getAdapterPosition());
                         myDialog.cancel();
                         return true;
                     }
