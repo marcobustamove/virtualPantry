@@ -33,6 +33,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private String pantryUUID;
     private String pantryCategory;
     private ArrayList<String> itemList;
+    private ArrayList<String> itemUUIDList;
 
     private String currentSortingOrder;
     private Button sortingMethod;
@@ -71,19 +72,19 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                     case "A-Z":
                         currentSortingOrder = "STATUS";
                         sortingMethod.setText(getResources().getString(R.string.status));
-                        itemList = sortItemsByStatus();
+                        sortItemsByStatus();
                         setUpRecyclerView();
                         break;
                     case "STATUS":
                         currentSortingOrder = "EXP";
                         sortingMethod.setText(getResources().getString(R.string.expiration));
-                        itemList = sortItemsByExpDate();
+                        sortItemsByExpDate();
                         setUpRecyclerView();
                         break;
                     case "EXP":
                         currentSortingOrder = "A-Z";
                         sortingMethod.setText(getResources().getString(R.string.alphabetically));
-                        itemList = sortItemsAlphabetically();
+                        sortItemsAlphabetically();
                         setUpRecyclerView();
                         break;
                 }
@@ -120,32 +121,35 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         switch(currentSortingOrder)
         {
             case "A-Z":
-                itemList = sortItemsAlphabetically();
+                sortItemsAlphabetically();
                 break;
 
             case "STATUS":
-                itemList = sortItemsByStatus();
+                sortItemsByStatus();
                 break;
 
             case "EXP":
-                itemList = sortItemsByExpDate();
+                sortItemsByExpDate();
                 break;
         }
     }
 
-    public Cursor getEntireItemDatabase()
+    public Cursor getItemDBSortedAlphabetically()
     {
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS, ItemTable.Cols.PANTRY_ID, ItemTable.Cols.DATE};
-        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
-        String[] selectVals = {pantryUUID, pantryCategory};
+        String[] selectionArgs = {pantryUUID, pantryCategory};
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
+    }
 
-        return readableDatabase.query(ItemTable.NAME, projection, selection, selectVals, null, null, null);
+    public Cursor getItemUUIDSortedAlphabetically()
+    {
+        String[] selectionArgs = {pantryUUID, pantryCategory};
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.UUID + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
     }
 
     public Cursor getItemDBSortedByStatus()
     {
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.STATUS};
-        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
+        String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
         String[] selectValues = {pantryUUID, pantryCategory};
         String sortOrder = ItemTable.Cols.STATUS + " ASC";
 
@@ -155,59 +159,63 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public Cursor getItemDBSortedByExpDate()
     {
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.STATUS};
-        String selection = ItemTable.Cols.PANTRY_ID + "=?" + " AND " + ItemTable.Cols.CATEGORY + "=?";
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
+        String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
         String[] selectValues = {pantryUUID, pantryCategory};
         String sortOrder = ItemTable.Cols.DATE + " ASC";
 
         return readableDatabase.query(ItemTable.NAME, projection, selection, selectValues, null, null, sortOrder);
     }
 
-    public ArrayList<String> sortItemsAlphabetically()
+    public void sortItemsAlphabetically()
     {
-        ArrayList<String> temp = new ArrayList<>();
-        Cursor cursor = getEntireItemDatabase();
+        itemList = new ArrayList<>();
+        itemUUIDList = new ArrayList<>();
 
-        while(cursor.moveToNext())
+        Cursor itemNameCursor = getItemDBSortedAlphabetically();
+        Cursor itemUUIDCursor = getItemUUIDSortedAlphabetically();
+
+        while(itemNameCursor.moveToNext() && itemUUIDCursor.moveToNext())
         {
-            temp.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemUUIDList.add(itemUUIDCursor.getString(itemUUIDCursor.getColumnIndex(ItemTable.Cols.UUID)));
         }
-        cursor.close();
+        itemNameCursor.close();
+        itemUUIDCursor.close();
 
-        Collections.sort(temp, String.CASE_INSENSITIVE_ORDER);
-
-        return temp;
     }
 
-    public ArrayList<String> sortItemsByExpDate()
+    public void sortItemsByExpDate()
     {
-        ArrayList<String> temp = new ArrayList<>();
+        itemList = new ArrayList<>();
+        itemUUIDList = new ArrayList<>();
+
         Cursor cursor = getItemDBSortedByExpDate();
 
         while(cursor.moveToNext())
         {
-            temp.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemUUIDList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.UUID)));
         }
 
         cursor.close();
 
-        return temp;
     }
 
-    public ArrayList<String> sortItemsByStatus()
+    public void sortItemsByStatus()
     {
-        ArrayList<String> temp = new ArrayList<>();
+        itemList = new ArrayList<>();
+        itemUUIDList = new ArrayList<>();
 
         Cursor cursor = getItemDBSortedByStatus();
 
         while(cursor.moveToNext())
         {
-            temp.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemUUIDList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.UUID)));
         }
 
         cursor.close();
-
-        return temp;
     }
 
     @Override
@@ -234,8 +242,8 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     @Override
     public void itemDeleteInfo(View view, int position)
     {
-        String selectionForItemTable = ItemTable.Cols.PANTRY_ID + " LIKE ?" + " AND " + ItemTable.Cols.CATEGORY + " LIKE ?" + " AND " + ItemTable.Cols.NAME + " LIKE ?";
-        String[] whereValue = { this.pantryUUID, this.pantryCategory, itemList.get(position)};
+        String selectionForItemTable = ItemTable.Cols.UUID + " LIKE ?";
+        String[] whereValue = { itemUUIDList.get(position)};
 
         writableDatabase.delete(ItemTable.NAME, selectionForItemTable, whereValue);
         initializeArrayList();
