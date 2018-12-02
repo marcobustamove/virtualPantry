@@ -19,18 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:id="@+id/selectbutton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:fontFamily="@font/futura"
-            android:gravity="center"
-            android:text="@string/select_button"
-            android:textColor="@color/baby_blue"
-            android:textSize="25sp" />
+        <!--<Button-->
+            <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+            <!--android:id="@+id/selectbutton"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_weight="1"-->
+            <!--android:fontFamily="@font/futura"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/select_button"-->
+            <!--android:textColor="@color/baby_blue"-->
+            <!--android:textSize="25sp" />-->
 
         <TextView
             android:id="@+id/category"

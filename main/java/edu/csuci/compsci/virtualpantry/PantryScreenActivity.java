@@ -151,7 +151,18 @@ public class PantryScreenActivity extends AppCompatActivity {
     }
     public void enterItemScreen(String pantryUUID, String category)
     {
-        Intent intent = new Intent(this, ItemScreenActivity.class);
+        Intent intent;
+
+        if(category.equals("ALL ITEMS"))
+        {
+            intent = new Intent(this, AllItemsScreenActivity.class);
+
+        }
+        else
+        {
+            intent = new Intent(this, ItemScreenActivity.class);
+        }
+
         intent.putExtra("EXTRA_PANTRY_UUID", pantryUUID);
         intent.putExtra("EXTRA_PANTRY_CATEGORY", category);
         startActivity(intent);
