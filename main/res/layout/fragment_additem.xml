@@ -49,6 +49,7 @@
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Display1"
+                android:imeOptions="actionDone"
                 android:textColor="@color/baby_blue"
                 android:textColorHint="@color/colorPrimary"
                 android:textSize="15sp" />

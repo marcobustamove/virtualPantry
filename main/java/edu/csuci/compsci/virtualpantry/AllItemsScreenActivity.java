@@ -21,7 +21,7 @@ import java.util.UUID;
 import database.PantryBaseHelper;
 import database.PantryDBSchema.ItemTable;
 
-public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
+public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
 
     MyRecyclerViewAdapter adapter;
 
@@ -39,10 +39,10 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private Button sortingMethod;
     private Button mAddItemButton;
 
-    public static final int FULL = 1;
-    public static final int LOW = 2;
-    public static final int EMPTY = 3;
-    public static final int EXPIRED = 4;
+    private static final int FULL = 1;
+    private static final int LOW = 2;
+    private static final int EMPTY = 3;
+    private static final int EXPIRED = 4;
 
     private static final String DIALOG_ADD_ITEM = "DialogAddItem";
 
@@ -97,6 +97,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         setUpRecyclerView();
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
+        mAddItemButton.setVisibility(View.INVISIBLE);
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,21 +137,21 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public Cursor getItemDBSortedAlphabetically()
     {
-        String[] selectionArgs = {pantryUUID, pantryCategory};
-        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
+        String[] selectionArgs = {pantryUUID};
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
     }
 
     public Cursor getItemUUIDSortedAlphabetically()
     {
-        String[] selectionArgs = {pantryUUID, pantryCategory};
-        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.UUID + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
+        String[] selectionArgs = {pantryUUID};
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.UUID + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
     }
 
     public Cursor getItemDBSortedByStatus()
     {
         String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
-        String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
-        String[] selectValues = {pantryUUID, pantryCategory};
+        String selection = ItemTable.Cols.PANTRY_ID + " = ?";
+        String[] selectValues = {pantryUUID};
         String sortOrder = ItemTable.Cols.STATUS + " ASC";
 
         return readableDatabase.query(ItemTable.NAME, projection, selection, selectValues, null, null, sortOrder);
@@ -160,8 +161,8 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     public Cursor getItemDBSortedByExpDate()
     {
         String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
-        String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
-        String[] selectValues = {pantryUUID, pantryCategory};
+        String selection = ItemTable.Cols.PANTRY_ID + " = ?";
+        String[] selectValues = {pantryUUID};
         String sortOrder = ItemTable.Cols.DATE + " ASC";
 
         return readableDatabase.query(ItemTable.NAME, projection, selection, selectValues, null, null, sortOrder);
@@ -249,12 +250,5 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         initializeArrayList();
         setUpRecyclerView();
 
-    }
-    @Override
-    public void itemModifyStatus(View view, int position, int newStatus)
-    {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ItemTable.Cols.STATUS, newStatus);
-        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemList.get(position)});
     }
 }

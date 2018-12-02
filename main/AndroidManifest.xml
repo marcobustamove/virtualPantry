@@ -26,6 +26,8 @@
         <activity android:name=".PantryScreenActivity" />
         <activity android:name=".ItemScreenActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".AllItemsScreenActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".HomeScreenActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
     </application>

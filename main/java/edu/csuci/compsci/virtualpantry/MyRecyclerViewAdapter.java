@@ -44,7 +44,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         TextView innertext = view.findViewById(R.id.info_text);
         innertext.setBackgroundResource(0); //This line is possibly not necessary, experiment later
-        innertext.setBackgroundResource(R.drawable.categorybutton);
+        innertext.setBackgroundResource(R.drawable.itemname);
         view.setLongClickable(true);
 
 
