@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -241,24 +242,47 @@ public class HomeScreenActivity extends AppCompatActivity
         fragment.show(getSupportFragmentManager(), DIALOG_DELETE_PANTRY);
     }
 
+    public boolean checkForDuplicatePantryNames(String inputPantryName)
+    {
+        boolean foundDuplicateName = false;
+
+        Cursor cursor = readableDatabase.rawQuery("SELECT " + PantryTable.Cols.TITLE + " FROM " + PantryTable.NAME + " WHERE "
+                + PantryTable.Cols.TITLE + " LIKE ?;", new String[] {inputPantryName});
+
+        if(cursor.moveToNext() && cursor.getString(cursor.getColumnIndex(PantryTable.Cols.TITLE)).equals(inputPantryName))
+            foundDuplicateName = true;
+
+        cursor.close();
+
+
+        return foundDuplicateName;
+    }
+
     @Override
     public void createPantry(String inputPantryName)
     {
-        ContentValues values = new ContentValues();
-        values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
-        values.put(PantryTable.Cols.TITLE, inputPantryName);
-        values.put(PantryTable.Cols.FAVORITE, "NO");
+        if(checkForDuplicatePantryNames(inputPantryName))
+        {
+            Toast.makeText(getApplicationContext(), inputPantryName + " already exists!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            ContentValues values = new ContentValues();
+            values.put(PantryTable.Cols.UUID, UUID.randomUUID().toString());
+            values.put(PantryTable.Cols.TITLE, inputPantryName);
+            values.put(PantryTable.Cols.FAVORITE, "NO");
 
-        writableDatabase.insert(PantryTable.NAME, null, values);
-        addMenuItemInNavMenuDrawer();
-        String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
-        String selection = PantryTable.Cols.TITLE + " = ?";
-        String[] whereValue = {inputPantryName};
+            writableDatabase.insert(PantryTable.NAME, null, values);
+            addMenuItemInNavMenuDrawer();
+            String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
+            String selection = PantryTable.Cols.TITLE + " = ?";
+            String[] whereValue = {inputPantryName};
 
-        Cursor cursor = readableDatabase.query(PantryTable.NAME, projection, selection, whereValue, null, null, null, null);
+            Cursor cursor = readableDatabase.query(PantryTable.NAME, projection, selection, whereValue, null, null, null, null);
 
-        cursor.moveToNext();
-        updatePantryBox(cursor);
+            cursor.moveToNext();
+            updatePantryBox(cursor);
+        }
     }
 
     @Override
