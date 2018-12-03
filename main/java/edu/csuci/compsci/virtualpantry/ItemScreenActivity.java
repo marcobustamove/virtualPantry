@@ -63,7 +63,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
         sortingMethod = (Button) findViewById(R.id.sort);
         currentSortingOrder = "A-Z";
-        sortingMethod.setText("A-Z");
+        sortingMethod.setBackgroundResource(R.drawable.alphabetical_selector);
         sortingMethod.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
@@ -72,19 +72,20 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                 {
                     case "A-Z":
                         currentSortingOrder = "STATUS";
-                        sortingMethod.setText(getResources().getString(R.string.status));
+                        sortingMethod.setBackgroundResource(R.drawable.status_sort_selector);
+
                         sortItemsByStatus();
                         setUpRecyclerView();
                         break;
                     case "STATUS":
                         currentSortingOrder = "EXP";
-                        sortingMethod.setText(getResources().getString(R.string.expiration));
+                        sortingMethod.setBackgroundResource(R.drawable.exp_sort_selector);
                         sortItemsByExpDate();
                         setUpRecyclerView();
                         break;
                     case "EXP":
                         currentSortingOrder = "A-Z";
-                        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+                        sortingMethod.setBackgroundResource(R.drawable.alphabetical_selector);
                         sortItemsAlphabetically();
                         setUpRecyclerView();
                         break;
@@ -271,5 +272,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         ContentValues contentValues = new ContentValues();
         contentValues.put(ItemTable.Cols.STATUS, newStatus);
         writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemUUIDList.get(position)});
+        initializeArrayList();
+        setUpRecyclerView();
     }
 }

@@ -31,17 +31,22 @@
             <!--android:text="@string/select_button"-->
             <!--android:textColor="@color/baby_blue"-->
             <!--android:textSize="25sp" />-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1.5"
+            android:layout_weight="1.8"
             android:fontFamily="@font/futura"
             android:gravity="center"
             android:textColor="@color/baby_blue"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            />
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
