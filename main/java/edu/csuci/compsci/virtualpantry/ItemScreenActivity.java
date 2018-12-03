@@ -40,10 +40,10 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private Button sortingMethod;
     private Button mAddItemButton;
 
-    private static final int FULL = 1;
-    private static final int LOW = 2;
-    private static final int EMPTY = 3;
-    private static final int EXPIRED = 4;
+    public static final int FULL = 1;
+    public static final int LOW = 2;
+    public static final int EMPTY = 3;
+    public static final int EXPIRED = 4;
 
     private static final String DIALOG_ADD_ITEM = "DialogAddItem";
 
@@ -264,5 +264,12 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         initializeArrayList();
         setUpRecyclerView();
 
+    }
+    @Override
+    public void itemModifyStatus(View view, int position, int newStatus)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ItemTable.Cols.STATUS, newStatus);
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemUUIDList.get(position)});
     }
 }
