@@ -35,7 +35,8 @@ public class AddItemFragment extends DialogFragment
         newItemName = v.findViewById(R.id.AddItemName);
         expirationDate = v.findViewById(R.id.AddItemExpirationPicker);
         datePickerLayout = v.findViewById(R.id.ItemExpirationDate_Layout);
-        datePickerLayout.setVisibility(View.INVISIBLE);
+        datePickerLayout.setVisibility(View.GONE);
+
 
         expirationSwitch = v.findViewById(R.id.itemExpirationQuerySwitch);
         expirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -49,7 +50,7 @@ public class AddItemFragment extends DialogFragment
                 }
                 else
                 {
-                    datePickerLayout.setVisibility(View.INVISIBLE);
+                    datePickerLayout.setVisibility(View.GONE);
                 }
             }
         });
