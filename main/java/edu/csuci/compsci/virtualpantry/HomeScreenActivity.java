@@ -80,7 +80,7 @@ public class HomeScreenActivity extends AppCompatActivity
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
 
-
+        
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
         {

@@ -256,7 +256,7 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
     }
     @Override
-    public void itemDeleteInfo(View view, int position)
+    public void deleteItem(View view, int position)
     {
         String selectionForItemTable = ItemTable.Cols.UUID + " LIKE ?";
         String[] whereValue = { itemUUIDList.get(position)};

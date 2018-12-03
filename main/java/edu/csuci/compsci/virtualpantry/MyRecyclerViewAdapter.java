@@ -3,11 +3,9 @@ package edu.csuci.compsci.virtualpantry;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
@@ -26,7 +23,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ArrayList<String> mItemStatusList;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-    private Random random = new Random();
 
     private Dialog myDialog;
 
@@ -48,8 +44,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
 
         TextView innertext = view.findViewById(R.id.info_text);
-        LinearLayout itemStatus = view.findViewById(R.id.item_button);
-
         innertext.setBackgroundResource(R.drawable.itemname);
 
         view.setLongClickable(true);
@@ -68,16 +62,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         switch(status)
         {
             case "1":
-                holder.itemButton.setBackgroundResource(R.drawable.fullstatus);
+                holder.itemStatusImage.setBackgroundResource(R.drawable.fullstatus);
                 break;
             case "2":
-                holder.itemButton.setBackgroundResource(R.drawable.lowstatus);
+                holder.itemStatusImage.setBackgroundResource(R.drawable.lowstatus);
                 break;
             case "3":
-                holder.itemButton.setBackgroundResource(R.drawable.emptystatus);
+                holder.itemStatusImage.setBackgroundResource(R.drawable.emptystatus);
                 break;
             case "4":
-                holder.itemButton.setBackgroundResource(R.drawable.expstatus);
+                holder.itemStatusImage.setBackgroundResource(R.drawable.expstatus);
                 break;
 
         }
@@ -93,11 +87,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView myTextView;
-        LinearLayout itemButton;
+        LinearLayout itemStatusImage;
 
         ViewHolder(View itemView) {
             super(itemView);
-            itemButton = itemView.findViewById(R.id.item_button);
+            itemStatusImage = itemView.findViewById(R.id.item_button);
             myTextView = itemView.findViewById(R.id.info_text);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -113,24 +107,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             System.out.println("OnClick received");
 
             //functionality will be added here to change item status, or select multiple items
-
-            String status = mItemStatusList.get(getAdapterPosition());
-
-            switch(status)
-            {
-                case "1":
-                    itemStatus.setBackgroundResource(R.drawable.fullstatus);
-                    break;
-                case "2":
-                    itemStatus.setBackgroundResource(R.drawable.lowstatus);
-                    break;
-                case "3":
-                    itemStatus.setBackgroundResource(R.drawable.emptystatus);
-                    break;
-                case "4":
-                    itemStatus.setBackgroundResource(R.drawable.expstatus);
-
-            }
 
         }
 
@@ -194,7 +170,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     if(event.getAction() == MotionEvent.ACTION_DOWN) {
                         return true;
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        mClickListener.itemDeleteInfo(view, getAdapterPosition());
+                        mClickListener.deleteItem(view, getAdapterPosition());
                         myDialog.cancel();
                         return true;
                     }
@@ -223,6 +199,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
-        void itemDeleteInfo(View view, int position);
+        void deleteItem(View view, int position);
     }
 }
