@@ -66,7 +66,7 @@ public class AddItemFragment extends DialogFragment
                 }
                 else
                 {
-                    listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), 0, 0, 0);
+                    listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), -1, 0, 0);
                 }
 
             }})
