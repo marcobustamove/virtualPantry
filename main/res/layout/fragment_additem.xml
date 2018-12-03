@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/secondary_blue">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/secondary_blue"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
-        android:id="@+id/AddItemDialog_ParentLayout"
+        android:id="@+id/itemName_expirableSwitch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:animateLayoutChanges="true">
 
         <LinearLayout
             android:id="@+id/AddItemName_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,10 +32,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/futura"
                 android:text="@string/addItemNameInput"
                 android:textColor="@color/baby_blue"
@@ -46,10 +47,10 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/baby_blue"
                 android:fontFamily="@font/futura"
+                android:imeOptions="actionDone"
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Display1"
-                android:imeOptions="actionDone"
                 android:textColor="@color/baby_blue"
                 android:textColorHint="@color/colorPrimary"
                 android:textSize="15sp" />
@@ -59,10 +60,10 @@
             android:id="@+id/ItemExpirationQuery_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,10 +74,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/futura"
                 android:text="@string/addItemExpirationQuery"
                 android:textColor="@color/baby_blue"
@@ -86,7 +87,8 @@
                 android:id="@+id/itemExpirationQuerySwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"/>
+                android:checked="false"
+                android:gravity="start" />
 
         </LinearLayout>
 
@@ -94,24 +96,20 @@
             android:id="@+id/ItemExpirationDate_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/futura"
                 android:text="@string/addItemExpirationDate"
                 android:textColor="@color/baby_blue"
@@ -122,18 +120,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:calendarTextColor="@color/baby_blue"
-                android:yearListSelectorColor="@color/baby_blue"
+                android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:calendarViewShown="false">
+                android:yearListSelectorColor="@color/baby_blue">
+
             </DatePicker>
 
 
         </LinearLayout>
 
-
-
     </LinearLayout>
 
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
