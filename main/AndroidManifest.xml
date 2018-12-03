@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginScreenActivity">
+        <activity android:name=".HomeScreenActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +25,12 @@
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".PantryScreenActivity" />
-        <activity android:name=".ItemScreenActivity" />
-        <activity android:name=".HomeScreenActivity"
+        <activity android:name=".ItemScreenActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".AllItemsScreenActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <!--<activity android:name=".HomeScreenActivity"-->
+            <!--android:windowSoftInputMode="adjustPan|stateHidden"/>-->
     </application>
 
 </manifest>

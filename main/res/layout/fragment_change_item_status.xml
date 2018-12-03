@@ -2,51 +2,77 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="275dp"
-    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="175dp"
     android:background="@drawable/status_selector_bg">
 
     <LinearLayout
         android:id="@+id/AddItemDialog_ParentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="298dp"
+        android:layout_height="96dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="center">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/set_empty_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="21dp"
+            android:layout_height="96dp"
             android:layout_weight="1"
-            android:background="@color/item_empty"
+            android:background="@drawable/emptystatus"
+            android:fontFamily="@font/futura"
             android:text="@string/setItemEmptyHint"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/futura"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
+
         <Button
             android:id="@+id/set_low_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="26dp"
+            android:layout_height="96dp"
             android:layout_weight="1"
-            android:background="@color/item_low"
+            android:background="@drawable/lowstatus"
+            android:fontFamily="@font/futura"
             android:text="@string/setItemLowHint"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/futura"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
+
         <Button
             android:id="@+id/set_full_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="19dp"
+            android:layout_height="96dp"
             android:layout_weight="1"
-            android:background="@color/item_full"
+            android:background="@drawable/fullstatus"
+            android:fontFamily="@font/futura"
             android:text="@string/setItemFullHint"
             android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/futura"
-            android:textSize="30sp"/>
-
+            android:textSize="30sp" />
 
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/item_delete_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bar_button"
+        android:text=" Delete Item"
+        android:textColor="@color/colorText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout" />
 
 
 
