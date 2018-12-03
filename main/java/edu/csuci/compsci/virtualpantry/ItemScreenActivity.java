@@ -255,6 +255,6 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ItemTable.Cols.STATUS, newStatus);
-        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemList.get(position)});
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemUUIDList.get(position)});
     }
 }
