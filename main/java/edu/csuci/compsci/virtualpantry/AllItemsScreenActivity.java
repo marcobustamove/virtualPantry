@@ -266,4 +266,13 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
         setUpRecyclerView();
 
     }
+    @Override
+    public void itemModifyStatus(View view, int position, int newStatus)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ItemTable.Cols.STATUS, newStatus);
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemList.get(position)});
+        initializeArrayList();
+        setUpRecyclerView();
+    }
 }
