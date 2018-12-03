@@ -34,6 +34,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private String pantryCategory;
     private ArrayList<String> itemList;
     private ArrayList<String> itemUUIDList;
+    private ArrayList<String> itemStatus;
 
     private String currentSortingOrder;
     private Button sortingMethod;
@@ -111,7 +112,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         int numberOfColumns = 3;
         ItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new MyRecyclerViewAdapter(this, itemList);
+        adapter = new MyRecyclerViewAdapter(this, itemList, itemStatus);
         adapter.setClickListener(this);
         ItemsRecyclerView.setAdapter(adapter);
     }
@@ -146,9 +147,15 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.UUID + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
     }
 
+    public Cursor getItemStatusSortedAlphabetically()
+    {
+        String[] selectionArgs = {pantryUUID, pantryCategory};
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.STATUS + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
+    }
+
     public Cursor getItemDBSortedByStatus()
     {
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS};
         String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
         String[] selectValues = {pantryUUID, pantryCategory};
         String sortOrder = ItemTable.Cols.STATUS + " ASC";
@@ -159,7 +166,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public Cursor getItemDBSortedByExpDate()
     {
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID};
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS};
         String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
         String[] selectValues = {pantryUUID, pantryCategory};
         String sortOrder = ItemTable.Cols.DATE + " ASC";
@@ -171,17 +178,21 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         itemList = new ArrayList<>();
         itemUUIDList = new ArrayList<>();
+        itemStatus = new ArrayList<>();
 
         Cursor itemNameCursor = getItemDBSortedAlphabetically();
         Cursor itemUUIDCursor = getItemUUIDSortedAlphabetically();
+        Cursor itemStatusCursor = getItemStatusSortedAlphabetically();
 
-        while(itemNameCursor.moveToNext() && itemUUIDCursor.moveToNext())
+        while(itemNameCursor.moveToNext() && itemUUIDCursor.moveToNext() && itemStatusCursor.moveToNext())
         {
             itemList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(ItemTable.Cols.NAME)));
             itemUUIDList.add(itemUUIDCursor.getString(itemUUIDCursor.getColumnIndex(ItemTable.Cols.UUID)));
+            itemStatus.add(itemStatusCursor.getString(itemStatusCursor.getColumnIndex(ItemTable.Cols.STATUS)));
         }
         itemNameCursor.close();
         itemUUIDCursor.close();
+        itemStatusCursor.close();
 
     }
 
@@ -189,6 +200,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         itemList = new ArrayList<>();
         itemUUIDList = new ArrayList<>();
+        itemStatus = new ArrayList<>();
 
         Cursor cursor = getItemDBSortedByExpDate();
 
@@ -196,6 +208,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         {
             itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
             itemUUIDList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.UUID)));
+            itemStatus.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.STATUS)));
         }
 
         cursor.close();
@@ -206,6 +219,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     {
         itemList = new ArrayList<>();
         itemUUIDList = new ArrayList<>();
+        itemStatus = new ArrayList<>();
 
         Cursor cursor = getItemDBSortedByStatus();
 
@@ -213,6 +227,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         {
             itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
             itemUUIDList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.UUID)));
+            itemStatus.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.STATUS)));
         }
 
         cursor.close();
@@ -227,7 +242,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         values.put(ItemTable.Cols.DATE, expirationYear + "/" + (expirationMonth+1) + "/" + expirationDay);
         values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
         values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
-        values.put(ItemTable.Cols.STATUS, FULL);
+        values.put(ItemTable.Cols.STATUS, EMPTY);
 
         writableDatabase.insert(ItemTable.NAME, null, values);
         initializeArrayList();
