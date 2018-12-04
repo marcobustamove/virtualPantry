@@ -38,6 +38,7 @@ public class HomeScreenActivity extends AppCompatActivity
 {
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
+    private static final int NUMBER_OF_CIRCLE_DOTS = 4;
 
     private Context mContext;
     private SQLiteDatabase writableDatabase;
@@ -52,6 +53,11 @@ public class HomeScreenActivity extends AppCompatActivity
     private Button mOpenPantry;
     private ImageView pantryBox;
     private Button mCreatePantry;
+
+    private ImageView dot1, dot2, dot3, dot4;
+    private ImageView[] circleDots = {dot1, dot2, dot3, dot4};
+    private int currentActiveCircle = 0;
+
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -75,12 +81,22 @@ public class HomeScreenActivity extends AppCompatActivity
         writableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
         readableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
+        dot1 = (ImageView) findViewById(R.id.scrollDot1);
+        dot2 = (ImageView) findViewById(R.id.scrollDot2);
+        dot3 = (ImageView) findViewById(R.id.scrollDot3);
+        dot4 = (ImageView) findViewById(R.id.scrollDot4);
+
+        circleDots[0] = dot1;
+        circleDots[1] = dot2;
+        circleDots[2] = dot3;
+        circleDots[3] = dot4;
+
+        setCircleDotImages();
 
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
 
-        
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
         {
@@ -91,6 +107,11 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 if(cursor.getCount() > 0)
                 {
+                    if(cursor.getCount() > 1)
+                    {
+                        currentActiveCircle++;
+                        setCircleDotImages();
+                    }
                     cursor.moveToNext();
 
                     while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
@@ -120,6 +141,11 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 if(cursor.getCount() > 0)
                 {
+                    if(cursor.getCount() > 1)
+                    {
+                        currentActiveCircle--;
+                        setCircleDotImages();
+                    }
                     cursor.moveToNext();
 
                     while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
@@ -412,6 +438,17 @@ public class HomeScreenActivity extends AppCompatActivity
         writableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "YES";
         addMenuItemInNavMenuDrawer();
+    }
+
+    public void setCircleDotImages()
+    {
+        for(int i = 0; i < NUMBER_OF_CIRCLE_DOTS; i++)
+        {
+            if(i == (currentActiveCircle%NUMBER_OF_CIRCLE_DOTS))
+                circleDots[i].setBackgroundResource(R.drawable.activepantryicon);
+            else
+                circleDots[i].setBackgroundResource(R.drawable.inactivepantryicon);
+        }
     }
 
     @Override
