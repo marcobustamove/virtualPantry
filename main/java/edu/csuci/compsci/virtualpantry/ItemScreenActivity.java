@@ -260,7 +260,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         }
         else if(newItemName.equals(""))
         {
-            Toast.makeText(getApplicationContext(), "Empty Strings are not allowed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Can't have a blank name", Toast.LENGTH_SHORT).show();
         }
         else {
             ContentValues values = new ContentValues();
