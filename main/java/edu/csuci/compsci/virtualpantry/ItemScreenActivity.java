@@ -270,7 +270,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
             values.put(ItemTable.Cols.DATE, expirationYear + "/" + (expirationMonth + 1) + "/" + expirationDay);
             values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
             values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
-            values.put(ItemTable.Cols.STATUS, EMPTY);
+            values.put(ItemTable.Cols.STATUS, FULL);
 
             writableDatabase.insert(ItemTable.NAME, null, values);
             initializeArrayList();
