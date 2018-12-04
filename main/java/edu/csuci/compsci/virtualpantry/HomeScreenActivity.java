@@ -291,6 +291,10 @@ public class HomeScreenActivity extends AppCompatActivity
         {
             Toast.makeText(getApplicationContext(), inputPantryName + " already exists!", Toast.LENGTH_SHORT).show();
         }
+        else if(inputPantryName.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(),"Can't have a blank name!", Toast.LENGTH_SHORT).show();
+        }
         else
         {
             ContentValues values = new ContentValues();

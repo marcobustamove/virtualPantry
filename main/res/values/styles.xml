@@ -22,7 +22,7 @@
         <item name="android:textColorPrimaryInverse">?attr/colorPrimary</item>
         <item name="android:colorBackground">@color/secondary_blue</item>
         <item name="colorPrimary">@color/secondary_blue</item>
-        <item name="android:colorForeground">@color/white</item>
+        <item name="android:colorForeground">@color/secondary_blue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@android:color/holo_blue_light</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
