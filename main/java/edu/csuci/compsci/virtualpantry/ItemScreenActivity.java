@@ -13,12 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
+import database.PantryDBSchema;
 import database.PantryDBSchema.ItemTable;
 
 public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
@@ -233,20 +235,46 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         cursor.close();
     }
 
+    public boolean checkForDuplicateItem(String ItemName)
+    {
+        boolean foundItem = false;
+        String[] selectionArgs = {pantryUUID, ItemName};
+
+        Cursor cursor = readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + " FROM "+ ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ?" + " AND " + ItemTable.Cols.NAME + " LIKE ?;",selectionArgs);
+
+        if(cursor.moveToNext() && cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)).toLowerCase().equals(ItemName.toLowerCase()))
+        {
+            foundItem = true;
+        }
+        cursor.close();
+
+        return foundItem;
+    }
+
     @Override
     public void AddItem(String newItemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear)
     {
-        ContentValues values = new ContentValues();
-        values.put(ItemTable.Cols.UUID, UUID.randomUUID().toString());
-        values.put(ItemTable.Cols.NAME, newItemName);
-        values.put(ItemTable.Cols.DATE, expirationYear + "/" + (expirationMonth+1) + "/" + expirationDay);
-        values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
-        values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
-        values.put(ItemTable.Cols.STATUS, EMPTY);
+        if(checkForDuplicateItem(newItemName))
+        {
+            Toast.makeText(getApplicationContext(), newItemName + " already exists!", Toast.LENGTH_SHORT).show();
+        }
+        else if(newItemName.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Empty Strings are not allowed!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            ContentValues values = new ContentValues();
+            values.put(ItemTable.Cols.UUID, UUID.randomUUID().toString());
+            values.put(ItemTable.Cols.NAME, newItemName);
+            values.put(ItemTable.Cols.DATE, expirationYear + "/" + (expirationMonth + 1) + "/" + expirationDay);
+            values.put(ItemTable.Cols.PANTRY_ID, this.pantryUUID);
+            values.put(ItemTable.Cols.CATEGORY, this.pantryCategory);
+            values.put(ItemTable.Cols.STATUS, EMPTY);
 
-        writableDatabase.insert(ItemTable.NAME, null, values);
-        initializeArrayList();
-        setUpRecyclerView();
+            writableDatabase.insert(ItemTable.NAME, null, values);
+            initializeArrayList();
+            setUpRecyclerView();
+        }
     }
 
     @Override
