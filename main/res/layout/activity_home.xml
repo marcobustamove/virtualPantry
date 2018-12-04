@@ -162,8 +162,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="226dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp"/>
 
         <ImageView
             android:id="@+id/scrollDot3"
@@ -172,8 +171,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="213dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp" />
 
         <ImageView
             android:id="@+id/scrollDot2"
@@ -182,8 +180,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="200dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp" />
 
         <ImageView
             android:id="@+id/scrollDot1"
@@ -192,8 +189,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="186dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/activepantryicon" />
+            android:layout_marginBottom="232dp"/>
 
         <TextView
             android:id="@+id/pantrytitle"
