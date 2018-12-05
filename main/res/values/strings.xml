@@ -50,6 +50,7 @@
     <string name="setItemEmptyHint">E</string>
     <string name="setItemLowHint">L</string>
     <string name="setItemFullHint">F</string>
+    <string name="deleteItemHint">Delete\nItem</string>
 
     <!--Create Account screen strings-->
     <string name="Email">Email</string>

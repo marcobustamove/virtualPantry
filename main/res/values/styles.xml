@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="VirtualPantryAppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -20,6 +20,20 @@
         <item name="android:textColor">@color/baby_blue</item>
         <item name="android:fontFamily">@font/futura</item>
         <item name="android:textColorPrimaryInverse">?attr/colorPrimary</item>
+        <item name="android:colorBackground">@color/secondary_blue</item>
+        <item name="colorPrimary">@color/secondary_blue</item>
+        <item name="android:colorForeground">@color/secondary_blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@android:color/holo_blue_light</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="VirtualPantryAppTheme" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:colorBackground">@color/secondary_blue</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
 </resources>

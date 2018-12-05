@@ -63,7 +63,7 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
 
         sortingMethod = (Button) findViewById(R.id.sort);
         currentSortingOrder = "A-Z";
-        sortingMethod.setText("A-Z");
+        sortingMethod.setBackgroundResource(R.drawable.alphabetical_selector);
         sortingMethod.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
@@ -72,19 +72,19 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
                 {
                     case "A-Z":
                         currentSortingOrder = "STATUS";
-                        sortingMethod.setText(getResources().getString(R.string.status));
+                        sortingMethod.setBackgroundResource(R.drawable.status_sort_selector);
                         sortItemsByStatus();
                         setUpRecyclerView();
                         break;
                     case "STATUS":
                         currentSortingOrder = "EXP";
-                        sortingMethod.setText(getResources().getString(R.string.expiration));
+                        sortingMethod.setBackgroundResource(R.drawable.exp_sort_selector);
                         sortItemsByExpDate();
                         setUpRecyclerView();
                         break;
                     case "EXP":
                         currentSortingOrder = "A-Z";
-                        sortingMethod.setText(getResources().getString(R.string.alphabetically));
+                        sortingMethod.setBackgroundResource(R.drawable.alphabetical_selector);
                         sortItemsAlphabetically();
                         setUpRecyclerView();
                         break;
@@ -256,7 +256,7 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
     }
     @Override
-    public void itemDeleteInfo(View view, int position)
+    public void deleteItem(View view, int position)
     {
         String selectionForItemTable = ItemTable.Cols.UUID + " LIKE ?";
         String[] whereValue = { itemUUIDList.get(position)};
@@ -265,5 +265,14 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
         initializeArrayList();
         setUpRecyclerView();
 
+    }
+    @Override
+    public void itemModifyStatus(View view, int position, int newStatus)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ItemTable.Cols.STATUS, newStatus);
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemUUIDList.get(position)});
+        initializeArrayList();
+        setUpRecyclerView();
     }
 }

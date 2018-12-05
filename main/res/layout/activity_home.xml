@@ -156,44 +156,40 @@
 
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/scrollDot4"
             android:layout_width="9dp"
             android:layout_height="9dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="226dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp"/>
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/scrollDot3"
             android:layout_width="9dp"
             android:layout_height="9dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="213dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/scrollDot2"
             android:layout_width="9dp"
             android:layout_height="9dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="200dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/inactivepantryicon" />
+            android:layout_marginBottom="232dp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/scrollDot1"
             android:layout_width="9dp"
             android:layout_height="9dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="186dp"
-            android:layout_marginBottom="232dp"
-            app:srcCompat="@drawable/activepantryicon" />
+            android:layout_marginBottom="232dp"/>
 
         <TextView
             android:id="@+id/pantrytitle"
@@ -218,6 +214,6 @@
         app:headerLayout="@layout/nav_header"
         android:background="@drawable/categorydrawerbg"
         app:itemTextColor="@color/white"
-        app:itemBackground="@color/colorPrimary"/>
+        app:itemBackground="@color/colorPrimary"/>z
 </android.support.v4.widget.DrawerLayout>
 

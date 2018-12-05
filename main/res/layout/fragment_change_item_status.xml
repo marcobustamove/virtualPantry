@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="175dp"
-    android:background="@drawable/status_selector_bg">
+    android:layout_height="300dp"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/AddItemDialog_ParentLayout"
@@ -60,19 +60,22 @@
     <Button
         android:id="@+id/item_delete_button"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="133dp"
-        android:layout_height="60dp"
+        android:layout_width="121dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bar_button"
-        android:text=" Delete Item"
-        android:textColor="@color/colorText"
+        android:background="@drawable/expstatus"
+        android:text="@string/deleteItemHint"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/futura"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout"
+        app:layout_constraintVertical_bias="0.787" />
 
 
 
