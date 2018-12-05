@@ -271,7 +271,7 @@ public class AllItemsScreenActivity extends AppCompatActivity  implements MyRecy
     {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ItemTable.Cols.STATUS, newStatus);
-        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemList.get(position)});
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.UUID + "=?", new String[] {itemUUIDList.get(position)});
         initializeArrayList();
         setUpRecyclerView();
     }
