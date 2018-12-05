@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import java.util.Calendar;
+
 public class AddItemFragment extends DialogFragment
 {
 
@@ -36,7 +38,13 @@ public class AddItemFragment extends DialogFragment
         expirationDate = v.findViewById(R.id.AddItemExpirationPicker);
         datePickerLayout = v.findViewById(R.id.ItemExpirationDate_Layout);
         datePickerLayout.setVisibility(View.GONE);
-
+        Calendar date = Calendar.getInstance();
+        // reset hour, minutes, seconds and millis
+        date.set(Calendar.HOUR_OF_DAY, 0);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND, 0);
+        expirationDate.setMinDate(date.getTimeInMillis());
 
         expirationSwitch = v.findViewById(R.id.itemExpirationQuerySwitch);
         expirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
