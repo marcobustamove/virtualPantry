@@ -64,6 +64,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private String favoriteValue;
     private String currentPantryUUIDOnDisplay;
+    public static final int MAX_PANTRY_NAME_LENGTH = 20;
 
     private List<String> pantryUUIDS;
 
@@ -287,7 +288,11 @@ public class HomeScreenActivity extends AppCompatActivity
     @Override
     public void createPantry(String inputPantryName)
     {
-        if(checkForDuplicatePantryNames(inputPantryName))
+        if(inputPantryName.length() > MAX_PANTRY_NAME_LENGTH)
+        {
+            Toast.makeText(getApplicationContext(),  "Pantry name is too long!", Toast.LENGTH_SHORT).show();
+        }
+        else if(checkForDuplicatePantryNames(inputPantryName))
         {
             Toast.makeText(getApplicationContext(), inputPantryName + " already exists!", Toast.LENGTH_SHORT).show();
         }
