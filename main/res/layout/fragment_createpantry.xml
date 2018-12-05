@@ -47,8 +47,7 @@
             android:inputType="text"
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
 
