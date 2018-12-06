@@ -148,8 +148,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="256dp"
-            android:text="" />
+            android:layout_marginBottom="8dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toTopOf="@+id/pantrybox" />
 
         <ImageView
             android:id="@+id/pantryImage"
