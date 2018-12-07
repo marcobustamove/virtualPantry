@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HomeScreenActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,13 +23,18 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".PantryScreenActivity" />
+        <activity android:name=".CreateAccountActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PantryScreenActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ItemScreenActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".AllItemsScreenActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"/>
         <!--<activity android:name=".HomeScreenActivity"-->
             <!--android:windowSoftInputMode="adjustPan|stateHidden"/>-->
     </application>
