@@ -209,7 +209,10 @@ public class HomeScreenActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                openCreatePantryDialog();
+                if(pantryUUIDS.size() < 11)
+                    openCreatePantryDialog();
+                else
+                    Toast.makeText(getApplicationContext(), " ಠ_ಠ Do you REALLY need that many pantries?", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -278,6 +281,7 @@ public class HomeScreenActivity extends AppCompatActivity
     @Override
     public void createPantry(String inputPantryName)
     {
+
         if(checkForDuplicatePantryNames(inputPantryName))
         {
             Toast.makeText(getApplicationContext(), inputPantryName + " already exists!", Toast.LENGTH_SHORT).show();
