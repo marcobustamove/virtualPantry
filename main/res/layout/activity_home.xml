@@ -59,7 +59,7 @@
             android:layout_marginBottom="8dp"
             android:background="@layout/pantryselect"
             android:contentDescription="@string/open_pantry"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/dotsContainer"
             app:layout_constraintEnd_toEndOf="@+id/pantrybox"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/pantrybox"
@@ -150,7 +150,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/dotsContainer"
             app:layout_constraintEnd_toEndOf="@+id/pantrybox"
             app:layout_constraintStart_toStartOf="@+id/pantrybox"
             app:layout_constraintTop_toTopOf="@+id/pantrybox" />
@@ -170,7 +170,7 @@
             app:srcCompat="@drawable/pantryavatardefault" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/dotsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -181,41 +181,6 @@
             app:layout_constraintStart_toStartOf="@+id/pantrybox"
             app:layout_constraintTop_toBottomOf="@+id/openpantry">
 
-            <ImageView
-                android:id="@+id/scrollDot4"
-                android:layout_width="9dp"
-                android:layout_height="9dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp" />
-
-            <ImageView
-                android:id="@+id/scrollDot3"
-                android:layout_width="9dp"
-                android:layout_height="9dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp" />
-
-            <ImageView
-                android:id="@+id/scrollDot2"
-                android:layout_width="9dp"
-                android:layout_height="9dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp" />
-
-            <ImageView
-                android:id="@+id/scrollDot1"
-                android:layout_width="9dp"
-                android:layout_height="9dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp" />
         </LinearLayout>
 
 
