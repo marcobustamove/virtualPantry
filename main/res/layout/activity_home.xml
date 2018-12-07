@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,21 +15,17 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
-
-
-    <RelativeLayout
-
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/homescreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,68 +36,75 @@
         <ToggleButton
             android:id="@+id/favicon"
             android:layout_width="25dp"
-            android:layout_height="21dp"
+            android:layout_height="25dp"
             android:layout_alignTop="@+id/deletebutton"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="-32dp"
+            android:layout_marginStart="20dp"
             android:layout_toStartOf="@+id/openpantry"
             android:background="@drawable/favoriteicon"
             android:textOff=""
             android:textOn=""
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="116dp" />
+            app:layout_constraintBottom_toBottomOf="@+id/pantrytitle"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toTopOf="@+id/pantrytitle" />
 
         <Button
             android:id="@+id/openpantry"
-            android:contentDescription="@string/open_pantry"
             android:layout_width="299dp"
             android:layout_height="44dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="290dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@layout/pantryselect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="306dp" />
+            android:contentDescription="@string/open_pantry"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toBottomOf="@+id/pantryImage" />
 
 
         <Button
             android:id="@+id/deletebutton"
-            android:layout_width="26dp"
-            android:layout_height="24dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="321dp"
-            android:layout_marginTop="176dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/deletebtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="111dp" />
+            app:layout_constraintBottom_toBottomOf="@+id/pantrytitle"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintTop_toTopOf="@+id/pantrytitle" />
 
         <Button
             android:id="@+id/create_pantry_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="65dp"
-            android:background="@drawable/createbtn" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/createbtn"
+            app:layout_constraintBottom_toTopOf="@+id/createpantrytext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline5"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="2" />
 
         <ImageView
             android:id="@+id/categorylist"
             android:layout_width="26dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="361dp"
-            android:layout_marginBottom="637dp"
-            android:contentDescription="@string/pantrycategorylist"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="8dp"
             android:clickable="true"
+            android:contentDescription="@string/pantrycategorylist"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/categorydropdown" />
 
         <ImageView
@@ -112,23 +113,34 @@
             android:layout_height="331dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="163dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="pantrybox"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline6"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintVertical_weight="6"
             app:srcCompat="@drawable/pantryboxhomeview" />
 
         <TextView
             android:id="@+id/createpantrytext"
-            android:layout_width="210dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/create_pantry_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="-65dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/futura"
             android:text="Create Pantry"
             android:textAlignment="center"
             android:textColor="@color/text_brown_accent"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/create_pantry_button"
+            app:layout_constraintVertical_weight="2" />
 
         <TextView
             android:id="@+id/noPantryPrompt"
@@ -136,8 +148,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="256dp"
-            android:text="" />
+            android:layout_marginBottom="8dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toTopOf="@+id/pantrybox" />
 
         <ImageView
             android:id="@+id/pantryImage"
@@ -147,63 +163,115 @@
             android:layout_alignStart="@+id/pantrybox"
             android:layout_alignTop="@+id/pantrybox"
             android:layout_alignEnd="@+id/pantrybox"
-            android:layout_marginStart="107dp"
-            android:layout_marginTop="61dp"
-            android:layout_marginEnd="101dp"
-            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/openpantry"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toBottomOf="@+id/pantrytitle"
             app:srcCompat="@drawable/pantryavatardefault" />
 
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/pantrybox"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toBottomOf="@+id/openpantry">
 
+            <ImageView
+                android:id="@+id/scrollDot4"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp" />
 
-        <ImageView
-            android:id="@+id/scrollDot4"
-            android:layout_width="9dp"
-            android:layout_height="9dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="226dp"
-            android:layout_marginBottom="232dp"/>
+            <ImageView
+                android:id="@+id/scrollDot3"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp" />
 
-        <ImageView
-            android:id="@+id/scrollDot3"
-            android:layout_width="9dp"
-            android:layout_height="9dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="213dp"
-            android:layout_marginBottom="232dp" />
+            <ImageView
+                android:id="@+id/scrollDot2"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp" />
 
-        <ImageView
-            android:id="@+id/scrollDot2"
-            android:layout_width="9dp"
-            android:layout_height="9dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="200dp"
-            android:layout_marginBottom="232dp" />
+            <ImageView
+                android:id="@+id/scrollDot1"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp" />
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/scrollDot1"
-            android:layout_width="9dp"
-            android:layout_height="9dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="186dp"
-            android:layout_marginBottom="232dp"/>
 
         <TextView
             android:id="@+id/pantrytitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/favicon"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/futura"
             android:text="Pantry Name"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/pantryImage"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toTopOf="@+id/pantrybox" />
+
+        <android.support.constraint.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.constraint.Group
+            android:id="@+id/group2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.constraint.Group
+            android:id="@+id/group3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.84" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
 
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
