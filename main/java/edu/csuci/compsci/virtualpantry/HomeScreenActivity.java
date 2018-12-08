@@ -170,6 +170,8 @@ public class HomeScreenActivity extends AppCompatActivity
                 {
                     removeCurrentFavorite();
                     mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+                    addMenuItemInNavMenuDrawer();
+                    setCircleDotImages();
                 }
                 else
                 {
