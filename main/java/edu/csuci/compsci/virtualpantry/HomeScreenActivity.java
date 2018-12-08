@@ -136,6 +136,7 @@ public class HomeScreenActivity extends AppCompatActivity
                     mockPantryImage = findViewById(R.id.mockPantryImage);
                     pantryImage.startAnimation(animInRight);
                     mockPantryImage.startAnimation(animOutLeft);
+                    pantryTitle.startAnimation(animInRight);
                 }
             }
 
@@ -176,6 +177,7 @@ public class HomeScreenActivity extends AppCompatActivity
                     mockPantryImage = findViewById(R.id.mockPantryImage);
                     pantryImage.startAnimation(animInLeft);
                     mockPantryImage.startAnimation(animOutRight);
+                    pantryTitle.startAnimation(animInLeft);
                 }
             }
 
