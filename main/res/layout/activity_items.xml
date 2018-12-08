@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -70,6 +71,7 @@
         android:orientation="horizontal"
         android:padding="0dp"
         android:animateLayoutChanges="true"
+        android:background="@color/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -87,6 +89,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/categorydrawerbg"
                 android:text="@string/deleteItemHint"/>
 
             <TextView
@@ -95,6 +98,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/categorydrawerbg"
                 android:text="@string/allitems"/>
 
         </LinearLayout>
@@ -103,12 +107,14 @@
             android:id="@+id/statusSetterButton1"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="@drawable/fullstatus"
             android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/statusSetterButton2"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="@drawable/lowstatus"
             android:layout_height="match_parent" />
 
         <LinearLayout

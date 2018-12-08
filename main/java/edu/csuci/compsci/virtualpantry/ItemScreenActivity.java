@@ -1,5 +1,6 @@
 package edu.csuci.compsci.virtualpantry;
 
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,11 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private Context mContext;
     private SQLiteDatabase writableDatabase;
     private SQLiteDatabase readableDatabase;
+
+    private LinearLayout detailsLayout;
+    private TextView itemNameTextView;
+    private TextView itemExpirationTextView;
+
     private RecyclerView ItemsRecyclerView;
     private TextView categoryTitle;
     private String pantryUUID;
@@ -98,6 +105,22 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         });
 
         initializeArrayList();
+
+        detailsLayout = findViewById(R.id.detailsLayout);
+        detailsLayout.setVisibility(View.GONE);
+        itemNameTextView = findViewById(R.id.itemNameTextView);
+        itemExpirationTextView = findViewById(R.id.itemExpirationTextView);
+        Button closeDetailsButton = findViewById(R.id.closeInfoButton);
+
+
+        closeDetailsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                detailsLayout.setVisibility(View.GONE);
+            }
+        });
 
         ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         setUpRecyclerView();
@@ -289,6 +312,24 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     public void onItemClick(View view, int position)
     {
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
+
+        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.DATE, ItemTable.Cols.STATUS};
+        String selection = ItemTable.Cols.UUID + " = ? ";
+        String[] selectionVals = {itemUUIDList.get(position)};
+        Cursor cursor = readableDatabase.query(ItemTable.NAME,projection,selection,selectionVals, null, null, null);
+        cursor.moveToNext();
+        int iNameColumn = cursor.getColumnIndex(ItemTable.Cols.NAME);
+        int iDateColumn = cursor.getColumnIndex(ItemTable.Cols.DATE);
+        int iStatusColumn = cursor.getColumnIndex(ItemTable.Cols.STATUS);
+
+        itemNameTextView.setText(cursor.getString(iNameColumn));
+        itemExpirationTextView.setText(cursor.getString(iDateColumn));
+
+
+        detailsLayout.setVisibility(View.VISIBLE);
+
+
+
     }
     @Override
     public void deleteItem(View view, int position)
