@@ -37,6 +37,8 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private LinearLayout detailsLayout;
     private TextView itemNameTextView;
     private TextView itemExpirationTextView;
+    private Button statusSetter1;
+    private Button statusSetter2;
 
     private RecyclerView ItemsRecyclerView;
     private TextView categoryTitle;
@@ -110,9 +112,11 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         detailsLayout.setVisibility(View.GONE);
         itemNameTextView = findViewById(R.id.itemNameTextView);
         itemExpirationTextView = findViewById(R.id.itemExpirationTextView);
+
+        statusSetter1 = findViewById(R.id.statusSetterButton1);
+        statusSetter2 = findViewById(R.id.statusSetterButton2);
+
         Button closeDetailsButton = findViewById(R.id.closeInfoButton);
-
-
         closeDetailsButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -324,13 +328,28 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
         itemNameTextView.setText(cursor.getString(iNameColumn));
         itemExpirationTextView.setText(cursor.getString(iDateColumn));
+        int itemStatus = cursor.getInt(iStatusColumn);
 
-
+        switch(itemStatus)
+        {
+            case FULL:
+                statusSetter1.setBackgroundResource(R.drawable.lowstatus);
+                statusSetter2.setBackgroundResource(R.drawable.emptystatus);
+                break;
+            case LOW:
+                statusSetter1.setBackgroundResource(R.drawable.fullstatus);
+                statusSetter2.setBackgroundResource(R.drawable.emptystatus);
+                break;
+            case EMPTY:
+                statusSetter1.setBackgroundResource(R.drawable.fullstatus);
+                statusSetter2.setBackgroundResource(R.drawable.lowstatus);
+                break;
+        }
         detailsLayout.setVisibility(View.VISIBLE);
-
-
-
     }
+
+
+
     @Override
     public void deleteItem(View view, int position)
     {
