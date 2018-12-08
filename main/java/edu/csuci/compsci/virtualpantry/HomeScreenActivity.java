@@ -69,7 +69,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private List<String> pantryUUIDS;
 
-    //CursorAdapter for binding to a sql
+
     ListView listView;
 
     @SuppressLint("ClickableViewAccessibility")
