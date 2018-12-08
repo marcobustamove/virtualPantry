@@ -328,6 +328,8 @@ public class HomeScreenActivity extends AppCompatActivity
 
             writableDatabase.insert(PantryTable.NAME, null, values);
             addMenuItemInNavMenuDrawer();
+
+
             String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
             String selection = PantryTable.Cols.TITLE + " = ?";
             String[] whereValue = {inputPantryName};
