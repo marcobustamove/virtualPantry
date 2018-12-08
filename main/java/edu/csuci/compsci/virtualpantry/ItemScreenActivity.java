@@ -101,7 +101,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
         ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         setUpRecyclerView();
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
