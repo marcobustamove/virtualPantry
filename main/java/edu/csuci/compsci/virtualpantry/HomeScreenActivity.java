@@ -74,7 +74,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private List<String> pantryUUIDS;
 
-    //CursorAdapter for binding to a sql
+
     ListView listView;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -192,6 +192,8 @@ public class HomeScreenActivity extends AppCompatActivity
                 {
                     removeCurrentFavorite();
                     mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+                    addMenuItemInNavMenuDrawer();
+                    setCircleDotImages();
                 }
                 else
                 {
