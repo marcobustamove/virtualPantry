@@ -7,16 +7,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.UUID;
+import java.util.zip.Inflater;
 
 import database.PantryBaseHelper;
 import database.PantryDBSchema;
@@ -89,6 +94,8 @@ public class HomeScreenActivity extends AppCompatActivity
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
 
+
+
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
         {
@@ -97,7 +104,11 @@ public class HomeScreenActivity extends AppCompatActivity
             {
                 Cursor cursor = getPantryDBWithFavoriteAsFirst();
 
-                if(cursor.getCount() > 0)
+                Animation animOutLeft;
+                Animation animInRight;
+                ImageView mockPantryImage;
+
+                if(cursor.getCount() > 1)
                 {
                     cursor.moveToNext();
 
@@ -108,22 +119,23 @@ public class HomeScreenActivity extends AppCompatActivity
 
                     if(cursor.moveToNext())
                     {
-
                         updatePantryBox(cursor);
                     }
                     else
                     {
                         cursor.moveToPosition(0);
-
                         updatePantryBox(cursor);
-
                     }
-
                     if(cursor.getCount() > 1)
                     {
                         currentActiveCircle++;
                         setCircleDotImages();
                     }
+                    animOutLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_left);
+                    animInRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_right);
+                    mockPantryImage = findViewById(R.id.mockPantryImage);
+                    pantryImage.startAnimation(animInRight);
+                    mockPantryImage.startAnimation(animOutLeft);
                 }
             }
 
@@ -132,7 +144,11 @@ public class HomeScreenActivity extends AppCompatActivity
             {
                 Cursor cursor = getPantryDBWithFavoriteAsFirst();
 
-                if(cursor.getCount() > 0)
+                Animation animOutRight;
+                Animation animInLeft;
+                ImageView mockPantryImage;
+
+                if(cursor.getCount() > 1)
                 {
                     cursor.moveToNext();
 
@@ -150,12 +166,16 @@ public class HomeScreenActivity extends AppCompatActivity
                         cursor.moveToLast();
                         updatePantryBox(cursor);
                     }
-
                     if(cursor.getCount() > 1)
                     {
                         currentActiveCircle--;
                         setCircleDotImages();
                     }
+                    animOutRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_right);
+                    animInLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_left);
+                    mockPantryImage = findViewById(R.id.mockPantryImage);
+                    pantryImage.startAnimation(animInLeft);
+                    mockPantryImage.startAnimation(animOutRight);
                 }
             }
 
