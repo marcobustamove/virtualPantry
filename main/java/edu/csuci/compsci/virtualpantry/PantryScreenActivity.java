@@ -166,5 +166,6 @@ public class PantryScreenActivity extends AppCompatActivity {
         intent.putExtra("EXTRA_PANTRY_UUID", pantryUUID);
         intent.putExtra("EXTRA_PANTRY_CATEGORY", category);
         startActivity(intent);
+
     }
 }

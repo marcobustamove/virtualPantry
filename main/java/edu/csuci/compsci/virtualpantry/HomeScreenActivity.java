@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,8 +56,7 @@ public class HomeScreenActivity extends AppCompatActivity
     private ImageView pantryBox;
     private Button mCreatePantry;
 
-    private ImageView dot1, dot2, dot3, dot4;
-    private ImageView[] circleDots = {dot1, dot2, dot3, dot4};
+    private LinearLayout dotsContainer;
     private int currentActiveCircle = 0;
 
 
@@ -64,10 +65,11 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private String favoriteValue;
     private String currentPantryUUIDOnDisplay;
+    public static final int MAX_PANTRY_NAME_LENGTH = 20;
 
     private List<String> pantryUUIDS;
 
-    //CursorAdapter for binding to a sql
+
     ListView listView;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -81,17 +83,7 @@ public class HomeScreenActivity extends AppCompatActivity
         writableDatabase = new PantryBaseHelper(mContext).getWritableDatabase();
         readableDatabase = new PantryBaseHelper(mContext).getReadableDatabase();
 
-        dot1 = (ImageView) findViewById(R.id.scrollDot1);
-        dot2 = (ImageView) findViewById(R.id.scrollDot2);
-        dot3 = (ImageView) findViewById(R.id.scrollDot3);
-        dot4 = (ImageView) findViewById(R.id.scrollDot4);
-
-        circleDots[0] = dot1;
-        circleDots[1] = dot2;
-        circleDots[2] = dot3;
-        circleDots[3] = dot4;
-
-        setCircleDotImages();
+        dotsContainer = (LinearLayout) findViewById(R.id.dotsContainer);
 
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
@@ -107,11 +99,6 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 if(cursor.getCount() > 0)
                 {
-                    if(cursor.getCount() > 1)
-                    {
-                        currentActiveCircle++;
-                        setCircleDotImages();
-                    }
                     cursor.moveToNext();
 
                     while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
@@ -131,6 +118,12 @@ public class HomeScreenActivity extends AppCompatActivity
                         updatePantryBox(cursor);
 
                     }
+
+                    if(cursor.getCount() > 1)
+                    {
+                        currentActiveCircle++;
+                        setCircleDotImages();
+                    }
                 }
             }
 
@@ -141,11 +134,6 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 if(cursor.getCount() > 0)
                 {
-                    if(cursor.getCount() > 1)
-                    {
-                        currentActiveCircle--;
-                        setCircleDotImages();
-                    }
                     cursor.moveToNext();
 
                     while (!currentPantryUUIDOnDisplay.equals(cursor.getString(cursor.getColumnIndex(PantryTable.Cols.UUID))))
@@ -163,7 +151,11 @@ public class HomeScreenActivity extends AppCompatActivity
                         updatePantryBox(cursor);
                     }
 
-
+                    if(cursor.getCount() > 1)
+                    {
+                        currentActiveCircle--;
+                        setCircleDotImages();
+                    }
                 }
             }
 
@@ -178,6 +170,8 @@ public class HomeScreenActivity extends AppCompatActivity
                 {
                     removeCurrentFavorite();
                     mHeartIcon.setBackgroundResource(R.drawable.defaultfavicon);
+                    addMenuItemInNavMenuDrawer();
+                    setCircleDotImages();
                 }
                 else
                 {
@@ -219,7 +213,10 @@ public class HomeScreenActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                openCreatePantryDialog();
+                if(pantryUUIDS.size() < 11)
+                    openCreatePantryDialog();
+                else
+                    Toast.makeText(getApplicationContext(), " ಠ_ಠ Do you REALLY need that many pantries?", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -233,7 +230,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -246,6 +243,7 @@ public class HomeScreenActivity extends AppCompatActivity
             }
         });
         addMenuItemInNavMenuDrawer();
+        setCircleDotImages();
 
     }
 
@@ -287,7 +285,11 @@ public class HomeScreenActivity extends AppCompatActivity
     @Override
     public void createPantry(String inputPantryName)
     {
-        if(checkForDuplicatePantryNames(inputPantryName))
+        if(inputPantryName.length() > MAX_PANTRY_NAME_LENGTH)
+        {
+            Toast.makeText(getApplicationContext(),  "Pantry name is too long!", Toast.LENGTH_SHORT).show();
+        }
+        else if(checkForDuplicatePantryNames(inputPantryName))
         {
             Toast.makeText(getApplicationContext(), inputPantryName + " already exists!", Toast.LENGTH_SHORT).show();
         }
@@ -326,6 +328,7 @@ public class HomeScreenActivity extends AppCompatActivity
         writableDatabase.delete(PantryTable.NAME, selectionForPantryTable, whereValue);
         addMenuItemInNavMenuDrawer();
         setPantryView();
+        setCircleDotImages();
     }
 
     public Cursor getPantryDBWithFavoriteAsFirst()
@@ -373,6 +376,8 @@ public class HomeScreenActivity extends AppCompatActivity
         }
 
         cursor.close();
+
+
     }
 
     public void updatePantryBox(Cursor cursor)
@@ -401,6 +406,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
         makeIconsVisible();
         addMenuItemInNavMenuDrawer();
+        setCircleDotImages();
     }
 
     public void makeIconsVisible()
@@ -442,16 +448,31 @@ public class HomeScreenActivity extends AppCompatActivity
         writableDatabase.update(PantryTable.NAME, cv, whereClause, whereValue);
         favoriteValue = "YES";
         addMenuItemInNavMenuDrawer();
+        setCircleDotImages();
     }
 
     public void setCircleDotImages()
     {
-        for(int i = 0; i < NUMBER_OF_CIRCLE_DOTS; i++)
+
+        dotsContainer.removeAllViews();
+        currentActiveCircle = pantryUUIDS.indexOf(currentPantryUUIDOnDisplay);
+
+        for(int i = 0; i < pantryUUIDS.size(); i++)
         {
-            if(i == (currentActiveCircle%NUMBER_OF_CIRCLE_DOTS))
-                circleDots[i].setBackgroundResource(R.drawable.activepantryicon);
+            ImageView dot = new ImageView(this);
+            float dotScale = 0.3f;
+
+            if(i == currentActiveCircle)
+            {
+                dot.setBackgroundResource(R.drawable.activepantryicon);
+                dotScale = 0.4f;
+            }
             else
-                circleDots[i].setBackgroundResource(R.drawable.inactivepantryicon);
+                dot.setBackgroundResource(R.drawable.inactivepantryicon);
+
+            dot.setScaleX(dotScale);
+            dot.setScaleY(dotScale);
+            dotsContainer.addView(dot);
         }
     }
 
