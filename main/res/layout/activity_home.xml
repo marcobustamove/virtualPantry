@@ -261,6 +261,6 @@
         app:headerLayout="@layout/nav_header"
         android:background="@drawable/categorydrawerbg"
         app:itemTextColor="@color/white"
-        app:itemBackground="@color/colorPrimary"/>
+        app:itemBackground="@color/colorPrimary"/>z
 </android.support.v4.widget.DrawerLayout>
 
