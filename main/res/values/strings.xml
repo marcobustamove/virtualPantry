@@ -36,6 +36,10 @@
     <string name="status">STATUS</string>
     <string name="expiration">EXP</string>
     <string name="plus_button">Add Item</string>
+    <string name="edit_item_details">Edit</string>
+
+    <!--Edit Item Dialog Strings-->
+    <string name="Edit_Items">Edit Items</string>
 
     <!--Add Item Dialog Strings-->
     <string name="addItemTitle">Add Item</string>

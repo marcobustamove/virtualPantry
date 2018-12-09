@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +33,6 @@ import java.util.List;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
-import database.PantryDBSchema;
 import database.PantryDBSchema.PantryTable;
 import database.PantryDBSchema.ItemTable;
 
@@ -40,7 +41,6 @@ public class HomeScreenActivity extends AppCompatActivity
 {
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
-    private static final int NUMBER_OF_CIRCLE_DOTS = 4;
 
     private Context mContext;
     private SQLiteDatabase writableDatabase;
@@ -52,6 +52,7 @@ public class HomeScreenActivity extends AppCompatActivity
     private Button mDeletePantry;
     private TextView noPantryPrompt;
     private ImageView pantryImage;
+    private ImageView mockPantryImage;
     private Button mOpenPantry;
     private ImageView pantryBox;
     private Button mCreatePantry;
@@ -88,6 +89,7 @@ public class HomeScreenActivity extends AppCompatActivity
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
+        mockPantryImage = findViewById(R.id.mockPantryImage);
 
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
@@ -97,7 +99,10 @@ public class HomeScreenActivity extends AppCompatActivity
             {
                 Cursor cursor = getPantryDBWithFavoriteAsFirst();
 
-                if(cursor.getCount() > 0)
+                Animation animOutLeft;
+                Animation animInRight;
+
+                if(cursor.getCount() > 1)
                 {
                     cursor.moveToNext();
 
@@ -108,22 +113,23 @@ public class HomeScreenActivity extends AppCompatActivity
 
                     if(cursor.moveToNext())
                     {
-
                         updatePantryBox(cursor);
                     }
                     else
                     {
                         cursor.moveToPosition(0);
-
                         updatePantryBox(cursor);
-
                     }
-
                     if(cursor.getCount() > 1)
                     {
                         currentActiveCircle++;
                         setCircleDotImages();
                     }
+                    animOutLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_left);
+                    animInRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_right);
+                    pantryImage.startAnimation(animInRight);
+                    mockPantryImage.startAnimation(animOutLeft);
+                    pantryTitle.startAnimation(animInRight);
                 }
             }
 
@@ -132,7 +138,10 @@ public class HomeScreenActivity extends AppCompatActivity
             {
                 Cursor cursor = getPantryDBWithFavoriteAsFirst();
 
-                if(cursor.getCount() > 0)
+                Animation animOutRight;
+                Animation animInLeft;
+
+                if(cursor.getCount() > 1)
                 {
                     cursor.moveToNext();
 
@@ -150,12 +159,16 @@ public class HomeScreenActivity extends AppCompatActivity
                         cursor.moveToLast();
                         updatePantryBox(cursor);
                     }
-
                     if(cursor.getCount() > 1)
                     {
                         currentActiveCircle--;
                         setCircleDotImages();
                     }
+                    animOutRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_right);
+                    animInLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_left);
+                    pantryImage.startAnimation(animInLeft);
+                    mockPantryImage.startAnimation(animOutRight);
+                    pantryTitle.startAnimation(animInLeft);
                 }
             }
 
@@ -306,6 +319,8 @@ public class HomeScreenActivity extends AppCompatActivity
 
             writableDatabase.insert(PantryTable.NAME, null, values);
             addMenuItemInNavMenuDrawer();
+
+
             String[] projection = {PantryTable.Cols.UUID, PantryTable.Cols.TITLE, PantryTable.Cols.FAVORITE};
             String selection = PantryTable.Cols.TITLE + " = ?";
             String[] whereValue = {inputPantryName};
@@ -415,6 +430,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mDeletePantry.setVisibility(View.VISIBLE);
         mOpenPantry.setVisibility(View.VISIBLE);
         pantryImage.setVisibility(View.VISIBLE);
+        mockPantryImage.setVisibility(View.VISIBLE);
     }
 
     public void hidePantryIcons()
@@ -423,6 +439,8 @@ public class HomeScreenActivity extends AppCompatActivity
         mDeletePantry.setVisibility(View.INVISIBLE);
         mOpenPantry.setVisibility(View.INVISIBLE);
         pantryImage.setVisibility(View.INVISIBLE);
+        mockPantryImage.setVisibility(View.INVISIBLE);
+
         pantryTitle.setText("");
         noPantryPrompt.setText("You have no Pantries!\nStart by creating one!");
     }
@@ -512,4 +530,5 @@ public class HomeScreenActivity extends AppCompatActivity
         }
         cursor.close();
     }
+
 }

@@ -169,6 +169,20 @@
             app:layout_constraintTop_toBottomOf="@+id/pantrytitle"
             app:srcCompat="@drawable/pantryavatardefault" />
 
+        <ImageView
+            android:id="@+id/mockPantryImage"
+            android:layout_width="123dp"
+            android:layout_height="123dp"
+            android:layout_above="@+id/openpantry"
+            android:layout_alignStart="@+id/pantrybox"
+            android:layout_alignTop="@+id/pantrybox"
+            android:layout_alignEnd="@+id/pantrybox"
+            app:layout_constraintBottom_toTopOf="@+id/openpantry"
+            app:layout_constraintEnd_toEndOf="@+id/pantrybox"
+            app:layout_constraintStart_toStartOf="@+id/pantrybox"
+            app:layout_constraintTop_toBottomOf="@+id/pantrytitle"
+            app:srcCompat="@drawable/pantryavatardefault" />
+
         <LinearLayout
             android:id="@+id/dotsContainer"
             android:layout_width="wrap_content"
