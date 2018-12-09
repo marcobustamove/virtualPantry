@@ -52,6 +52,7 @@ public class HomeScreenActivity extends AppCompatActivity
     private Button mDeletePantry;
     private TextView noPantryPrompt;
     private ImageView pantryImage;
+    private ImageView mockPantryImage;
     private Button mOpenPantry;
     private ImageView pantryBox;
     private Button mCreatePantry;
@@ -88,6 +89,7 @@ public class HomeScreenActivity extends AppCompatActivity
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
+        mockPantryImage = findViewById(R.id.mockPantryImage);
 
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
@@ -99,7 +101,6 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 Animation animOutLeft;
                 Animation animInRight;
-                ImageView mockPantryImage;
 
                 if(cursor.getCount() > 1)
                 {
@@ -126,7 +127,6 @@ public class HomeScreenActivity extends AppCompatActivity
                     }
                     animOutLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_left);
                     animInRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_right);
-                    mockPantryImage = findViewById(R.id.mockPantryImage);
                     pantryImage.startAnimation(animInRight);
                     mockPantryImage.startAnimation(animOutLeft);
                     pantryTitle.startAnimation(animInRight);
@@ -140,7 +140,6 @@ public class HomeScreenActivity extends AppCompatActivity
 
                 Animation animOutRight;
                 Animation animInLeft;
-                ImageView mockPantryImage;
 
                 if(cursor.getCount() > 1)
                 {
@@ -167,7 +166,6 @@ public class HomeScreenActivity extends AppCompatActivity
                     }
                     animOutRight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_out_right);
                     animInLeft = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.box_in_left);
-                    mockPantryImage = findViewById(R.id.mockPantryImage);
                     pantryImage.startAnimation(animInLeft);
                     mockPantryImage.startAnimation(animOutRight);
                     pantryTitle.startAnimation(animInLeft);
@@ -432,6 +430,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mDeletePantry.setVisibility(View.VISIBLE);
         mOpenPantry.setVisibility(View.VISIBLE);
         pantryImage.setVisibility(View.VISIBLE);
+        mockPantryImage.setVisibility(View.VISIBLE);
     }
 
     public void hidePantryIcons()
@@ -440,6 +439,8 @@ public class HomeScreenActivity extends AppCompatActivity
         mDeletePantry.setVisibility(View.INVISIBLE);
         mOpenPantry.setVisibility(View.INVISIBLE);
         pantryImage.setVisibility(View.INVISIBLE);
+        mockPantryImage.setVisibility(View.INVISIBLE);
+
         pantryTitle.setText("");
         noPantryPrompt.setText("You have no Pantries!\nStart by creating one!");
     }
