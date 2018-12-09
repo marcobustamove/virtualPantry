@@ -51,12 +51,12 @@
 
         <Button
             android:id="@+id/openpantry"
-            android:layout_width="299dp"
-            android:layout_height="44dp"
+            android:layout_width="234dp"
+            android:layout_height="42dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@layout/pantryselect"
             android:contentDescription="@string/open_pantry"
             app:layout_constraintBottom_toTopOf="@+id/dotsContainer"

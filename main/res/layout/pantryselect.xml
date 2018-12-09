@@ -3,7 +3,7 @@
     android:layout_height="102dp"
     android:layout_width="81dp">
 
-    <item android:drawable="@drawable/openedpantrybtn"
+    <item android:drawable="@drawable/openpantrybtnonclick"
     android:state_pressed="true" />
     <item android:drawable="@drawable/openpantrybtn"/>
 
