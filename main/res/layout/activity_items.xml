@@ -89,8 +89,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:background="@drawable/categorydrawerbg"
-                android:text="@string/deleteItemHint"/>
+                android:background="@drawable/categorydrawerbg" />
 
             <TextView
                 android:id="@+id/itemExpirationTextView"
@@ -99,7 +98,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:background="@drawable/categorydrawerbg"
-                android:text="@string/allitems"/>
+                />
 
         </LinearLayout>
 
@@ -129,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="0dp"
-                android:text="@string/allitems"
+                android:text="@string/close"
                 android:gravity="center"/>
 
             <Button
@@ -137,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="0dp"
-                android:text="@string/allitems"
+                android:text="@string/edit_item_details"
                 android:gravity="center"/>
 
         </LinearLayout>
