@@ -7,14 +7,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.UUID;
-import java.util.zip.Inflater;
 
 import database.PantryBaseHelper;
-import database.PantryDBSchema;
 import database.PantryDBSchema.PantryTable;
 import database.PantryDBSchema.ItemTable;
 
@@ -45,7 +41,6 @@ public class HomeScreenActivity extends AppCompatActivity
 {
     private static final String DIALOG_CREATE_PANTRY = "DialogCreatePantry";
     private static final String DIALOG_DELETE_PANTRY = "DialogDeletePantry";
-    private static final int NUMBER_OF_CIRCLE_DOTS = 4;
 
     private Context mContext;
     private SQLiteDatabase writableDatabase;
@@ -93,8 +88,6 @@ public class HomeScreenActivity extends AppCompatActivity
         pantryTitle = (TextView) findViewById(R.id.pantrytitle);
         noPantryPrompt = (TextView) findViewById(R.id.noPantryPrompt);
         pantryImage = (ImageView) findViewById(R.id.pantryImage);
-
-
 
         pantryBox = (ImageView) findViewById(R.id.pantrybox);
         pantryBox.setOnTouchListener(new OnSwipeTouchListener(mContext)
@@ -536,4 +529,5 @@ public class HomeScreenActivity extends AppCompatActivity
         }
         cursor.close();
     }
+
 }
