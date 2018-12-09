@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddItemFragment extends DialogFragment
@@ -27,12 +28,14 @@ public class AddItemFragment extends DialogFragment
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         final View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_additem, null);
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity(), R.style.AddItemDialogTheme);
         dialog.setView(v);
+
+        boolean inEditMode = getArguments().getBoolean("EDIT_ITEM");
+        final ArrayList<String> itemDetails = getArguments().getStringArrayList("NAME_UUID_DATE");
 
         newItemName = v.findViewById(R.id.AddItemName);
         expirationDate = v.findViewById(R.id.AddItemExpirationPicker);
@@ -63,25 +66,66 @@ public class AddItemFragment extends DialogFragment
             }
         });
 
+        if(inEditMode)
+        {
+            dialog.setTitle(R.string.Edit_Items);
 
-        dialog.setTitle(R.string.addItemTitle)
-        .setPositiveButton(R.string.addItemDone, new DialogInterface.OnClickListener() {
+            String[] expDate = itemDetails.get(2).split("/");
+            newItemName.setText(itemDetails.get(0));
+            if(expDate.equals("0/0/0"))
+            {
+                expirationSwitch.setChecked(false);
+            }
+            else
+            {
+                expirationSwitch.setChecked(true);
+                String expYear = expDate[0];
+                String expMonth = expDate[1];
+                String expDay = expDate[2];
+
+                expirationDate.updateDate(Integer.parseInt(expYear), Integer.parseInt(expMonth)-1, Integer.parseInt(expDay));
+            }
+
+
+
+            dialog.setPositiveButton(R.string.edit_item_details, new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    if(expirationSwitch.isChecked())
+                    {
+                        listener.editItem(newItemName.getText().toString(), expirationSwitch.isChecked(), expirationDate.getMonth(), expirationDate.getDayOfMonth(), expirationDate.getYear(), itemDetails.get(1));
+                    }
+                    else
+                    {
+                        listener.editItem(newItemName.getText().toString(), expirationSwitch.isChecked(), -1, 0, 0, itemDetails.get(1));
+                    }
+                }
+            });
+        }
+        else
+        {
+            dialog.setTitle(R.string.addItemTitle)
+                    .setPositiveButton(R.string.addItemDone, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if(expirationSwitch.isChecked())
+                            {
+                                listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), expirationDate.getMonth(), expirationDate.getDayOfMonth(), expirationDate.getYear());
+                            }
+                            else
+                            {
+                                listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), -1, 0, 0);
+                            }
+
+                        }});
+        }
+
+
+        dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
-                if(expirationSwitch.isChecked())
-                {
-                    listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), expirationDate.getMonth(), expirationDate.getDayOfMonth(), expirationDate.getYear());
-                }
-                else
-                {
-                    listener.AddItem(newItemName.getText().toString(), expirationSwitch.isChecked(), -1, 0, 0);
-                }
-
-            }})
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        AddItemFragment.this.getDialog().cancel();
-                    }});
+                AddItemFragment.this.getDialog().cancel();
+            }});
 
         return dialog.create();
     }
@@ -96,5 +140,6 @@ public class AddItemFragment extends DialogFragment
     public interface AddItemListener
     {
         void AddItem(String newItemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear);
+        void editItem(String itemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear, String itemUUID);
     }
 }

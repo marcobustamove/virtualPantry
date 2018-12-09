@@ -51,6 +51,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private String currentSortingOrder;
     private Button sortingMethod;
     private Button mAddItemButton;
+    private int itemClickedPosition;
 
     public static final int MAX_ITEM_NAME_LENGTH = 11;
     public static final int FULL = 1;
@@ -116,13 +117,44 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         statusSetter1 = findViewById(R.id.statusSetterButton1);
         statusSetter2 = findViewById(R.id.statusSetterButton2);
 
-        Button closeDetailsButton = findViewById(R.id.closeInfoButton);
+        Button closeDetailsButton = (Button) findViewById(R.id.closeInfoButton);
         closeDetailsButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 detailsLayout.setVisibility(View.GONE);
+            }
+        });
+
+        Button editItemButton = (Button) findViewById(R.id.editItemButton);
+        editItemButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String[] projection = {ItemTable.Cols.DATE};
+                String selection = ItemTable.Cols.UUID + " = ?";
+                String[] selectionValue = {itemUUIDList.get(itemClickedPosition)};
+
+                Cursor cursor = readableDatabase.query(ItemTable.NAME, projection, selection, selectionValue, null, null, null);
+                cursor.moveToNext();
+
+                ArrayList<String> itemDetails = new ArrayList<>();
+                itemDetails.add(itemList.get(itemClickedPosition));
+                itemDetails.add(itemUUIDList.get(itemClickedPosition));
+                itemDetails.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.DATE)));
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("EDIT_ITEM", true);
+                bundle.putStringArrayList("NAME_UUID_DATE", itemDetails);
+
+                FragmentManager manager = getSupportFragmentManager();
+                AddItemFragment dialog = new AddItemFragment();
+                dialog.setArguments(bundle);
+                dialog.show(manager, DIALOG_ADD_ITEM);
+
+                cursor.close();
             }
         });
 
@@ -315,7 +347,10 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     @Override
     public void onItemClick(View view, int position)
     {
+        final View tempView = view;
         Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
+
+        itemClickedPosition = position;
 
         String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.DATE, ItemTable.Cols.STATUS};
         String selection = ItemTable.Cols.UUID + " = ? ";
@@ -326,23 +361,82 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         int iDateColumn = cursor.getColumnIndex(ItemTable.Cols.DATE);
         int iStatusColumn = cursor.getColumnIndex(ItemTable.Cols.STATUS);
 
+        String expDate = cursor.getString(iDateColumn);
+
         itemNameTextView.setText(cursor.getString(iNameColumn));
-        itemExpirationTextView.setText(cursor.getString(iDateColumn));
+        if(expDate.equals("0/0/0"))
+            expDate = "Not Perishable";
+
+        itemExpirationTextView.setText(expDate);
         int itemStatus = cursor.getInt(iStatusColumn);
 
         switch(itemStatus)
         {
             case FULL:
                 statusSetter1.setBackgroundResource(R.drawable.lowstatus);
+                statusSetter1.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, LOW);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 statusSetter2.setBackgroundResource(R.drawable.emptystatus);
+                statusSetter2.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, EMPTY);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 break;
             case LOW:
                 statusSetter1.setBackgroundResource(R.drawable.fullstatus);
+                statusSetter1.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, FULL);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 statusSetter2.setBackgroundResource(R.drawable.emptystatus);
+                statusSetter2.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, EMPTY);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 break;
             case EMPTY:
                 statusSetter1.setBackgroundResource(R.drawable.fullstatus);
+                statusSetter1.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, FULL);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 statusSetter2.setBackgroundResource(R.drawable.lowstatus);
+                statusSetter2.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        itemModifyStatus(tempView, itemClickedPosition, LOW);
+                        detailsLayout.setVisibility(View.GONE);
+                    }
+                });
                 break;
         }
         detailsLayout.setVisibility(View.VISIBLE);
@@ -370,4 +464,33 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         initializeArrayList();
         setUpRecyclerView();
     }
+
+    @Override
+    public void editItem(String itemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear, String itemUUID)
+    {
+        if(itemName.length() > MAX_ITEM_NAME_LENGTH)
+        {
+            Toast.makeText(getApplicationContext(), "Item name is too long!", Toast.LENGTH_SHORT).show();
+        }
+        else if(itemName.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Can't have a blank name", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            ContentValues values = new ContentValues();
+            values.put(ItemTable.Cols.NAME, itemName);
+            values.put(ItemTable.Cols.DATE, expirationYear + "/" + (expirationMonth + 1) + "/" + expirationDay);
+
+            String selection = ItemTable.Cols.UUID + " = ?";
+            String[] selectionValues = {itemUUID};
+
+            writableDatabase.update(ItemTable.NAME, values, selection, selectionValues);
+
+            initializeArrayList();
+            setUpRecyclerView();
+        }
+
+        detailsLayout.setVisibility(View.GONE);
+    }
+
 }
