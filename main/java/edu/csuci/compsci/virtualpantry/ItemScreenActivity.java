@@ -166,8 +166,11 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("EDIT_ITEM", false);
                 FragmentManager manager = getSupportFragmentManager();
                 AddItemFragment dialog = new AddItemFragment();
+                dialog.setArguments(bundle);
                 dialog.show(manager,DIALOG_ADD_ITEM);
             }
         });
