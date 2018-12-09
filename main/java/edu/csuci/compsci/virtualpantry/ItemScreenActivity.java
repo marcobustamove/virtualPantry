@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     private Button sortingMethod;
     private Button mAddItemButton;
 
+    public static final int MAX_ITEM_NAME_LENGTH = 11;
     public static final int FULL = 1;
     public static final int LOW = 2;
     public static final int EMPTY = 3;
@@ -99,6 +101,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
         ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         setUpRecyclerView();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mAddItemButton = (Button) findViewById(R.id.addItemButton);
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +258,11 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     @Override
     public void AddItem(String newItemName, Boolean expirable, int expirationMonth, int expirationDay, int expirationYear)
     {
-        if(checkForDuplicateItem(newItemName))
+        if(newItemName.length() > MAX_ITEM_NAME_LENGTH)
+        {
+            Toast.makeText(getApplicationContext(), "Item name is too long!", Toast.LENGTH_SHORT).show();
+        }
+        else if(checkForDuplicateItem(newItemName))
         {
             Toast.makeText(getApplicationContext(), newItemName + " already exists!", Toast.LENGTH_SHORT).show();
         }

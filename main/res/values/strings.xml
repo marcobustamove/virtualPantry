@@ -41,7 +41,7 @@
     <string name="addItemTitle">Add Item</string>
     <string name="addItemNameInput">Item Name:</string>
     <string name="addItemNameHint">Apple</string>
-    <string name="addItemExpirationQuery">Expirable?</string>
+    <string name="addItemExpirationQuery">Perishable?</string>
     <string name="addItemExpirationDate">Expiration Date:</string>
     <string name="addItemExpirationHint">mm/dd/yyyy</string>
     <string name="addItemDone">Create</string>
@@ -70,6 +70,21 @@
     <string name="trouble_logging_in">Trouble logging in?</string>
     <string name="enter_your_e_mail_and_we_ll_send_you_a_link_nto_get_back_into_your_account">Enter your e-mail and we’ll send you a link to get back into your account.</string>
     <string name="pantrycategorylist">pantrycategorylist</string>
+
+    <!--Category use strings-->
+    <string name="dairy">Dairy</string>
+    <string name="ViewAllItems">View All Items</string>
+    <string name="Beverages">Beverages</string>
+    <string name="Frozen">Frozen</string>
+    <string name="Seafood">Seafood</string>
+    <string name="Fruits">Fruits</string>
+    <string name="Snacks">Snacks</string>
+    <string name="Hygeine">Hygeine</string>
+    <string name="Condiments">Condiments</string>
+    <string name="Oils">Oils</string>
+    <string name="Vegetables">Vegetables</string>
+    <string name="Meats">Meats</string>
+    <string name="Grains">Grains</string>
 
 
 </resources>
