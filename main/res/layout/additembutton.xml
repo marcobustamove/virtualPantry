@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="102dp"
+    android:layout_width="81dp">
+
+    <item android:drawable="@drawable/itemadditemonclick"
+        android:state_pressed="true" />
+    <item android:drawable="@drawable/itemadditem"/>
+
+</selector>
