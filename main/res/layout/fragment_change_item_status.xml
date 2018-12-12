@@ -64,21 +64,21 @@
     <Button
         android:id="@+id/item_delete_button"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="35dp"
-        android:layout_height="34dp"
+        android:layout_width="80dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="163dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/statusdeleteicon"
         android:fontFamily="@font/futura"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.025" />
 
 
 </android.support.constraint.ConstraintLayout>
