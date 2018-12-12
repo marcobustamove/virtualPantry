@@ -78,7 +78,6 @@
             app:layout_constraintEnd_toEndOf="@+id/pantrybox"
             app:layout_constraintHorizontal_weight="2"
             app:layout_constraintTop_toTopOf="@+id/pantrytitle" />
-
         <Button
             android:id="@+id/create_pantry_button"
             android:layout_width="35dp"
@@ -131,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/futura"
             android:text="Create Pantry"
@@ -241,7 +241,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.84" />
+            app:layout_constraintGuide_percent="0.79" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline6"
