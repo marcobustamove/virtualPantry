@@ -74,85 +74,85 @@
 
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/detailsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:padding="0dp"
-        android:animateLayoutChanges="true"
-        android:background="@drawable/pantrycontainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-        
-        <LinearLayout
-            android:id="@+id/infoPanel"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/detailsLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="0dp"-->
+        <!--android:animateLayoutChanges="true"-->
+        <!--android:background="@drawable/pantrycontainer"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout">-->
+        <!---->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/infoPanel"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="2"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
 
-            <TextView
-                android:id="@+id/itemNameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/categorydrawerbg" />
+            <!--<TextView-->
+                <!--android:id="@+id/itemNameTextView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/categorydrawerbg" />-->
 
-            <TextView
-                android:id="@+id/itemExpirationTextView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@drawable/categorydrawerbg"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/itemExpirationTextView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/categorydrawerbg"-->
+                <!--/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <Button
-            android:id="@+id/statusSetterButton1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/fullstatus"
-            android:layout_height="match_parent" />
+        <!--<Button-->
+            <!--android:id="@+id/statusSetterButton1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/fullstatus"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <Button
-            android:id="@+id/statusSetterButton2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/lowstatus"
-            android:layout_height="match_parent" />
+        <!--<Button-->
+            <!--android:id="@+id/statusSetterButton2"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/lowstatus"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <LinearLayout
-            android:id="@+id/buttonPanel"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/buttonPanel"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
 
-            <Button
-                android:id="@+id/closeInfoButton"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:text="@string/close"
-                android:gravity="center"/>
+            <!--<Button-->
+                <!--android:id="@+id/closeInfoButton"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:text="@string/close"-->
+                <!--android:gravity="center"/>-->
 
-            <Button
-                android:id="@+id/editItemButton"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:text="@string/edit_item_details"
-                android:gravity="center"/>
+            <!--<Button-->
+                <!--android:id="@+id/editItemButton"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:text="@string/edit_item_details"-->
+                <!--android:gravity="center"/>-->
 
-        </LinearLayout>
-        
-    </LinearLayout>
+        <!--</LinearLayout>-->
+        <!---->
+    <!--</LinearLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/itemsRecyclerView"
@@ -164,7 +164,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addItemButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/addItemButton"
