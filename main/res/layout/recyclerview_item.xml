@@ -36,6 +36,8 @@
         android:fontFamily="@font/futura"
         android:gravity="center"
         android:textAlignment="center"
+        android:textColor="#31477E"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

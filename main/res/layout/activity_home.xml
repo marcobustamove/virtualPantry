@@ -150,6 +150,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:text=""
+            android:fontFamily="@font/futura"
             app:layout_constraintBottom_toTopOf="@+id/dotsContainer"
             app:layout_constraintEnd_toEndOf="@+id/pantrybox"
             app:layout_constraintStart_toStartOf="@+id/pantrybox"
