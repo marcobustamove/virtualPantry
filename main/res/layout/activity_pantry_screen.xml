@@ -438,12 +438,12 @@
         app:layout_constraintStart_toStartOf="@+id/snacks" />
 
     <TextView
-        android:id="@+id/hygeinetitle"
+        android:id="@+id/hygienetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/futur"
-        android:text="@string/Hygeine"
+        android:text="@string/Hygiene"
         android:textColor="@color/text_brown_accent"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView9"
