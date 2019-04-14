@@ -1,9 +1,11 @@
 package edu.csuci.compsci.virtualpantry;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
@@ -56,6 +58,7 @@ public class HomeScreenActivity extends AppCompatActivity
     private Button mOpenPantry;
     private ImageView pantryBox;
     private Button mCreatePantry;
+    private Button mLogOut;
 
     private LinearLayout dotsContainer;
     private int currentActiveCircle = 0;
@@ -63,6 +66,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
 
     private String favoriteValue;
     private String currentPantryUUIDOnDisplay;
@@ -233,10 +237,23 @@ public class HomeScreenActivity extends AppCompatActivity
             }
         });
 
+        mLogOut = (Button) findViewById(R.id.logout);
+        mLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                SharedPreferences mySharedPreferences = getSharedPreferences("LoggedIn", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = mySharedPreferences.edit();
+                editor.putBoolean("loggedIn", false);
+                editor.apply();
+                openLoginScreen();
+            }
+        });
+
         setPantryView();
 
         //This is for the drawer
-        mDrawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
@@ -244,7 +261,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -255,6 +272,7 @@ public class HomeScreenActivity extends AppCompatActivity
                 return false;
             }
         });
+
         addMenuItemInNavMenuDrawer();
         setCircleDotImages();
 
@@ -264,6 +282,13 @@ public class HomeScreenActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this, PantryScreenActivity.class);
         intent.putExtra("EXTRA_PANTRY_UUID", pantryUUID);
+        startActivity(intent);
+    }
+
+    public void openLoginScreen()
+    {
+        Intent intent = new Intent(this, LoginScreenActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -502,6 +527,7 @@ public class HomeScreenActivity extends AppCompatActivity
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -510,9 +536,9 @@ public class HomeScreenActivity extends AppCompatActivity
     {
         int indexOfTitleColumn;
         int indexOfUUIDColumn;
+        int numOfItems = 0;
 
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menu = navView.getMenu();
+        Menu menu = navigationView.getMenu();
 
         Cursor cursor = getPantryDBWithFavoriteAsFirst();
         indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
@@ -526,7 +552,8 @@ public class HomeScreenActivity extends AppCompatActivity
             String pantryUUID = cursor.getString(indexOfUUIDColumn);
 
             pantryUUIDS.add(pantryUUID);
-            menu.add(pantryName);
+            menu.add(0, numOfItems, 0, pantryName);
+            numOfItems++;
         }
         cursor.close();
     }

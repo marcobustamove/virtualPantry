@@ -57,9 +57,13 @@
     <string name="deleteItemHint">Delete\nItem</string>
 
     <!--Create Account screen strings-->
-    <string name="Email">Email</string>
+    <string name="Lets_Get_Started">Let\'s Get Started!\nEnter Your Information Below.</string>
+    <string name="Enter_Username">Enter Username</string>
+    <string name="Email">Enter E-mail Address</string>
     <string name="Enter_Password">Enter Password</string>
-    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Reenter_Password">Re-Enter Password</string>
+    <string name="Already_Have_an_Account">Already Have an Account?</string>
+    <string name="LogIn">Log In</string>
 
     <!--Forgot Password screen strings-->
     <string name="Forgot_Password">Forgot Password?</string>
@@ -72,7 +76,7 @@
     <string name="send_password_link">Send Password Link</string>
     <string name="enter_e_mail_address">Enter E-mail Address</string>
     <string name="trouble_logging_in">Trouble logging in?</string>
-    <string name="enter_your_e_mail_and_we_ll_send_you_a_link_nto_get_back_into_your_account">Enter your e-mail and we’ll send you a link to get back into your account.</string>
+    <string name="enter_your_e_mail_and_we_ll_send_you_a_link_nto_get_back_into_your_account">Enter your e-mail and we’ll send you a link \nto get back into your account.</string>
     <string name="pantrycategorylist">pantrycategorylist</string>
 
     <!--Category use strings-->

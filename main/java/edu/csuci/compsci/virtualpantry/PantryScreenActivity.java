@@ -31,7 +31,6 @@ public class PantryScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantry_screen);
 
         final String pantryUUID = this.getIntent().getStringExtra("EXTRA_PANTRY_UUID");
-        System.out.println(pantryUUID);
 
         closePantryButton = (Button) findViewById(R.id.closepantry);
         closePantryButton.setOnClickListener(new View.OnClickListener() {

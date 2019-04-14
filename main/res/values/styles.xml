@@ -13,6 +13,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/futura</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="AddItemDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -34,6 +35,7 @@
         <item name="android:colorBackground">@color/secondary_blue</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
