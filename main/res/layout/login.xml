@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/loginscreenbg"
     android:fitsSystemWindows="true"
-    tools:context=".LoginScreenActivity">
+    android:minHeight="0dp"
+    tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/vplogo"
@@ -42,23 +43,20 @@
             android:contentDescription="@string/app_name" />
 
 
-        <EditText
-            android:id="@+id/email"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/username"
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:backgroundTint="@color/baby_blue"
             android:fontFamily="@font/futura"
             android:hint="@string/Username"
-            android:cursorVisible="false"
-            android:importantForAutofill="no"
             android:inputType="text"
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/baby_blue"
             android:textColorHint="@color/colorText"
-            android:textSize="15sp"
-            tools:targetApi="o" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +82,7 @@
             android:background="@drawable/loginscreenpasswordlockicon"
             android:contentDescription="@string/Password" />
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/password"
             android:layout_width="175dp"
             android:layout_height="wrap_content"
@@ -92,8 +90,6 @@
             android:backgroundTint="@color/baby_blue"
             android:fontFamily="@font/futur"
             android:hint="@string/Password"
-            android:cursorVisible="false"
-            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
