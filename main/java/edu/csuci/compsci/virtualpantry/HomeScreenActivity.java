@@ -63,6 +63,7 @@ public class HomeScreenActivity extends AppCompatActivity
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
 
     private String favoriteValue;
     private String currentPantryUUIDOnDisplay;
@@ -236,7 +237,7 @@ public class HomeScreenActivity extends AppCompatActivity
         setPantryView();
 
         //This is for the drawer
-        mDrawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
@@ -244,7 +245,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mToggle.syncState();
         listView = (ListView) findViewById(R.id.simpleListView);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -512,8 +513,7 @@ public class HomeScreenActivity extends AppCompatActivity
         int indexOfUUIDColumn;
         int numOfItems = 0;
 
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menu = navView.getMenu();
+        Menu menu = navigationView.getMenu();
 
         Cursor cursor = getPantryDBWithFavoriteAsFirst();
         indexOfTitleColumn = cursor.getColumnIndex(PantryTable.Cols.TITLE);
