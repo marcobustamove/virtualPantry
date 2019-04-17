@@ -510,6 +510,7 @@ public class HomeScreenActivity extends AppCompatActivity
     {
         int indexOfTitleColumn;
         int indexOfUUIDColumn;
+        int numOfItems = 0;
 
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navView.getMenu();
@@ -526,7 +527,8 @@ public class HomeScreenActivity extends AppCompatActivity
             String pantryUUID = cursor.getString(indexOfUUIDColumn);
 
             pantryUUIDS.add(pantryUUID);
-            menu.add(pantryName);
+            menu.add(0, numOfItems, 0, pantryName);
+            numOfItems++;
         }
         cursor.close();
     }
