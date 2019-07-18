@@ -138,6 +138,9 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public void initializeArrayList()
     {
+        //TODO: Check all items in DB for expiration date
+        checkForExpiredItems();
+
         switch(currentSortingOrder)
         {
             case "A-Z":
@@ -152,6 +155,13 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
                 sortItemsByExpDate();
                 break;
         }
+    }
+
+    public void checkForExpiredItems()
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ItemTable.Cols.STATUS, EXPIRED);
+        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.DATE + " < ?", new String[] {"2019/5/28"});
     }
 
     public Cursor getItemDBSortedAlphabetically()
