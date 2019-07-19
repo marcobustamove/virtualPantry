@@ -1,6 +1,5 @@
 package edu.csuci.compsci.virtualpantry;
 
-import android.content.ClipData;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,12 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
-import database.PantryDBSchema;
 import database.PantryDBSchema.ItemTable;
 
 public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
@@ -159,9 +158,12 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public void checkForExpiredItems()
     {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ItemTable.Cols.STATUS, EXPIRED);
-        writableDatabase.update(ItemTable.NAME, contentValues, ItemTable.Cols.DATE + " < ?", new String[] {"2019/5/28"});
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd", Locale.US);
+        String dateString = sdf.format(new Date());
+        System.out.println(dateString);
+
+        String[] selectionArgs = {dateString, "0/0/0"};
+        writableDatabase.rawQuery("UPDATE " + ItemTable.NAME + " SET " + ItemTable.Cols.STATUS + " = " + EXPIRED + " WHERE (" + ItemTable.Cols.DATE + " < ?" + " AND " + ItemTable.Cols.DATE + " != ?)", selectionArgs);
     }
 
     public Cursor getItemDBSortedAlphabetically()

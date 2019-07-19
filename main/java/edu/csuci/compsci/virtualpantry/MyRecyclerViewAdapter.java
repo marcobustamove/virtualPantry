@@ -73,7 +73,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             case "4":
                 holder.itemStatusImage.setBackgroundResource(R.drawable.expstatus);
                 break;
-
         }
     }
 
