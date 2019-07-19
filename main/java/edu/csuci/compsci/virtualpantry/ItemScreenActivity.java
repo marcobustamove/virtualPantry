@@ -1,6 +1,5 @@
 package edu.csuci.compsci.virtualpantry;
 
-import android.content.ClipData;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,12 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import database.PantryBaseHelper;
-import database.PantryDBSchema;
 import database.PantryDBSchema.ItemTable;
 
 public class ItemScreenActivity extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener, AddItemFragment.AddItemListener {
@@ -109,55 +108,6 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
         initializeArrayList();
 
-        detailsLayout = findViewById(R.id.detailsLayout);
-        detailsLayout.setVisibility(View.GONE);
-        itemNameTextView = findViewById(R.id.itemNameTextView);
-        itemExpirationTextView = findViewById(R.id.itemExpirationTextView);
-
-        statusSetter1 = findViewById(R.id.statusSetterButton1);
-        statusSetter2 = findViewById(R.id.statusSetterButton2);
-
-        Button closeDetailsButton = (Button) findViewById(R.id.closeInfoButton);
-        closeDetailsButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                detailsLayout.setVisibility(View.GONE);
-            }
-        });
-
-        Button editItemButton = (Button) findViewById(R.id.editItemButton);
-        editItemButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String[] projection = {ItemTable.Cols.DATE};
-                String selection = ItemTable.Cols.UUID + " = ?";
-                String[] selectionValue = {itemUUIDList.get(itemClickedPosition)};
-
-                Cursor cursor = readableDatabase.query(ItemTable.NAME, projection, selection, selectionValue, null, null, null);
-                cursor.moveToNext();
-
-                ArrayList<String> itemDetails = new ArrayList<>();
-                itemDetails.add(itemList.get(itemClickedPosition));
-                itemDetails.add(itemUUIDList.get(itemClickedPosition));
-                itemDetails.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.DATE)));
-
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("EDIT_ITEM", true);
-                bundle.putStringArrayList("NAME_UUID_DATE", itemDetails);
-
-                FragmentManager manager = getSupportFragmentManager();
-                AddItemFragment dialog = new AddItemFragment();
-                dialog.setArguments(bundle);
-                dialog.show(manager, DIALOG_ADD_ITEM);
-
-                cursor.close();
-            }
-        });
-
         ItemsRecyclerView = findViewById(R.id.itemsRecyclerView);
         setUpRecyclerView();
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -187,6 +137,9 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
 
     public void initializeArrayList()
     {
+        //TODO: Check all items in DB for expiration date
+        checkForExpiredItems();
+
         switch(currentSortingOrder)
         {
             case "A-Z":
@@ -203,22 +156,20 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         }
     }
 
+    public void checkForExpiredItems()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/dd", Locale.US);
+        String dateString = sdf.format(new Date());
+        System.out.println(dateString);
+
+        String[] selectionArgs = {dateString, "0/0/0"};
+        writableDatabase.rawQuery("UPDATE " + ItemTable.NAME + " SET " + ItemTable.Cols.STATUS + " = " + EXPIRED + " WHERE (" + ItemTable.Cols.DATE + " < ?" + " AND " + ItemTable.Cols.DATE + " != ?)", selectionArgs);
+    }
+
     public Cursor getItemDBSortedAlphabetically()
     {
         String[] selectionArgs = {pantryUUID, pantryCategory};
-        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
-    }
-
-    public Cursor getItemUUIDSortedAlphabetically()
-    {
-        String[] selectionArgs = {pantryUUID, pantryCategory};
-        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.UUID + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
-    }
-
-    public Cursor getItemStatusSortedAlphabetically()
-    {
-        String[] selectionArgs = {pantryUUID, pantryCategory};
-        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.STATUS + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
+        return readableDatabase.rawQuery("SELECT " + ItemTable.Cols.NAME + ", " + ItemTable.Cols.UUID + ", " + ItemTable.Cols.STATUS + " FROM " + ItemTable.NAME + " WHERE " + ItemTable.Cols.PANTRY_ID + " LIKE ? " + " AND " + ItemTable.Cols.CATEGORY + " LIKE ? " + " ORDER BY " + ItemTable.Cols.NAME + " COLLATE NOCASE ASC;", selectionArgs);
     }
 
     public Cursor getItemDBSortedByStatus()
@@ -226,7 +177,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.UUID, ItemTable.Cols.STATUS};
         String selection = ItemTable.Cols.PANTRY_ID + " = ?" + " AND " + ItemTable.Cols.CATEGORY + " = ?";
         String[] selectValues = {pantryUUID, pantryCategory};
-        String sortOrder = ItemTable.Cols.STATUS + " ASC";
+        String sortOrder = ItemTable.Cols.STATUS + " DESC";
 
         return readableDatabase.query(ItemTable.NAME, projection, selection, selectValues, null, null, sortOrder);
 
@@ -248,20 +199,15 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         itemUUIDList = new ArrayList<>();
         itemStatus = new ArrayList<>();
 
-        Cursor itemNameCursor = getItemDBSortedAlphabetically();
-        Cursor itemUUIDCursor = getItemUUIDSortedAlphabetically();
-        Cursor itemStatusCursor = getItemStatusSortedAlphabetically();
+        Cursor cursor = getItemDBSortedAlphabetically();
 
-        while(itemNameCursor.moveToNext() && itemUUIDCursor.moveToNext() && itemStatusCursor.moveToNext())
+        while(cursor.moveToNext())
         {
-            itemList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(ItemTable.Cols.NAME)));
-            itemUUIDList.add(itemUUIDCursor.getString(itemUUIDCursor.getColumnIndex(ItemTable.Cols.UUID)));
-            itemStatus.add(itemStatusCursor.getString(itemStatusCursor.getColumnIndex(ItemTable.Cols.STATUS)));
+            itemList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.NAME)));
+            itemUUIDList.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.UUID)));
+            itemStatus.add(cursor.getString(cursor.getColumnIndex(ItemTable.Cols.STATUS)));
         }
-        itemNameCursor.close();
-        itemUUIDCursor.close();
-        itemStatusCursor.close();
-
+        cursor.close();
     }
 
     public void sortItemsByExpDate()
@@ -280,7 +226,6 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         }
 
         cursor.close();
-
     }
 
     public void sortItemsByStatus()
@@ -350,99 +295,7 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
     @Override
     public void onItemClick(View view, int position)
     {
-        final View tempView = view;
-        Log.i("TAG", "You clicked number " + adapter.getItem(position) + ", which is at cell position " + position);
-
-        itemClickedPosition = position;
-
-        String[] projection = {ItemTable.Cols.NAME, ItemTable.Cols.DATE, ItemTable.Cols.STATUS};
-        String selection = ItemTable.Cols.UUID + " = ? ";
-        String[] selectionVals = {itemUUIDList.get(position)};
-        Cursor cursor = readableDatabase.query(ItemTable.NAME,projection,selection,selectionVals, null, null, null);
-        cursor.moveToNext();
-        int iNameColumn = cursor.getColumnIndex(ItemTable.Cols.NAME);
-        int iDateColumn = cursor.getColumnIndex(ItemTable.Cols.DATE);
-        int iStatusColumn = cursor.getColumnIndex(ItemTable.Cols.STATUS);
-
-        String expDate = cursor.getString(iDateColumn);
-
-        itemNameTextView.setText(cursor.getString(iNameColumn));
-        if(expDate.equals("0/0/0"))
-            expDate = "Not Perishable";
-
-        itemExpirationTextView.setText(expDate);
-        int itemStatus = cursor.getInt(iStatusColumn);
-
-        switch(itemStatus)
-        {
-            case FULL:
-                statusSetter1.setBackgroundResource(R.drawable.lowstatus);
-                statusSetter1.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, LOW);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                statusSetter2.setBackgroundResource(R.drawable.emptystatus);
-                statusSetter2.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, EMPTY);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                break;
-            case LOW:
-                statusSetter1.setBackgroundResource(R.drawable.fullstatus);
-                statusSetter1.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, FULL);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                statusSetter2.setBackgroundResource(R.drawable.emptystatus);
-                statusSetter2.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, EMPTY);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                break;
-            case EMPTY:
-                statusSetter1.setBackgroundResource(R.drawable.fullstatus);
-                statusSetter1.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, FULL);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                statusSetter2.setBackgroundResource(R.drawable.lowstatus);
-                statusSetter2.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        itemModifyStatus(tempView, itemClickedPosition, LOW);
-                        detailsLayout.setVisibility(View.GONE);
-                    }
-                });
-                break;
-        }
-        detailsLayout.setVisibility(View.VISIBLE);
+//
     }
 
 
@@ -456,8 +309,8 @@ public class ItemScreenActivity extends AppCompatActivity  implements MyRecycler
         writableDatabase.delete(ItemTable.NAME, selectionForItemTable, whereValue);
         initializeArrayList();
         setUpRecyclerView();
-
     }
+
     @Override
     public void itemModifyStatus(View view, int position, int newStatus)
     {

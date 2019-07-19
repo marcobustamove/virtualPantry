@@ -25,7 +25,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
 
-    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/homescreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,8 +55,8 @@
             android:layout_height="42dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@layout/pantryselect"
             android:contentDescription="@string/open_pantry"
             app:layout_constraintBottom_toTopOf="@+id/dotsContainer"
@@ -96,13 +96,16 @@
 
         <ImageView
             android:id="@+id/categorylist"
-            android:layout_width="26dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="373dp"
             android:layout_marginBottom="8dp"
             android:clickable="true"
             android:contentDescription="@string/pantrycategorylist"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/group3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/categorydropdown" />
@@ -131,12 +134,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/futura"
             android:text="Create Pantry"
             android:textAlignment="center"
             android:textColor="@color/text_brown_accent"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/create_pantry_button"
@@ -149,6 +155,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/futura"
             android:text=""
             app:layout_constraintBottom_toTopOf="@+id/dotsContainer"
             app:layout_constraintEnd_toEndOf="@+id/pantrybox"
@@ -217,30 +224,44 @@
         <android.support.constraint.Group
             android:id="@+id/group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/group2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Group
             android:id="@+id/group2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/group3"
+            app:layout_constraintStart_toEndOf="@+id/group"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Group
             android:id="@+id/group3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/categorylist"
+            app:layout_constraintStart_toEndOf="@+id/group2"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Barrier
             android:id="@+id/barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:barrierDirection="top" />
+            app:barrierDirection="top"
+            tools:layout_editor_absoluteY="731dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.84" />
+            app:layout_constraintGuide_percent="0.79" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline6"
@@ -248,6 +269,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.08" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="27dp"
+            android:text="Log out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

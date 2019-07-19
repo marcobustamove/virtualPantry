@@ -10,25 +10,26 @@
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_account_submit_button"
-        app:layout_constraintVertical_bias="0.173">
+        app:layout_constraintTop_toBottomOf="@+id/create_account">
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futur"
-            android:text="Already Have an Account?"
+            android:fontFamily="@font/futura"
+            android:text="@string/Already_Have_an_Account"
             android:textColor="@color/baby_blue"
             android:textSize="12sp" />
 
@@ -39,8 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:fontFamily="@font/futur"
-            android:text="Log In"
+            android:fontFamily="@font/futura"
+            android:text="@string/LogIn"
+            android:textAlignment="viewStart"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:textColor="@color/colorText"
             android:textSize="12sp" />
@@ -64,37 +66,38 @@
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/get_started"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/futur"
-        android:text="Let's Get Started!\nEnter Your Information Below."
+        android:fontFamily="@font/futura"
+        android:text="@string/Lets_Get_Started"
         android:textAlignment="center"
         android:textColor="@color/baby_blue"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/email_text_field"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vplogo"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintVertical_bias="0.32" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/email_text_field"
+        android:id="@+id/username"
         android:layout_width="226dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/futur"
-        android:hint="Enter Username"
+        android:fontFamily="@font/futura"
+        android:hint="@string/Enter_Username"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="@color/accent_brown"
+        android:textColor="@color/baby_blue"
         android:textColorHint="@color/accent_brown"
+        android:backgroundTint="@color/baby_blue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -102,18 +105,19 @@
         app:layout_constraintTop_toBottomOf="@+id/vplogo" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/email_text_field3"
+        android:id="@+id/email"
         android:layout_width="226dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="156dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/futur"
-        android:hint="Enter E-mail Address"
-        android:inputType="textPassword"
+        android:fontFamily="@font/futura"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
         android:textAlignment="center"
-        android:textColor="@color/accent_brown"
+        android:textColor="@color/baby_blue"
         android:textColorHint="@color/accent_brown"
+        android:backgroundTint="@color/baby_blue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -121,18 +125,19 @@
         app:layout_constraintTop_toBottomOf="@+id/vplogo" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/email_text_field4"
+        android:id="@+id/password"
         android:layout_width="226dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="212dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/futur"
-        android:hint="Enter a Password"
+        android:fontFamily="@font/futura"
+        android:hint="@string/Enter_Password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        android:textColor="@color/accent_brown"
+        android:textColor="@color/baby_blue"
         android:textColorHint="@color/accent_brown"
+        android:backgroundTint="@color/baby_blue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -140,18 +145,19 @@
         app:layout_constraintTop_toBottomOf="@+id/vplogo" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/email_text_field5"
+        android:id="@+id/reenter_password"
         android:layout_width="226dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="264dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/futur"
-        android:hint="Re-Enter Password"
-        android:inputType="textEmailAddress"
+        android:fontFamily="@font/futura"
+        android:hint="@string/Reenter_Password"
+        android:inputType="textPassword"
         android:textAlignment="center"
-        android:textColor="@color/accent_brown"
+        android:textColor="@color/baby_blue"
         android:textColorHint="@color/accent_brown"
+        android:backgroundTint="@color/baby_blue"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -159,24 +165,24 @@
         app:layout_constraintTop_toBottomOf="@+id/vplogo" />
 
     <Button
-        android:id="@+id/create_account_submit_button"
+        android:id="@+id/create_account"
         android:layout_width="167dp"
         android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="168dp"
+        android:layout_marginBottom="89dp"
         android:background="@drawable/submitlinkbtn"
-        android:fontFamily="@font/futur"
+        android:fontFamily="@font/futura"
         android:text="@string/Create_Account"
         android:textAllCaps="false"
         android:textColor="@color/baby_blue"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_text_field5"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/reenter_password"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
 
 </android.support.constraint.ConstraintLayout>

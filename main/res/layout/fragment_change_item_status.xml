@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
-    android:background="@android:color/transparent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/statusviewbg">
 
     <LinearLayout
         android:id="@+id/AddItemDialog_ParentLayout"
-        android:layout_width="298dp"
-        android:layout_height="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toTopOf="@+id/item_delete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <Button
             android:id="@+id/set_empty_button"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="21dp"
-            android:layout_height="96dp"
+            android:layout_width="121dp"
+            android:layout_height="121dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/emptystatus"
+            android:background="@drawable/statusouticon"
             android:fontFamily="@font/futura"
-            android:text="@string/setItemEmptyHint"
+            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/set_low_button"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="26dp"
-            android:layout_height="96dp"
+            android:layout_width="121dp"
+            android:layout_height="121dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/lowstatus"
+            android:background="@drawable/statuslowicon"
             android:fontFamily="@font/futura"
-            android:text="@string/setItemLowHint"
+            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/set_full_button"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="19dp"
-            android:layout_height="96dp"
+            android:layout_width="121dp"
+            android:layout_height="121dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/fullstatus"
+            android:background="@drawable/statusfullicon"
             android:fontFamily="@font/futura"
-            android:text="@string/setItemFullHint"
+            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
@@ -60,23 +73,19 @@
     <Button
         android:id="@+id/item_delete_button"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="121dp"
-        android:layout_height="115dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/expstatus"
-        android:text="@string/deleteItemHint"
-        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/statusdeleteicon"
         android:fontFamily="@font/futura"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout"
-        app:layout_constraintVertical_bias="0.787" />
-
+        app:layout_constraintTop_toBottomOf="@+id/AddItemDialog_ParentLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
